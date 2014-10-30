@@ -1,7 +1,11 @@
 package com.relhs.asianfinder;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -58,11 +62,24 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         CustomButton btnLogin = (CustomButton)findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
 
+        Notification notification=new Notification(R.drawable.ic_launcher,"Saanvi Birthday!", System.currentTimeMillis());
+        Intent intent=new Intent(getApplicationContext(), DashboardActivity.class);
+        PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+        notification.setLatestEventInfo(getBaseContext(), "Reminder: Saanvi Birthday",
+                "Today is your friend Saanvi's Birthday, please wish her", pendingIntent);
+
         if(userOperations.isLogin() == 1) {
+            if(!isMyServiceRunning(AFPushService.class)) {
+                startService(new Intent(LoginActivity.this, AFPushService.class));
+            } else {
+                Log.d("HUGHES", "Already Running");
+            }
             Intent i = new Intent(this, DashboardActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
+
+
 
     }
     @Override
@@ -194,6 +211,16 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             }
 
         }
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

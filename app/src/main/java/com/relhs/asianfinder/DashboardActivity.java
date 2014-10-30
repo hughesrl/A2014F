@@ -50,13 +50,12 @@ public class DashboardActivity extends FragmentActivity
     @Override
     protected void onResume() {
         super.onResume();
-//        userOperations = new UserInfoOperations(this);
-//        userOperations.open();
-//        if(userOperations.isLogin() == 0) {
-//            Intent i = new Intent(this, LoginActivity.class);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(i);
-//        }
+        AsianFinderApplication.activityResumed();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AsianFinderApplication.activityPaused();
     }
 
     @Override

@@ -79,11 +79,9 @@
       <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="3060">
-              <caret line="48" column="46" selection-start-line="45" selection-start-column="8" selection-end-line="48" selection-end-column="46" />
-              <folding>
-                <element signature="e#4556#4571#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="1492" max-vertical-offset="3451">
+              <caret line="77" column="72" selection-start-line="77" selection-start-column="72" selection-end-line="77" selection-end-column="72" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -91,14 +89,9 @@
       <file leaf-file-name="NavigationDrawerFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/NavigationDrawerFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1631" max-vertical-offset="5899">
-              <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7440#7471#0" expanded="true" />
-                <element signature="e#7540#7572#0" expanded="true" />
-                <element signature="e#11992#12009#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="5287">
+              <caret line="89" column="4" selection-start-line="89" selection-start-column="4" selection-end-line="90" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,20 +99,43 @@
       <file leaf-file-name="DashboardActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/DashboardActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="2958">
-              <caret line="73" column="20" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="387" max-vertical-offset="2941">
+              <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProfileFragment.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ProfileFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/ProfileFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39494163" vertical-offset="664" max-vertical-offset="1411">
-              <caret line="51" column="110" selection-start-line="51" selection-start-column="110" selection-end-line="51" selection-end-column="110" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1411">
+              <caret line="66" column="66" selection-start-line="66" selection-start-column="66" selection-end-line="66" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AFPushService.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AFPushService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.53464204" vertical-offset="2427" max-vertical-offset="3604">
+              <caret line="201" column="0" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
+              <folding>
+                <element signature="e#5455#5720#0" expanded="true" />
+                <element signature="e#5705#5706#0" expanded="true" />
+                <element signature="e#5737#6020#0" expanded="true" />
+                <element signature="e#6005#6006#0" expanded="true" />
+                <element signature="e#6041#6953#0" expanded="true" />
+                <element signature="e#6938#6939#0" expanded="true" />
+                <element signature="e#6981#7828#0" expanded="true" />
+                <element signature="e#7813#7814#0" expanded="true" />
+                <element signature="e#7841#8806#0" expanded="true" />
+                <element signature="e#8791#8792#0" expanded="true" />
+                <element signature="e#8829#9787#0" expanded="true" />
+                <element signature="e#9772#9773#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,12 +157,9 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.555555" vertical-offset="0" max-vertical-offset="1428">
+            <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1428">
               <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-              <folding>
-                <element signature="e#2474#2496#0" expanded="true" />
-                <element signature="e#2527#2549#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,21 +167,9 @@
       <file leaf-file-name="dimens.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+            <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="459">
               <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserInfoOperations.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/operation/UserInfoOperations.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1393" max-vertical-offset="2363">
-              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -176,11 +177,26 @@
       <file leaf-file-name="AsianFinderApplication.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AsianFinderApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="489" max-vertical-offset="1037">
+              <caret line="47" column="23" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1249#1250#0" expanded="true" />
+                <element signature="e#1287#1288#0" expanded="true" />
+                <element signature="e#1331#1332#0" expanded="true" />
+                <element signature="e#1369#1370#0" expanded="true" />
+                <element signature="e#1412#1413#0" expanded="true" />
+                <element signature="e#1451#1452#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserInfoOperations.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/operation/UserInfoOperations.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1632" max-vertical-offset="2465">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -923,7 +939,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/utils/JSONParser.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AFPushService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/data/Tips.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/data/UserInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/DataBaseWrapper.java" />
@@ -935,7 +950,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_dashboard.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/operation/UserInfoOperations.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_navigation_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/utils/Utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/data/NavDrawerItem.java" />
@@ -946,12 +960,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/loader/ImageLoader.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/NavigationDrawerFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AsianFinderApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/DashboardActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/ProfileFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AsianFinderApplication.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/DashboardActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AFPushService.java" />
       </list>
     </option>
   </component>
@@ -985,7 +1001,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1414,8 +1431,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1490,19 +1506,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -1528,6 +1531,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1636,12 +1652,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1050" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24462366" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1651,7 +1666,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.393736" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.393736" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1664,6 +1679,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24462366" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1690,13 +1706,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/view/CustomTextView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5496536" vertical-offset="34" max-vertical-offset="1173">
-          <caret line="30" column="71" selection-start-line="30" selection-start-column="71" selection-end-line="30" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/view/RoundedImageView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07852194" vertical-offset="0" max-vertical-offset="866">
@@ -1761,7 +1770,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
           <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1769,7 +1777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
           <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1798,7 +1805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1054">
           <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1806,7 +1812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
           <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1825,18 +1830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377">
           <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AFPushService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1378" max-vertical-offset="2244">
-          <caret line="139" column="17" selection-start-line="139" selection-start-column="17" selection-end-line="139" selection-end-column="17" />
-          <folding>
-            <element signature="e#4469#4828#0" expanded="false" />
-            <element signature="e#4817#4818#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1844,7 +1837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33268481" vertical-offset="594" max-vertical-offset="5644">
           <caret line="75" column="11" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1860,37 +1852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1288" max-vertical-offset="1836">
           <caret line="107" column="29" selection-start-line="107" selection-start-column="29" selection-end-line="107" selection-end-column="29" />
-          <folding>
-            <element signature="e#442#443#0" expanded="false" />
-            <element signature="e#467#468#0" expanded="false" />
-            <element signature="e#500#501#0" expanded="false" />
-            <element signature="e#528#529#0" expanded="false" />
-            <element signature="e#628#629#0" expanded="false" />
-            <element signature="e#664#665#0" expanded="false" />
-            <element signature="e#1299#1300#0" expanded="false" />
-            <element signature="e#1332#1333#0" expanded="false" />
-            <element signature="e#1384#1385#0" expanded="false" />
-            <element signature="e#1428#1429#0" expanded="false" />
-            <element signature="e#1461#1462#0" expanded="false" />
-            <element signature="e#1490#1491#0" expanded="false" />
-            <element signature="e#1534#1535#0" expanded="false" />
-            <element signature="e#1570#1571#0" expanded="false" />
-            <element signature="e#1610#1611#0" expanded="false" />
-            <element signature="e#1646#1647#0" expanded="false" />
-            <element signature="e#1704#1705#0" expanded="false" />
-            <element signature="e#1754#1755#0" expanded="false" />
-            <element signature="e#1789#1790#0" expanded="false" />
-            <element signature="e#1820#1821#0" expanded="false" />
-            <element signature="e#1868#1869#0" expanded="false" />
-            <element signature="e#1908#1909#0" expanded="false" />
-            <element signature="e#1944#1945#0" expanded="false" />
-            <element signature="e#1976#1977#0" expanded="false" />
-            <element signature="e#2026#2027#0" expanded="false" />
-            <element signature="e#2068#2069#0" expanded="false" />
-            <element signature="e#2129#2130#0" expanded="false" />
-            <element signature="e#2172#2173#0" expanded="false" />
-            <element signature="e#2210#2211#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1991,9 +1952,9 @@
         <state vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="714">
           <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
           <folding>
-            <element signature="e#431#455#0" expanded="true" />
-            <element signature="e#628#652#0" expanded="true" />
-            <element signature="e#688#706#0" expanded="true" />
+            <element signature="e#431#455#0" expanded="false" />
+            <element signature="e#628#652#0" expanded="false" />
+            <element signature="e#688#706#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2026,9 +1987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="697">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2036,7 +1994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="1428">
           <caret line="31" column="11" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2044,11 +2001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="698" max-vertical-offset="1360">
           <caret line="65" column="33" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2303#2375#0" expanded="true" />
-            <element signature="e#2397#2469#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2056,7 +2008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="3485">
           <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2072,36 +2023,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="1139">
           <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
-          <folding>
-            <element signature="e#322#323#0" expanded="true" />
-            <element signature="e#356#357#0" expanded="true" />
-            <element signature="e#800#801#0" expanded="true" />
-            <element signature="e#824#825#0" expanded="true" />
-            <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#1184#1185#0" expanded="true" />
-            <element signature="e#1227#1228#0" expanded="true" />
-            <element signature="e#1267#1268#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AsianFinderApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="3060">
-          <caret line="48" column="46" selection-start-line="45" selection-start-column="8" selection-end-line="48" selection-end-column="46" />
-          <folding>
-            <element signature="e#4556#4571#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2109,22 +2030,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1393" max-vertical-offset="2363">
           <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/NavigationDrawerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1631" max-vertical-offset="5899">
-          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7440#7471#0" expanded="true" />
-            <element signature="e#7540#7572#0" expanded="true" />
-            <element signature="e#11992#12009#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2146,25 +2052,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/DashboardActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="2958">
-          <caret line="73" column="20" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.555555" vertical-offset="0" max-vertical-offset="1428">
+        <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1428">
           <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-          <folding>
-            <element signature="e#2474#2496#0" expanded="true" />
-            <element signature="e#2527#2549#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2186,10 +2081,78 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/ProfileFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39494163" vertical-offset="664" max-vertical-offset="1411">
-          <caret line="51" column="110" selection-start-line="51" selection-start-column="110" selection-end-line="51" selection-end-column="110" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1411">
+          <caret line="66" column="66" selection-start-line="66" selection-start-column="66" selection-end-line="66" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/NavigationDrawerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="5287">
+          <caret line="89" column="4" selection-start-line="89" selection-start-column="4" selection-end-line="90" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-21/android/app/ActivityManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33268481" vertical-offset="21793" max-vertical-offset="44948">
+          <caret line="1405" column="29" selection-start-line="1405" selection-start-column="29" selection-end-line="1405" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AsianFinderApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="489" max-vertical-offset="1037">
+          <caret line="47" column="23" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+          <folding>
+            <element signature="e#1249#1250#0" expanded="true" />
+            <element signature="e#1287#1288#0" expanded="true" />
+            <element signature="e#1331#1332#0" expanded="true" />
+            <element signature="e#1369#1370#0" expanded="true" />
+            <element signature="e#1412#1413#0" expanded="true" />
+            <element signature="e#1451#1452#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="115" max-vertical-offset="3451">
+          <caret line="77" column="72" selection-start-line="77" selection-start-column="72" selection-end-line="77" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/DashboardActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="387" max-vertical-offset="2941">
+          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/AFPushService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53464204" vertical-offset="2427" max-vertical-offset="3604">
+          <caret line="201" column="0" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
+          <folding>
+            <element signature="e#5455#5720#0" expanded="true" />
+            <element signature="e#5705#5706#0" expanded="true" />
+            <element signature="e#5737#6020#0" expanded="true" />
+            <element signature="e#6005#6006#0" expanded="true" />
+            <element signature="e#6041#6953#0" expanded="true" />
+            <element signature="e#6938#6939#0" expanded="true" />
+            <element signature="e#6981#7828#0" expanded="true" />
+            <element signature="e#7813#7814#0" expanded="true" />
+            <element signature="e#7841#8806#0" expanded="true" />
+            <element signature="e#8791#8792#0" expanded="true" />
+            <element signature="e#8829#9787#0" expanded="true" />
+            <element signature="e#9772#9773#0" expanded="true" />
           </folding>
         </state>
       </provider>

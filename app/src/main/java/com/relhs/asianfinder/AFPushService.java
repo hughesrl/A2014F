@@ -1,5 +1,10 @@
 package com.relhs.asianfinder;
 
+import android.app.ActivityManager;
+import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,6 +18,8 @@ import android.widget.Toast;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.relhs.asianfinder.data.UserInfo;
+import com.relhs.asianfinder.operation.UserInfoOperations;
 
 
 import org.json.JSONException;
@@ -24,6 +31,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class AFPushService extends Service {
@@ -32,6 +40,13 @@ public class AFPushService extends Service {
     PrintWriter out;
     Socket socket;
     InetAddress serverAddr;
+    JSONObject credentials = new JSONObject();
+    private UserInfoOperations userOperations;
+    private UserInfo userInformation;
+
+    Notification notification;
+    private static final int NOTIFICATION_ID=1;
+    private NotificationManager mgr;
 
     private final IBinder myBinder = new LocalBinder();
 
@@ -49,7 +64,21 @@ public class AFPushService extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "The new Service was Created", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "The new Service was Created", Toast.LENGTH_LONG).show();
+        // !IMPORTANT DATABASE OPERATION
+        userOperations = new UserInfoOperations(this);
+        userOperations.open();
+        // !IMPORTANT DATABASE OPERATION
+        userInformation = userOperations.getUser();
+        userOperations.close();
+        mgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
+//        notification=new Notification(R.drawable.ic_launcher,"Online", System.currentTimeMillis());
+////Intent to start new activity on click of expanded view
+//        Intent intent=new Intent(getApplicationContext(), DashboardActivity.class);
+//        PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+//        notification.setLatestEventInfo(AFPushService.this, "Reminder: Saanvi Birthday",
+//                "Today is your friend Saanvi's Birthday, please wish her", pendingIntent);
     }
 
     @Override
@@ -109,44 +138,100 @@ public class AFPushService extends Service {
         }
     }
     public void socketFunctions() throws URISyntaxException {
-        socket = IO.socket(SERVERIP+":"+SERVERPORT);
-        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                try {
-                    JSONObject credentials = new JSONObject();
-                    credentials.putOpt("userId", 27310);
-                    credentials.putOpt("userType", "u");
-                    credentials.putOpt("userName", "DjMike2312");
-                    credentials.putOpt("domainId", 3);
-                    credentials.putOpt("userSessionId", "c1g3t6");
-                    credentials.putOpt("main_photo", "http://www.asianfinder.com//media/photos/30000/27310/1413385363_3e5658934f39f5e4d8ac9dbb4063a808.jpg");
-                    credentials.putOpt("gender", "m");
-                    credentials.putOpt("userToken", "32fca34402e197198460d74a60e3bcfc");
+        try {
+            credentials.putOpt("userId", userInformation.getUserId());
+            credentials.putOpt("userType", userInformation.getUserType());
+            credentials.putOpt("userName", userInformation.getUserName());
+            credentials.putOpt("domainId", userInformation.getDomainId());
+            credentials.putOpt("userSessionId", userInformation.getUserSessionId());
+            credentials.putOpt("main_photo", userInformation.getMain_photo());
+            credentials.putOpt("gender", userInformation.getGender());
+            credentials.putOpt("userToken", userInformation.getUserToken());
 
+            socket = IO.socket(SERVERIP+":"+SERVERPORT);
+            socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
                     Log.d("HUGHES", "Go ONLINE: " +credentials.toString());
-
                     socket.emit("online", credentials);
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        }).on("onlineOk", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                if(Arrays.toString(args).equalsIgnoreCase("true")) {
-                    Log.d("HUGHES STARTVIEWING DATA", "onlineOkay");
-//                    socket.emit("onlineChat", credentials); // show online in chat
+            }).on("onlineOk", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d("HUGHES STARTVIEWING DATA", "onlineOk");
+                    socket.emit("onlineChat", credentials); // show online in chat
+                }
+            }).on("onlineChatOk", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d("HUGHES STARTVIEWING DATA", "onlineChatOk " + Arrays.toString(args));
+                    //socket.emit("onlineChat", credentials); // show online in chat
+
+                    notification = new Notification(R.drawable.ic_launcher, "Online", System.currentTimeMillis());
+                    Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+                    notification.setLatestEventInfo(AFPushService.this, "Reminder: Saanvi Birthday",
+                            "Today is your friend Saanvi's Birthday, please wish her", pendingIntent);
+
+                    mgr.notify(NOTIFICATION_ID, notification);
+                }
+            }).on("receiveNotification", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d("HUGHES STARTVIEWING DATA", "receiveNotification " + Arrays.toString(args));
+                    notification = new Notification(R.drawable.ic_launcher, Arrays.toString(args), System.currentTimeMillis());
+
+                    Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+                    notification.setLatestEventInfo(AFPushService.this, "Reminder: Saanvi Birthday",
+                            "Today is your friend Saanvi's Birthday, please wish her", pendingIntent);
+
+                    mgr.notify(NOTIFICATION_ID, notification);
+                }
+            }).on("chat", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d("HUGHES STARTVIEWING DATA", "chat " + Arrays.toString(args));
+                    if(!AsianFinderApplication.isActivityVisible()) {
+                        notification = new Notification(R.drawable.ic_launcher, "New Message", System.currentTimeMillis());
+
+                        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+                        notification.setLatestEventInfo(AFPushService.this, "Message",
+                                Arrays.toString(args), pendingIntent);
+
+                        mgr.notify(NOTIFICATION_ID, notification);
+                    } else {
+                        // Do something else here
+                    }
+                }
+            }).on("receiveSticker", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d("HUGHES STARTVIEWING DATA", "chat " + Arrays.toString(args));
+                    if(!AsianFinderApplication.isActivityVisible()) {
+                        notification=new Notification(R.drawable.ic_launcher, "New Message", System.currentTimeMillis());
+
+                        Intent intent=new Intent(getApplicationContext(), DashboardActivity.class);
+                        PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+                        notification.setLatestEventInfo(AFPushService.this, "Sticker",
+                                Arrays.toString(args), pendingIntent);
+
+                        mgr.notify(NOTIFICATION_ID,notification);
+                    } else {
+                        // Do something else here
+                    }
+                }
+            }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
                 }
 
-            }
-        }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-            }
-
-        });
-        socket.connect();
+            });
+            socket.connect();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 }
