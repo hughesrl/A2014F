@@ -72,9 +72,10 @@ public class AFPushService extends Service {
         userInformation = userOperations.getUser();
         userOperations.close();
         mgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        //to clear the notification
+        //mgr.cancel(NOTIFICATION_ID);
 
 //        notification=new Notification(R.drawable.ic_launcher,"Online", System.currentTimeMillis());
-////Intent to start new activity on click of expanded view
 //        Intent intent=new Intent(getApplicationContext(), DashboardActivity.class);
 //        PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
 //        notification.setLatestEventInfo(AFPushService.this, "Reminder: Saanvi Birthday",

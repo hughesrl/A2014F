@@ -105,6 +105,7 @@ public class NavigationDrawerFragment extends Fragment {
         userOperations.open();
         // !IMPORTANT DATABASE OPERATION
         userInformation = userOperations.getUser();
+        userOperations.close();
 
         // load slide menu items
         navMenuTitles = getResources().getStringArray(R.array.drawer_menu);

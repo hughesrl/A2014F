@@ -66,9 +66,8 @@ public class DashboardActivity extends FragmentActivity
 
         switch (position) {
             case 0:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, ProfileFragment.newInstance(position + 1))
-                        .commit();
+                Intent i = new Intent(this, ProfileActivity.class);
+                startActivity(i);
                 break;
             case 1 :
                 fragmentManager.beginTransaction()
