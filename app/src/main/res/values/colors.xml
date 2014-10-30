@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">@android:color/white</color>
+    <color name="white70">#50000000</color>
+    <color name="orange">#FFE7B952</color>
+    <color name="bgColor">#FFEDF6FF</color>
+
+    <color name="titleColor">#FF990033</color>
+
+
+</resources>

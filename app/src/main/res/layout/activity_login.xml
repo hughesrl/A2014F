@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/bgColor"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_above="@+id/loginContainer"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/banner_logo"
+        android:id="@+id/bg_img"
+        android:adjustViewBounds="true"/>
+
+    <LinearLayout
+        android:id="@+id/loginContainer"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.relhs.asianfinder.view.CustomEditTextView
+            app:fontName="MyriadProCond.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:id="@+id/etUsername"
+            android:background="@drawable/rounded_corners"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:singleLine="true"
+            android:hint="@string/lblUsername" />
+
+        <com.relhs.asianfinder.view.CustomEditTextView
+            app:fontName="MyriadProCond.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/etPassword"
+            android:background="@drawable/rounded_corners"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:singleLine="true"
+            android:hint="@string/lblPassword" />
+
+        <com.relhs.asianfinder.view.CustomButton
+            app:fontName="MyriadProCond.ttf"
+            app:fontStyle="bold"
+            app:fontColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblLogin"
+            android:id="@+id/btnLogin"
+            android:background="@drawable/custom_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            style="@style/button_appearance_login" />
+
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="#FF000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lblForgotPassword"
+            android:id="@+id/forgot_password"
+            android:layout_gravity="center_horizontal"
+            style="@style/text_Appearance_normal"/>
+    </LinearLayout>
+
+    <com.relhs.asianfinder.view.CustomTextView
+        android:layout_alignParentBottom="true"
+        app:fontName="MyriadProCond.ttf"
+        app:fontColor="#FF000000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lblRegisterNewAccount"
+        android:id="@+id/signUp"
+        android:gravity="center"
+        style="@style/text_Appearance_normal"/>
+
+
+
+
+</RelativeLayout>

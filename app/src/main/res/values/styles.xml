@@ -1,0 +1,66 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/bgColor</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppThemeNoActionBar" parent="android:style/Theme.NoTitleBar">
+        <item name="android:windowBackground">@color/bgColor</item>
+    </style>
+
+    <style name="Theme.TranslucentActionBar" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/Widget.ActionBar</item>
+    </style>
+
+    <style name="Theme.TranslucentActionBar.ActionBar" />
+
+    <style name="Theme.TranslucentActionBar.ActionBar.Overlay">
+        <item name="android:actionBarStyle">@style/Widget.ActionBar.Transparent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="Widget.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/ab_background</item>
+    </style>
+
+    <style name="Widget.ActionBar.Transparent">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+    <style name="text_Appearance_normal">
+        <item name="android:textSize">@dimen/text_appearance_normal</item>
+    </style>
+
+    <style name="text_Appearance_large">
+        <item name="android:textSize">@dimen/text_appearance_large</item>
+    </style>
+
+
+
+    <style name="widget_button_appearance" parent="android:Widget.Button">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textAppearance">@style/text_Appearance_normal</item>
+    </style>
+
+    <style name="button_appearance" parent="widget_button_appearance">
+        <item name="android:textAppearance">@style/text_Appearance_normal</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="button_appearance_login" parent="widget_button_appearance">
+        <item name="android:textAppearance">@style/text_Appearance_normal</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="button_appearance_signup" parent="widget_button_appearance">
+        <item name="android:textAppearance">@style/text_Appearance_normal</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+</resources>

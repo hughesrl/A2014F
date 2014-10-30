@@ -1,0 +1,152 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/bgColor"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/yourseachfortruelove"
+        android:id="@+id/bg_img"
+        android:adjustViewBounds="true"/>
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_below="@+id/bg_img"
+        android:id="@+id/loginContainer"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/user_photo_size"
+                android:layout_height="@dimen/user_photo_size"
+                android:src="@drawable/ic_no_photo"
+                android:layout_marginBottom="5dp"
+                android:adjustViewBounds="true"/>
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/etName"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="@string/lblName" />
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/etGender"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="@string/lblGender" />
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/etBirthday"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="@string/lblBirthday" />
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/etCountry"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="@string/lblCountry" />
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/etState"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="@string/lblState" />
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/etCity"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="@string/lblCity" />
+
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/etUsername"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="@string/lblEmail" />
+
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/etPassword"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="@string/lblPassword" />
+
+            <com.relhs.asianfinder.view.CustomButton
+                app:fontName="MyriadProCond.ttf"
+                app:fontStyle="bold"
+                app:fontColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lblContinue"
+                android:id="@+id/btnContinue"
+                android:background="@drawable/custom_button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                style="@style/button_appearance_login" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</RelativeLayout>

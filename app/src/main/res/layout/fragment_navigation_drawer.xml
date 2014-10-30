@@ -1,0 +1,57 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCCCCC"
+    tools:context="com.robert247.camapp.fragments.NavigationDrawerFragment">
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:id="@+id/myProfile"
+        android:padding="@dimen/rounded_padding"
+        android:gravity="center"
+        android:clickable="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profilePicture"
+            android:src="@drawable/ic_launcher"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"/>
+
+        <com.relhs.asianfinder.view.CustomTextView
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="#FF000000"
+            android:id="@+id/txtUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblRegisterNewAccount"
+            style="@style/text_Appearance_large"/>
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_below="@+id/myProfile">
+        <ListView
+            android:id="@+id/drawer_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.1dp"
+            android:background="@android:color/transparent"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

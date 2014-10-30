@@ -1,0 +1,310 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/bgColor"
+    tools:context=".LoginActivity">
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/youralmostdone"
+        android:id="@+id/bg_img"
+        android:adjustViewBounds="true"/>
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_below="@+id/bg_img"
+        android:id="@+id/loginContainer"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/user_photo_size"
+                android:layout_height="@dimen/user_photo_size"
+                android:src="@drawable/ic_no_photo"
+                android:layout_marginBottom="5dp"
+                android:adjustViewBounds="true"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <com.relhs.asianfinder.view.CustomTextView
+                    app:fontName="MyriadProCond.ttf"
+                    app:fontColor="#FF000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your profile heading"
+                    android:id="@+id/forgot_password"
+                    style="@style/text_Appearance_normal"/>
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:id="@+id/etCountry"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="e.g. Seeking for a new partner" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <com.relhs.asianfinder.view.CustomTextView
+                    app:fontName="MyriadProCond.ttf"
+                    app:fontColor="#FF000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Say something about yourself"
+                    style="@style/text_Appearance_normal"/>
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:hint="e.g. Someone who is unique, quite intelligent and who can follow moodiness at times." />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/orange"
+                android:padding="5dp"
+                android:layout_marginBottom="10dp">
+                <com.relhs.asianfinder.view.CustomTextView
+                    app:fontName="MyriadProCond.ttf"
+                    app:fontColor="#FFFF0000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Warning:"
+                    style="@style/text_Appearance_normal"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginRight="2dp"/>
+                <com.relhs.asianfinder.view.CustomTextView
+                    app:fontName="MyriadProCond.ttf"
+                    app:fontColor="#FF000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please do not include ANY personal information such as you contact number, home address and/or email"
+                    style="@style/text_Appearance_normal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <com.relhs.asianfinder.view.CustomTextView
+                    app:fontName="MyriadProCond.ttf"
+                    app:fontColor="#FF990033"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Your Details"
+                    style="@style/text_Appearance_large"/>
+
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Eye Color" />
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Height" />
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Body Art" />
+
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Do you Smoke?" />
+
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Education" />
+
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Marital Status" />
+
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Religion" />
+
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Hair Color" />
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Weight" />
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Do you drink?" />
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Do you have children?" />
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Employment Status" />
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Nationality" />
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Zodiac Sign" />
+
+                <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:hint="Relationship you are looking for (Checkbox)" />
+
+            </LinearLayout>
+
+
+            <com.relhs.asianfinder.view.CustomEditTextView
+                app:fontName="MyriadProCond.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:background="@drawable/rounded_corners"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:hint="By submitting this form, you are agreeing to the Terms of Use &amp; Privacy Policy of AsianFinder.com" />
+            <com.relhs.asianfinder.view.CustomButton
+                app:fontName="MyriadProCond.ttf"
+                app:fontStyle="bold"
+                app:fontColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Continue"
+                android:id="@+id/btnLogin"
+                android:background="@drawable/custom_button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                style="@style/button_appearance_login" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="api">http://www.asianfinder.com/actions/mobilecom.php</string>
+    <string name="app_name">Asian Finder</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="lblName">Name</string>
+    <string name="lblGender">Gender</string>
+    <string name="lblBirthday">Birthday</string>
+    <string name="lblCountry">Country</string>
+    <string name="lblState">State</string>
+    <string name="lblCity">City</string>
+    <string name="lblEmail">Email</string>
+    <string name="lblPassword">Password</string>
+    <string name="lblContinue">Continue</string>
+    <string name="lblUsername">Username</string>
+    <string name="lblLogin">Login</string>
+    <string name="lblForgotPassword">Forgot Password?</string>
+    <string name="lblRegisterNewAccount">Register new account.</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_dashboard_activity_fragment">DashboardActivityFragment</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+
+    <string-array name="drawer_menu">
+        <item>PROFILE</item>
+        <item>HOME</item>
+        <item>MATCHES</item>
+        <item>MY LIST</item>
+        <item>MESSAGES</item>
+        <item>NOTIFICATIONS</item>
+        <item>SETTINGS</item>
+    </string-array>
+
+
+
+</resources>
