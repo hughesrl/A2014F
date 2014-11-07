@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AsianFinder.iml" filepath="$PROJECT_DIR$/AsianFinder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/agvlibrary/agvlibrary.iml" filepath="$PROJECT_DIR$/agvlibrary/agvlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

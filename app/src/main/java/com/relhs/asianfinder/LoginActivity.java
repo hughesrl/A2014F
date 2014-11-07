@@ -179,6 +179,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     // Get Data inside the CamAppApplication.TAG_DATA
                     final JSONObject jsonArrayLoginDataObject = c.getJSONObject(AsianFinderApplication.TAG_DATA);
 
+                    Log.d("-- robert", jsonArrayLoginDataObject.toString());
                     String sessionId = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_SESSION);
                     String userToken = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_TOKEN);
                     String userDomainId = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_DOMAIN);

@@ -1,5 +1,6 @@
 package com.relhs.asianfinder;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -7,19 +8,40 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.RectF;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.util.SparseArrayCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
+import com.nineoldandroids.view.ViewHelper;
 import com.relhs.asianfinder.data.UserInfo;
+import com.relhs.asianfinder.flavienlaurent.notboringactionbar.AlphaForegroundColorSpan;
+import com.relhs.asianfinder.flavienlaurent.notboringactionbar.KenBurnsSupportView;
+import com.relhs.asianfinder.fragment.SampleListFragment;
+import com.relhs.asianfinder.fragment.ScrollTabHolder;
+import com.relhs.asianfinder.fragment.ScrollTabHolderFragment;
 import com.relhs.asianfinder.operation.UserInfoOperations;
 import com.relhs.asianfinder.utils.JSONParser;
 import com.relhs.asianfinder.view.CustomButton;
@@ -35,66 +57,221 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileActivity extends Activity implements View.OnClickListener{
-    private UserInfoOperations userOperations;
+public class ProfileActivity extends ActionBarActivity implements ScrollTabHolder, ViewPager.OnPageChangeListener {
+
+    private static AccelerateDecelerateInterpolator sSmoothInterpolator = new AccelerateDecelerateInterpolator();
+
+    private KenBurnsSupportView mHeaderPicture;
+    private View mHeader;
+
+    private PagerSlidingTabStrip mPagerSlidingTabStrip;
+    private ViewPager mViewPager;
+    private PagerAdapter mPagerAdapter;
+
+    private int mActionBarHeight;
+    private int mMinHeaderHeight;
+    private int mHeaderHeight;
+    private int mMinHeaderTranslation;
+    private ImageView mHeaderLogo;
+
+    private RectF mRect1 = new RectF();
+    private RectF mRect2 = new RectF();
+
+    private TypedValue mTypedValue = new TypedValue();
+    private SpannableString mSpannableString;
+    private AlphaForegroundColorSpan mAlphaForegroundColorSpan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mMinHeaderHeight = getResources().getDimensionPixelSize(R.dimen.min_header_height);
+        mHeaderHeight = getResources().getDimensionPixelSize(R.dimen.header_height);
+        mMinHeaderTranslation = -mMinHeaderHeight + getActionBarHeight();
+
         setContentView(R.layout.activity_profile);
 
-        // TODO: !IMPORTANT DATABASE OPERATION
-        userOperations = new UserInfoOperations(this);
-        userOperations.open();
-        // TODO: !IMPORTANT DATABASE OPERATION
+        mHeaderPicture = (KenBurnsSupportView) findViewById(R.id.header_picture);
+        mHeaderPicture.setResourceIds(R.drawable.pic0, R.drawable.pic1);
+        mHeaderLogo = (ImageView) findViewById(R.id.header_logo);
+        mHeader = findViewById(R.id.header);
 
-        Toast.makeText(this, "isLogin " + userOperations.isLogin(), Toast.LENGTH_LONG).show();
+        mPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setOffscreenPageLimit(4);
 
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mPagerAdapter.setTabHolderScrollingContent(this);
 
-    }
-    @Override
-    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.btnLogin:
-//                txtUsername = etUsername.getText().toString();
-//                txtPassword = etPassword.getText().toString();
-//                if(!txtUsername.isEmpty()) {
-//                    progress = new ProgressDialog(LoginActivity.this);
-//                    progress.setCanceledOnTouchOutside(false);
-//
-//                    new LoginTask(progress, txtUsername, txtPassword).execute();
-//                } else {
-//                    Toast.makeText(this, "Fill up form correctly", Toast.LENGTH_LONG).show();
-//                }
-//
-//                break;
-//            case R.id.signUp:
-//                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
-//                startActivity(i);
-//                stopService(new Intent(this, AFPushService.class));
-//                break;
-//
-//
+        mViewPager.setAdapter(mPagerAdapter);
+
+        mPagerSlidingTabStrip.setViewPager(mViewPager);
+        mPagerSlidingTabStrip.setOnPageChangeListener(this);
+        mSpannableString = new SpannableString("Robert");
+        mAlphaForegroundColorSpan = new AlphaForegroundColorSpan(0xffffffff);
+ //       if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            // > 11 version
+//            getActionBarIconView().setAlpha(0);
+//        } else {
+            // Nine Old Androids version
+//            ViewHelper.setAlpha(getActionBarIconView(), 0f);
 //        }
+//        ViewHelper.setAlpha(getActionBarIconView(), 0f);
+
+        getSupportActionBar().setBackgroundDrawable(null);
+    }
+
+
+    @Override
+    public void onPageScrollStateChanged(int arg0) {
+        // nothing
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
-        return true;
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        // nothing
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    public void onPageSelected(int position) {
+        SparseArrayCompat<ScrollTabHolder> scrollTabHolders = mPagerAdapter.getScrollTabHolders();
+        ScrollTabHolder currentHolder = scrollTabHolders.valueAt(position);
+
+        currentHolder.adjustScroll((int) (mHeader.getHeight() + ViewHelper.getTranslationY(mHeader)));
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount, int pagePosition) {
+        if (mViewPager.getCurrentItem() == pagePosition) {
+            int scrollY = getScrollY(view);
+            ViewHelper.setTranslationY(mHeader, Math.max(-scrollY, mMinHeaderTranslation));
+            float ratio = clamp(ViewHelper.getTranslationY(mHeader) / mMinHeaderTranslation, 0.0f, 1.0f);
+            interpolate(mHeaderLogo, getActionBarIconView(), sSmoothInterpolator.getInterpolation(ratio));
+            setTitleAlpha(clamp(5.0F * ratio - 4.0F, 0.0F, 1.0F));
         }
-        return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void adjustScroll(int scrollHeight) {
+        // nothing
+    }
+
+    public int getScrollY(AbsListView view) {
+        View c = view.getChildAt(0);
+        if (c == null) {
+            return 0;
+        }
+
+        int firstVisiblePosition = view.getFirstVisiblePosition();
+        int top = c.getTop();
+
+        int headerHeight = 0;
+        if (firstVisiblePosition >= 1) {
+            headerHeight = mHeaderHeight;
+        }
+
+        return -top + firstVisiblePosition * c.getHeight() + headerHeight;
+    }
+
+    public static float clamp(float value, float max, float min) {
+        return Math.max(Math.min(value, min), max);
+    }
+
+    private void interpolate(View view1, View view2, float interpolation) {
+        getOnScreenRect(mRect1, view1);
+        getOnScreenRect(mRect2, view2);
+
+        float scaleX = 1.0F + interpolation * (mRect2.width() / mRect1.width() - 1.0F);
+        float scaleY = 1.0F + interpolation * (mRect2.height() / mRect1.height() - 1.0F);
+        float translationX = 0.5F * (interpolation * (mRect2.left + mRect2.right - mRect1.left - mRect1.right));
+        float translationY = 0.5F * (interpolation * (mRect2.top + mRect2.bottom - mRect1.top - mRect1.bottom));
+
+        ViewHelper.setTranslationX(view1, translationX);
+        ViewHelper.setTranslationY(view1, translationY - ViewHelper.getTranslationY(mHeader));
+        ViewHelper.setScaleX(view1, scaleX);
+        ViewHelper.setScaleY(view1, scaleY);
+    }
+
+    private RectF getOnScreenRect(RectF rect, View view) {
+        //Log.d("RectF", view.getLeft() + ", " + view.getTop() + ", " + view.getRight() + ", " + view.getBottom());
+        //rect.set(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
+
+        rect.set(10f, 10f, 2f, 5f);
+        return rect;
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public int getActionBarHeight() {
+        if (mActionBarHeight != 0) {
+            return mActionBarHeight;
+        }
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            getTheme().resolveAttribute(android.R.attr.actionBarSize, mTypedValue, true);
+        } else {
+            getTheme().resolveAttribute(R.attr.actionBarSize, mTypedValue, true);
+        }
+
+        mActionBarHeight = TypedValue.complexToDimensionPixelSize(mTypedValue.data, getResources().getDisplayMetrics());
+
+        return mActionBarHeight;
+    }
+
+    private void setTitleAlpha(float alpha) {
+        mAlphaForegroundColorSpan.setAlpha(alpha);
+        mSpannableString.setSpan(mAlphaForegroundColorSpan, 0, mSpannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        getSupportActionBar().setTitle(mSpannableString);
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private ImageView getActionBarIconView() {
+        //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            return (ImageView)findViewById(android.R.id.home);
+        //}
+        //return (ImageView)findViewById(android.support.v7.appcompat.R.id.home);
+    }
+
+    public class PagerAdapter extends FragmentPagerAdapter {
+
+        private SparseArrayCompat<ScrollTabHolder> mScrollTabHolders;
+        private final String[] TITLES = { "Page 1", "Page 2", "Page 3", "Page 4"};
+        private ScrollTabHolder mListener;
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+            mScrollTabHolders = new SparseArrayCompat<ScrollTabHolder>();
+        }
+
+        public void setTabHolderScrollingContent(ScrollTabHolder listener) {
+            mListener = listener;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TITLES[position];
+        }
+
+        @Override
+        public int getCount() {
+            return TITLES.length;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            ScrollTabHolderFragment fragment = (ScrollTabHolderFragment) SampleListFragment.newInstance(position);
+
+            mScrollTabHolders.put(position, fragment);
+            if (mListener != null) {
+                fragment.setScrollTabHolder(mListener);
+            }
+
+            return fragment;
+        }
+
+        public SparseArrayCompat<ScrollTabHolder> getScrollTabHolders() {
+            return mScrollTabHolders;
+        }
+
+    }
 }
+

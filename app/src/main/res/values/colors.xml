@@ -7,5 +7,40 @@
 
     <color name="titleColor">#FF990033</color>
 
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#303030</color>
+    <color name="list_background_pressed">#992416</color>
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#FF626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+
+
+    <color name="white90">#99ffffff</color>
+    <color name="transparent">#ffffffff</color>
+    <color name="bgcolor">#232428</color>
+    <color name="sidebgcolor">#1c1d21</color>
+    <color name="red">#ff4845</color>
+    <color name="green">#f0f0</color>
+    <color name="blue">#f00f</color>
+    <color name="black">#f000</color>
+    <color name="actionbar_text">#FF232428</color>
+
+    <color name="edit_text_stroke">#FF232428</color>
+
+
+    <color name="sidebarmenu_icon_bg_category">#992416</color>
+
+
+    <color name="like_color">#2fb4e1</color>
+    <color name="favorite_color">#99cc33</color>
+    <color name="bucket_color">#ff9933</color>
+    <color name="checkin_color">#eb4e43</color>
+    <color name="flair_color">#00bff3</color>
+
+    <color name="header">#ff33b5e5</color>
+
+    <color name="editTextBackground">#ff17181c</color>
+
+
 
 </resources>

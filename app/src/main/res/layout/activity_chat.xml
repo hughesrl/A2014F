@@ -1,0 +1,141 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgColor">
+        <View
+            android:id="@+id/filler"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_stacked_max_height"
+            android:background="@color/titleColor"/>
+        <ListView
+            android:layout_below="@+id/filler"
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/chatInputLayout"
+            android:background="@color/white90"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            android:divider="@color/transparent"
+            android:dividerHeight="0dp">
+        </ListView>
+
+        <RelativeLayout
+            android:id="@+id/chatInputLayout"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/counter_text_bg">
+            <RelativeLayout
+                android:id="@+id/textLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingTop="5dp">
+                <ImageButton
+                    android:src="@drawable/ic_smiley"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnEmoticons"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true" />
+               <com.relhs.asianfinder.view.CustomEditTextView
+                    app:fontName="MyriadProCond.ttf"
+                    android:layout_toLeftOf="@+id/sendMessage"
+                    android:layout_toStartOf="@+id/sendMessage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="50"
+                    android:id="@+id/txtMessage"
+                    android:layout_centerVertical="true"
+                    android:hint="Write Message"
+                    android:layout_toEndOf="@+id/btnEmoticons"
+                    android:layout_toRightOf="@+id/btnEmoticons" />
+                <ImageButton
+                    android:src="@drawable/ic_send"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sendMessage"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <!--<fragment android:background="@color/white"
+                android:layout_below="@+id/textLayout"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:id="@+id/emoticsContentFrame"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                tools:layout="@layout/fragment_emoticons" />-->
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/profileData"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/chatPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_no_photo"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp">
+            <com.relhs.asianfinder.view.CustomButton
+                app:fontName="MyriadProCond.ttf"
+                app:fontStyle="bold"
+                app:fontColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send Gift"
+                android:id="@+id/btnSendGift"
+                android:background="@drawable/custom_button"
+                android:layout_marginBottom="5dp"
+                style="@style/button_appearance_login"
+                android:layout_weight="1" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight=".1" />
+
+            <com.relhs.asianfinder.view.CustomButton
+                app:fontName="MyriadProCond.ttf"
+                app:fontStyle="bold"
+                app:fontColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send Load"
+                android:id="@+id/btnSendLoad"
+                android:background="@drawable/custom_button"
+                android:layout_marginBottom="5dp"
+                style="@style/button_appearance_login"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

@@ -30,7 +30,7 @@
             app:fontName="MyriadProCond.ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:id="@+id/etUsername"
             android:background="@drawable/rounded_corners"
             android:layout_gravity="center_horizontal"

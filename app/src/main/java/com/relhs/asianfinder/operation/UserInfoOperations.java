@@ -91,11 +91,9 @@ public class UserInfoOperations {
         // now that the user is created return it ...
         Cursor cursor = databaseRead.query(DataBaseWrapper.USERINFO,
                 USERS_TABLE_COLUMNS, DataBaseWrapper._ID, null, null, null, null);
-
         cursor.moveToFirst();
-
         UserInfo userInfo = parseUserInfo(cursor);
-
+        cursor.close();
         return userInfo;
     }
     public int getUserCount() {

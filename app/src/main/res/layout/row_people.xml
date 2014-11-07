@@ -1,0 +1,86 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:layout_alignParentTop="true"
+        android:id="@+id/photoMain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_launcher"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_weight=".7"
+        android:padding="3dp"
+    />
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:id="@+id/photoThumbs"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        >
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:id="@+id/photoThumb1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/ic_launcher"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight=".1" />
+
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:id="@+id/photoThumb2"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/ic_launcher"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1.2"
+        android:id="@+id/peopleInformation"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="3dp"
+        >
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="#FF000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DjMike2312 (28/M)"
+            style="@style/text_Appearance_normal"/>
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="#70000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Banyoyo, Ilocos Sur"
+            style="@style/text_Appearance_small"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+    <RelativeLayout
+        android:id="@+id/bubbleLeft"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dip"
+        android:layout_gravity="end"
+        android:gravity="start">
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/user_photo_size"
+            android:layout_height="@dimen/user_photo_size"
+            android:src="@drawable/ic_no_photo"
+            android:adjustViewBounds="true"
+            android:id="@+id/photoLeft" />
+
+
+        <LinearLayout
+            android:id="@+id/layoutBubbleLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bubble_left"
+            android:padding="10dp"
+            android:layout_below="@+id/photoLeft"
+            android:layout_toRightOf="@+id/photoLeft"
+            android:layout_toEndOf="@+id/photoLeft"
+            android:layout_marginTop="-20dp">
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/black"
+                style="@style/text_Appearance_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/briefMsgLeft"
+                android:layout_gravity="center_horizontal|start"
+                android:singleLine="false"
+                android:text="1"
+                 />
+
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="#50000000"
+                style="@style/text_Appearance_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lastChatDateLeft"
+                android:layout_gravity="center_horizontal|end"
+                android:singleLine="true"
+                android:paddingStart="20dp"
+                android:paddingLeft="20dp"
+                android:text="10-28-2014" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/photoLeft"
+            android:layout_toRightOf="@+id/photoLeft"
+            android:layout_toEndOf="@+id/photoLeft"
+            android:layout_marginTop="-50dp"
+            android:adjustViewBounds="true"
+            android:id="@+id/stickerLeft"
+            android:src="@drawable/ic_launcher"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/bubbleRight"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dip"
+        android:layout_gravity="end"
+        android:gravity="end">
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/user_photo_size"
+            android:layout_height="@dimen/user_photo_size"
+            android:src="@drawable/ic_no_photo"
+            android:adjustViewBounds="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/photoRight" />
+        <LinearLayout
+            android:id="@+id/layoutBubbleRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bubble_right"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:padding="10dp"
+            android:layout_below="@+id/photoRight"
+            android:layout_toLeftOf="@+id/photoRight"
+            android:layout_toStartOf="@+id/photoRight"
+            android:layout_marginTop="-20dp">
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/black"
+                style="@style/text_Appearance_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/briefMsgRight"
+                android:layout_gravity="center_horizontal|start"
+                android:singleLine="false"
+                android:text="1"
+                />
+
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="#50000000"
+                style="@style/text_Appearance_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lastChatDateRight"
+                android:layout_gravity="center_horizontal|start"
+                android:singleLine="true"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
+                android:text="10-28-2014" />
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/photoRight"
+            android:layout_toLeftOf="@+id/photoRight"
+            android:layout_toStartOf="@+id/photoRight"
+            android:layout_marginTop="-50dp"
+            android:adjustViewBounds="true"
+            android:id="@+id/stickerRight"
+            android:src="@drawable/ic_launcher"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.fragment.HomeFragment;
+import com.relhs.asianfinder.fragment.MessagesFragment;
 import com.relhs.asianfinder.fragment.NavigationDrawerFragment;
 import com.relhs.asianfinder.fragment.ProfileFragment;
 import com.relhs.asianfinder.operation.UserInfoOperations;
@@ -45,18 +47,24 @@ public class DashboardActivity extends FragmentActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        Log.d("-- HUGHES", ((AsianFinderApplication) getApplication()).getDeviceId());
+
+//        Log.d("-- HUGHES", AsianFinderApplication.getCurrentTimeStamp());
+//        Log.d("-- HUGHES", AsianFinderApplication.getDateCurrentTimeZone(Long.parseLong("1415192638387")));
+
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        AsianFinderApplication.activityResumed();
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        AsianFinderApplication.activityPaused();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        AsianFinderApplication.activityResumed();
+//    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        AsianFinderApplication.activityPaused();
+//    }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -72,6 +80,11 @@ public class DashboardActivity extends FragmentActivity
             case 1 :
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, HomeFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 4 :
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, MessagesFragment.newInstance(position + 1))
                         .commit();
                 break;
             default:
@@ -92,25 +105,29 @@ public class DashboardActivity extends FragmentActivity
                 mTitle = "Home";
                 break;
             case 2:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "Home";
                 break;
             case 3:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "Matches";
                 break;
             case 4:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "My List";
                 break;
             case 5:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "Messages";
                 break;
             case 6:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "Notifications";
+                break;
+            case 7:
+                mTitle = "Settings";
                 break;
         }
     }
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
+        assert actionBar != null;
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
