@@ -172,37 +172,73 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
                 Log.d("HUGHES LOGIN", c.toString());
 
-                if(c.getString(AsianFinderApplication.TAG_STATUS).equalsIgnoreCase("false")) {
+                if(!c.getBoolean(AsianFinderApplication.TAG_STATUS)) {
                     Toast.makeText(getApplicationContext(), c.getString(AsianFinderApplication.TAG_MESSAGE), Toast.LENGTH_LONG).show();
                 } else {
                     //final
                     // Get Data inside the CamAppApplication.TAG_DATA
                     final JSONObject jsonArrayLoginDataObject = c.getJSONObject(AsianFinderApplication.TAG_DATA);
 
-                    Log.d("-- robert", jsonArrayLoginDataObject.toString());
-                    String sessionId = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_SESSION);
-                    String userToken = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_TOKEN);
-                    String userDomainId = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_DOMAIN);
-
                     int userId = Integer.parseInt(jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_USERID));
-                    String gender = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_GENDER);
                     String username = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_USERNAME);
+                    String firstname = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_FIRSTNAME);
+                    String gender = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_GENDER);
+                    int country = jsonArrayLoginDataObject.getInt(DataBaseWrapper.USERINFO_COUNTRY_ID);
+                    int state = jsonArrayLoginDataObject.getInt(DataBaseWrapper.USERINFO_STATE_ID);
+                    int city = jsonArrayLoginDataObject.getInt(DataBaseWrapper.USERINFO_CITY_ID);
+                    String email = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_EMAIL);
+                    String membership_expiration = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_MEMBERSHIP_EXPIRATION);
+                    String membership_type = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_MEMBERSHIP_TYPE);
                     String main_photo = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_MAINPHOTO);
-                    String userType = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_TYPE);
+                    String user_type = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_TYPE);
+                    int membership_expired = jsonArrayLoginDataObject.getInt(DataBaseWrapper.USERINFO_MEMBERSHIP_EXPIRED);
+                    int validate = jsonArrayLoginDataObject.getInt(DataBaseWrapper.USERINFO_VALIDATE);
+                    int domain_id = jsonArrayLoginDataObject.getInt(DataBaseWrapper.USERINFO_DOMAIN_ID);
+                    String user_phone = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_USER_PHONE);
+                    String session_id = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_SESSION_ID);
+                    String user_token = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_TOKEN);
+
+                    JSONArray jsonArrayProfile = jsonArrayLoginDataObject.getJSONArray(Constants.TAG_PROFILE);
+                    JSONObject jsonObjectProfile = jsonArrayProfile.getJSONObject(0);
+
+                    String basic = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_BASIC).toString();
+                    //Log.d("-- robert -- basic", basic);
+                    String appearance = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_APPEARANCE).toString();
+                    //Log.d("-- robert -- appearance", appearance);
+                    String lifestyle = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_LIFESTYLE).toString();
+                    //Log.d("-- robert -- lifestyle", lifestyle);
+                    String culture_values = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_CULTURE_VALUES).toString();
+                    //Log.d("-- robert -- culture_values", culture_values);
+                    String personal = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_PERSONAL).toString();
+                    //Log.d("-- robert -- personal", personal);
+                    String interest = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_INTEREST).toString();
+                    //Log.d("-- robert -- interest", interest);
+                    String others = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_OTHERS).toString();
+                    //Log.d("-- robert -- others", others);
+
+                    JSONArray jsonArrayPreferences = jsonArrayLoginDataObject.getJSONArray(Constants.TAG_PREFERENCES);
+                    String preferences = jsonArrayPreferences.toString();
+                    //Log.d("-- robert -- preferences", preferences);
+
+                    JSONArray jsonArrayPhotos = jsonArrayLoginDataObject.getJSONArray(Constants.TAG_PHOTOS);
+                    String photos = jsonArrayPhotos.toString();
+                    //Log.d("-- robert -- photos", photos);
+
                     int isLogin = 1;
+                    final UserInfo userInfo = userOperations.addUser(userId,username,firstname,gender,country,state,city,email,
+                            membership_expiration,membership_type,main_photo,user_type,
+                            membership_expired,validate,domain_id,user_phone,session_id,user_token,
+                            basic, appearance, lifestyle, culture_values, personal, interest, others, preferences, photos, isLogin);
+//                    userOperations.close();
 
-                    final UserInfo userInfo = userOperations.addUser(sessionId,userToken,userDomainId,userId,gender,sUsername,username,main_photo,userType,isLogin);
-
-                    progress.dismiss();
-                    userOperations.close();
-
-
-                    if(userType.equalsIgnoreCase("u")) {
+                    if(user_type.equalsIgnoreCase("u")) {
                         // Start the service
                         startService(new Intent(LoginActivity.this, AFPushService.class));
 
                         Intent i = new Intent(getApplication(), DashboardActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                        progress.dismiss();
                         startActivity(i);
                     }
                 }

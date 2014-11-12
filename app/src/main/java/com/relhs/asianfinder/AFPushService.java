@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.relhs.asianfinder.data.RoomInfo;
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.operation.MessagesOperations;
 import com.relhs.asianfinder.operation.UserInfoOperations;
@@ -167,14 +168,14 @@ public class AFPushService extends Service {
     }
     public void socketFunctions() throws URISyntaxException {
         try {
-            credentials.putOpt("userId", userInformation.getUserId());
-            credentials.putOpt("userType", userInformation.getUserType());
-            credentials.putOpt("userName", userInformation.getUserName());
-            credentials.putOpt("domainId", userInformation.getDomainId());
-            credentials.putOpt("userSessionId", userInformation.getUserSessionId());
+            credentials.putOpt("userId", userInformation.getUser_id());
+            credentials.putOpt("userType", userInformation.getUser_type());
+            credentials.putOpt("userName", userInformation.getUsername());
+            credentials.putOpt("domainId", userInformation.getDomain_id());
+            credentials.putOpt("userSessionId", userInformation.getSession_id());
             credentials.putOpt("main_photo", userInformation.getMain_photo());
             credentials.putOpt("gender", userInformation.getGender());
-            credentials.putOpt("userToken", userInformation.getUserToken());
+            credentials.putOpt("userToken", userInformation.getUser_token());
 
             socket = IO.socket(SERVERIP+":"+SERVERPORT);
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
@@ -199,9 +200,9 @@ public class AFPushService extends Service {
                         JSONObject jsonObjectStickers = viewingData.getJSONObject("stickers");
                         JSONObject jsonObjectStickersFiles = jsonObjectStickers.getJSONObject("files");
 
-                        String stickersUrl = jsonObjectStickersFiles.getString("url");
+                        //String stickersUrl = jsonObjectStickersFiles.getString("url");
 
-                        Log.d("-- onlineChatOk STICKERS", stickersUrl);
+                        //Log.d("-- onlineChatOk STICKERS", stickersUrl);
 
                         JSONArray jsonObjectRoomMembers = viewingData.getJSONArray("roomMembers");
                         for (int i = 0; i < jsonObjectRoomMembers.length(); i++) {
@@ -407,13 +408,7 @@ public class AFPushService extends Service {
                 Boolean seen = cM.getBoolean("seen");
                 int mySeen = (seen) ? 1 : 0;
 
-                if (cM.has("s")) {
-                    JSONObject cMSticker = cM.getJSONObject("s");
-                    Log.d("-- robert",  cMSticker.getString("folder")+"/"+ cMSticker.getString("file"));
-                    messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, "", timestamp, mySeen, cMSticker.getString("folder"), cMSticker.getString("file"));
-                } else {
-                    messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, mySeen, "", "");
-                }
+                RoomInfo roomDetails = messagesOperations.getChatRoomDetails(threadId+"");
 
                 // show notification
                 notification = new Notification(R.drawable.ic_launcher, "New Message", System.currentTimeMillis());
@@ -422,10 +417,26 @@ public class AFPushService extends Service {
 
                 PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
                         0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                notification.setLatestEventInfo(AFPushService.this, "Message",
-                        cM.getString("m"), pendingIntent);
 
-                mgr.notify(NOTIFICATION_ID, notification);
+                if (cM.has("s")) {
+                    JSONObject cMSticker = cM.getJSONObject("s");
+                    Log.d("-- robert",  cMSticker.getString("folder")+"/"+ cMSticker.getString("file"));
+                    messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, "", timestamp, mySeen, cMSticker.getString("folder"), cMSticker.getString("file"));
+
+
+                    notification.setLatestEventInfo(AFPushService.this, roomDetails.getUserName(), "Sticker", pendingIntent);
+
+                    mgr.notify(NOTIFICATION_ID, notification);
+                } else {
+                    messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, mySeen, "", "");
+
+                    notification.setLatestEventInfo(AFPushService.this, roomDetails.getUserName(),
+                            cM.getString("m"), pendingIntent);
+
+                    mgr.notify(NOTIFICATION_ID, notification);
+                }
+
+
 
                 if(AsianFinderApplication.isActivityVisible()) {
                     sendResultChat(cM.getString("tid"));

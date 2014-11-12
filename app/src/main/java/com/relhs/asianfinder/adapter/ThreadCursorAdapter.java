@@ -70,7 +70,7 @@ public class ThreadCursorAdapter extends CursorAdapter {
 
         String messageType = cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_TYPE));
 
-        if(getItemViewType(cursor, userInfo.getUserId()) == 0) {
+        if(getItemViewType(cursor, userInfo.getUser_id()) == 0) {
             holder.chatLeft.setVisibility(View.GONE);
             holder.chatRight.setVisibility(View.VISIBLE);
 

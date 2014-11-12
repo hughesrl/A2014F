@@ -14,16 +14,38 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
 	
 	public static final String USERINFO = "UserInfo";
     public static final String USERINFO_USERID = "user_id";
-    public static final String USERINFO_TYPE = "user_type";
-    public static final String USERINFO_EMAIL = "user_email";
     public static final String USERINFO_USERNAME = "username";
+    public static final String USERINFO_FIRSTNAME = "firstname";
     public static final String USERINFO_GENDER = "gender";
-    public static final String USERINFO_MAINPHOTO = "main_photo";
-    public static final String USERINFO_SESSION = "session_id";
-    public static final String USERINFO_DOMAIN = "domain_id";
-    public static final String USERINFO_TOKEN = "user_token";
+    public static final String USERINFO_COUNTRY_ID = "country";
+    public static final String USERINFO_STATE_ID = "state";
+    public static final String USERINFO_CITY_ID = "city";
+    public static final String USERINFO_EMAIL = "user_email";
+    public static final String USERINFO_MEMBERSHIP_EXPIRATION = "membership_expiration";
     public static final String USERINFO_MEMBERSHIP_TYPE = "membership_type";
+    public static final String USERINFO_MAINPHOTO = "main_photo";
+    public static final String USERINFO_TYPE = "user_type";
+    public static final String USERINFO_MEMBERSHIP_EXPIRED = "membership_expired";
+    public static final String USERINFO_VALIDATE = "validate";
+    public static final String USERINFO_DOMAIN_ID = "domain_id";
+    public static final String USERINFO_USER_PHONE = "user_phone";
+    public static final String USERINFO_SESSION_ID = "session_id";
+    public static final String USERINFO_TOKEN = "user_token";
+
+    public static final String USERINFO_JSON_BASIC = "basic";
+    public static final String USERINFO_JSON_APPEARANCE = "appearance";
+    public static final String USERINFO_JSON_LIFESTYLE = "lifestyle";
+    public static final String USERINFO_JSON_CULTURE_VALUES = "culture_values";
+    public static final String USERINFO_JSON_PERSONAL = "personal";
+    public static final String USERINFO_JSON_INTEREST = "interest";
+    public static final String USERINFO_JSON_OTHERS = "others";
+    public static final String USERINFO_JSON_PREFERENCE = "preference";
+    public static final String USERINFO_JSON_PHOTOS = "photos";
+
     public static final String USERINFO_ISLOGIN = "_is_login";
+
+
+
 
     public static final String EMOTICONSINFO = "EmoticonsInfo";
     public static final String EMOTICONSINFO_FILE = "_f";
@@ -61,19 +83,37 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
 
 
 	// creation SQLite statement
-	private static final String DATABASE_CREATE_USERINFO = "CREATE TABLE " + USERINFO
-			+ "(" + _ID + " integer primary key autoincrement, "
+    private static final String DATABASE_CREATE_USERINFO = "CREATE TABLE " + USERINFO
+            + "(" + _ID + " integer primary key autoincrement, "
             + USERINFO_USERID + " integer,"
-            + USERINFO_TYPE + " text not null, "
             + USERINFO_USERNAME + " text not null, "
+            + USERINFO_FIRSTNAME + " text, "
             + USERINFO_GENDER + " text not null, "
-            + USERINFO_MAINPHOTO + " text not null, "
+            + USERINFO_COUNTRY_ID + " integer not null, "
+            + USERINFO_STATE_ID + " integer not null, "
+            + USERINFO_CITY_ID + " integer not null, "
             + USERINFO_EMAIL + " text not null, "
-            + USERINFO_SESSION + " text not null, "
-            + USERINFO_DOMAIN + " text not null, "
+            + USERINFO_MEMBERSHIP_EXPIRATION + " text, "
+            + USERINFO_MEMBERSHIP_TYPE + " text, "
+            + USERINFO_MAINPHOTO + " text not null, "
+            + USERINFO_TYPE + " text not null, "
+            + USERINFO_MEMBERSHIP_EXPIRED + " integer not null, "
+            + USERINFO_VALIDATE + " integer not null, "
+            + USERINFO_DOMAIN_ID + " integer not null, "
+            + USERINFO_USER_PHONE + " text, "
+            + USERINFO_SESSION_ID + " text not null, "
             + USERINFO_TOKEN + " text not null, "
-            + USERINFO_ISLOGIN + " int not null, "
-			+ _DATE + " datetime default current_timestamp);";
+            + USERINFO_JSON_BASIC + " text, "
+            + USERINFO_JSON_APPEARANCE + " text, "
+            + USERINFO_JSON_LIFESTYLE + " text, "
+            + USERINFO_JSON_CULTURE_VALUES + " text, "
+            + USERINFO_JSON_PERSONAL + " text, "
+            + USERINFO_JSON_INTEREST + " text, "
+            + USERINFO_JSON_OTHERS + " text, "
+            + USERINFO_JSON_PREFERENCE + " text, "
+            + USERINFO_JSON_PHOTOS + " text, "
+            + USERINFO_ISLOGIN + " integer not null, "
+            + _DATE + " datetime default current_timestamp);";
 
     private static final String DATABASE_CREATE_EMOTICONSINFO = "CREATE TABLE " + EMOTICONSINFO
             + "(" + _ID + " integer primary key autoincrement, "

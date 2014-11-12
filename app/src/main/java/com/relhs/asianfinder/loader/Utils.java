@@ -1,7 +1,11 @@
 package com.relhs.asianfinder.loader;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.relhs.asianfinder.R;
 import com.relhs.asianfinder.view.RoundedAvatarDrawable;
@@ -33,4 +37,25 @@ public class Utils {
 
         return r;
     }
+
+
+    public static ProgressDialog createProgressDialog(Context mContext) {
+        ProgressDialog dialog = new ProgressDialog(mContext);
+        try {
+            dialog.show();
+        } catch (WindowManager.BadTokenException e) {
+
+        }
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.progressdialog);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams windowParams = window.getAttributes();
+
+        windowParams.dimAmount = 0.90f;
+        windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        window.setAttributes(windowParams);
+        // dialog.setMessage(Message);
+        return dialog;
+    }
+
 }

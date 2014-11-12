@@ -105,10 +105,10 @@ public class HomeFragment extends Fragment {
 
                     return checkInFragment;
                 case 1: // Patient Information
-                    SampleListFragment checkInFragment2 = new SampleListFragment();
-                    checkInFragment2.setArguments(args);
+                    BrowseFragment browseFragment = new BrowseFragment();
+                    browseFragment.setArguments(args);
 
-                    return checkInFragment2;
+                    return browseFragment;
             }
             return null;
         }

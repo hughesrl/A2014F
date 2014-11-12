@@ -340,7 +340,7 @@ public class NavigationDrawerFragment extends Fragment {
 
 
     private ArrayList<NavDrawerItem> prepareListData() {
-        drawerMenus.add(0,new NavDrawerItem(userInformation.getUserName(), userInformation.getMain_photo()));
+        drawerMenus.add(0,new NavDrawerItem(userInformation.getUsername(), userInformation.getMain_photo()));
 
         for(int x=1;x<=(navMenuTitles.length-1);x++) {
             drawerMenus.add(new NavDrawerItem(navMenuTitles[x], ""));

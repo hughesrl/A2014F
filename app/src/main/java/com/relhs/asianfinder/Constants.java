@@ -16,12 +16,14 @@ public class Constants {
     public final static String TAG_DATA = "data";
 
 
-//    // PEOPLE LISTING
-//    public final static String TAG_ACCOUNTS = "accounts";
-//    // PROFILE
-//    public final static String TAG_PROFILE = "profile";
-//    // PROFILE BASIC
-//    public final static String TAG_BASIC = "basic";
+    // PEOPLE LISTING
+    public final static String TAG_ACCOUNTS = "accounts";
+    // PROFILE
+    public final static String TAG_PROFILE = "profile";
+    public final static String TAG_PREFERENCES = "preferences";
+    public final static String TAG_PHOTOS = "photos";
+    // PROFILE BASIC
+    public final static String TAG_BASIC = "basic";
 //
 //    public final static String TAG_PROFILE = "accounts";
 //    public final static String TAG_PROFILE = "accounts";
@@ -29,7 +31,85 @@ public class Constants {
 //    public final static String TAG_PROFILE = "accounts";public final static String TAG_PROFILE = "accounts";
 
 
+    // PROFILE
+    public final static String TAG_PROFILE_TABLE = "Profile";
+    public final static String TAG_PROFILE_USERID = "user_id";
+    public final static String TAG_PROFILE_USERNAME = "username";
+    public final static String TAG_PROFILE_FIRSTNAME = "firstname";
+    public final static String TAG_PROFILE_GENDER = "gender";
+    public final static String TAG_PROFILE_COUNTRY = "country";
+    public final static String TAG_PROFILE_STATE = "state";
+    public final static String TAG_PROFILE_CITY = "city";
+    public final static String TAG_PROFILE_USER_EMAIL = "user_email";
+    public final static String TAG_PROFILE_MEMBERSHIP_EXPIRATION = "membership_expiration";
+    public final static String TAG_PROFILE_MEMBERSHIP_TYPE = "membership_type";
+    public final static String TAG_PROFILE_MAIN_PHOTO = "main_photo";
+    public final static String TAG_PROFILE_USER_TYPE = "user_type";
+    public final static String TAG_PROFILE_MEMBERSHIP_EXPIRED = "membership_expired";
+    public final static String TAG_PROFILE_VALIDATE = "validate";
+    public final static String TAG_PROFILE_DOMAIN_ID = "domain_id";
+    public final static String TAG_PROFILE_USER_PHONE = "user_phone";
+    public final static String TAG_PROFILE_SESSION_ID = "session_id";
+    public final static String TAG_PROFILE_USER_TOKEN = "user_token";
 
+    // PROFILE -- APPEARANCE
+    public final static String TAG_APPEARANCE_TABLE = "Appearance";
+    public final static String TAG_HEIGHT = "height";
+    public final static String TAG_WEIGHT = "weight";
+    public final static String TAG_HAIR_COLOR = "hair_color";
+    public final static String TAG_HAIR_LENGTH = "hair_length";
+    public final static String TAG_HAIR_TYPE = "hair_type";
+    public final static String TAG_EYE_COLOR = "eye_color";
+    public final static String TAG_EYE_WEAR = "eye_wear";
+    public final static String TAG_BODY_TYPE = "body_type";
+    public final static String TAG_ETHNICITY = "ethnicity";
+    public final static String TAG_FACIAL_HAIR = "facial_hair";
+    public final static String TAG_BEST_FEATURE = "best_feature";
+    public final static String TAG_BODY_ART = "body_art";
+    public final static String TAG_APPEARANCE = "appearance";
+
+
+    // PROFILE -- LIFESTYLE
+    public final static String TAG_LIFESTYLE_TABLE = "Lifestyle";
+    public final static String TAG_DRINK = "drink";
+    public final static String TAG_SMOKE = "smoke";
+    public final static String TAG_MARITAL_STATUS = "marital_status";
+    public final static String TAG_HAVE_CHILDREN = "have_children";
+    public final static String TAG_NUMBER_OF_CHILDREN = "number_of_children";
+    public final static String TAG_OLDEST_CHILD = "oldest_child";
+    public final static String TAG_YOUNGEST_CHILD = "youngest_child";
+    public final static String TAG_WANT_MORE_CHILDREN = "want_more_children";
+    public final static String TAG_PETS = "pets";
+    public final static String TAG_OCCUPATION = "occupation";
+    public final static String TAG_EMPLOYMENT = "employment";
+    public final static String TAG_ANNUAL_INCOME = "annual_income";
+    public final static String TAG_HOME_TYPE = "home_type";
+    public final static String TAG_LIVING_SITUATION = "living_situation";
+    public final static String TAG_WILLING_TO_RELOCATE = "willing_to_relocate";
+
+    // PROFILE -- CULTURE VALUES
+    public final static String TAG_CULTURE_VALUES_TABLE = "CultureValues";
+    public final static String TAG_NATIONALITY = "nationality";
+    public final static String TAG_EDUCATION = "education";
+    public final static String TAG_LANGUAGE = "language";
+    public final static String TAG_ENGLISH_ABILITY = "english_ability";
+    public final static String TAG_RELIGION = "religion";
+    public final static String TAG_RELIGIOUS_VALUES = "religious_values";
+    public final static String TAG_STAR_SIGN = "star_sign";
+
+    // PROFILE -- PERSONAL
+    public final static String TAG_PERSONAL_TABLE = "Personal";
+    public final static String TAG_BUST = "bust";
+    public final static String TAG_WAIST = "waist";
+    public final static String TAG_HIPS = "hips";
+
+    // PROFILE -- INTEREST
+    public final static String TAG_INTEREST_TABLE = "Interest";
+    public final static String TAG_FOOD = "food";
+    public final static String TAG_MUSIC = "music";
+    public final static String TAG_SPORTS = "sports";
+
+    // ------------------------------------------------------
 
     public final static String TAG_OS_COUNTRY = "country";
     public final static String TAG_COUNTRY_ID= "id";

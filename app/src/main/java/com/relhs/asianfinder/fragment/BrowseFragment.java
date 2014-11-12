@@ -78,10 +78,10 @@ public class BrowseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myFragmentView = inflater.inflate(R.layout.fragment_browse, container, false);
 
-        mListView = (AsymmetricGridView) myFragmentView.findViewById(R.id.listView);
-
-        mListView.setRequestedColumnCount(2);
-        new GetAllNearest(mParamLong, mParamLat).execute();
+//        mListView = (AsymmetricGridView) myFragmentView.findViewById(R.id.listView);
+//
+//        mListView.setRequestedColumnCount(2);
+//        new GetAllNearest(mParamLong, mParamLat).execute();
 
         return myFragmentView;
     }
