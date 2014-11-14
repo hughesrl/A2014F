@@ -24,6 +24,8 @@ public class Constants {
     public final static String TAG_PHOTOS = "photos";
     // PROFILE BASIC
     public final static String TAG_BASIC = "basic";
+
+    public final static String TAG_SERVER_RESPONSE = "server_response";
 //
 //    public final static String TAG_PROFILE = "accounts";
 //    public final static String TAG_PROFILE = "accounts";

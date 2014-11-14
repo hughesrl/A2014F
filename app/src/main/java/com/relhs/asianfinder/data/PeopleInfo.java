@@ -1,66 +1,63 @@
 package com.relhs.asianfinder.data;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import com.felipecsl.asymmetricgridview.library.model.AsymmetricItem;
 
 public class PeopleInfo implements AsymmetricItem {
-    private int columnSpan;
+    private int colSpan;
     private int rowSpan;
     private int position;
 
-    private String name;
-    private String category;
-    private String ownership;
-    private String image_filename;
-    private String image_width;
-    private String image_height;
-    private String tile_size;
-    private String source;
-    private String id;
-    private String lat;
-    private String lng;
-    private String distance;
+    private String username;
+    private String gender;
+    private String aged;
+    private String country;
+    private String state;
+    private String city;
+    private int is_online;
+
+    private String main_photo;
+    private String subphoto_1;
+    private String subphoto_2;
+
 
     public PeopleInfo() {
-        this(1, 1, 0, "", "", "", "", "", "", "", "", "", "", "", "");
+        this(1, 1, 0, "", "", "", "", "", "", 0, "", "", "");
     }
 	 
-	public PeopleInfo(int columnSpan, int rowSpan, int position,
-                        String name,String category,String ownership,String image_filename,String image_width,
-                        String image_height,String tile_size,String source, String id,String lat,String lng,String distance) {
-		// TODO Auto-generated constructor stub
-
-		this.columnSpan = columnSpan;
-        this.rowSpan = rowSpan;
-        this.position = position;
-
-
-		this.name = name;
-		this.category = category;
-		this.ownership = ownership;
-		this.image_filename = image_filename;
-		this.image_width = image_width;
-		this.image_height = image_height;
-		this.tile_size = tile_size;
-		this.source = source;
-        this.id = id;
-		this.lat = lat;
-		this.lng = lng;
-		this.distance = distance;
-	} 
 
 	public PeopleInfo(Parcel in) {
 		// TODO Auto-generated constructor stub
 		readFromParcel(in);
 	}
+
+    public PeopleInfo(int colSpan, int rowSpan, int position, String username, String gender, String aged, String country, String state, String city, int is_online,
+                      String main_photo, String subphoto_1, String subphoto_2) {
+        this.colSpan = colSpan;
+        this.rowSpan = rowSpan;
+        this.position = position;
+
+
+        this.username = username;
+        this.gender = gender;
+        this.aged = aged;
+        this.country = country;
+        this.state = state;
+        this.city = city;
+        this.is_online = is_online;
+
+        this.main_photo = main_photo;
+        this.subphoto_1 = subphoto_1;
+        this.subphoto_2 = subphoto_2;
+    }
+
     public int getColumnSpan() {
-        return columnSpan;
+        return colSpan;
     }
 
     public void setColumnSpan(int columnSpan) {
-        this.columnSpan = columnSpan;
+        this.colSpan = columnSpan;
     }
 
     public int getRowSpan() {
@@ -79,120 +76,106 @@ public class PeopleInfo implements AsymmetricItem {
         this.position = position;
     }
 
-    public String getName() {
-        return name;
+
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getCategory() {
-        return category;
+    public String getGender() {
+        return gender;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getOwnership() {
-        return ownership;
+    public String getAged() {
+        return aged;
     }
 
-    public void setOwnership(String ownership) {
-        this.ownership = ownership;
+    public void setAged(String aged) {
+        this.aged = aged;
     }
 
-    public String getImage_filename() {
-        return image_filename;
+    public String getCountry() {
+        return country;
     }
 
-    public void setImage_filename(String image_filename) {
-        this.image_filename = image_filename;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getImage_width() {
-        return image_width;
+    public String getState() {
+        return state;
     }
 
-    public void setImage_width(String image_width) {
-        this.image_width = image_width;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getImage_height() {
-        return image_height;
+    public String getCity() {
+        return city;
     }
 
-    public void setImage_height(String image_height) {
-        this.image_height = image_height;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getTile_size() {
-        return tile_size;
+    public int getIs_online() {
+        return is_online;
     }
 
-    public void setTile_size(String tile_size) {
-        this.tile_size = tile_size;
+    public void setIs_online(int is_online) {
+        this.is_online = is_online;
     }
 
-    public String getSource() {
-        return source;
+    public String getMain_photo() {
+        return main_photo;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setMain_photo(String main_photo) {
+        this.main_photo = main_photo;
     }
 
-    public String getId() {
-        return id;
+    public String getSubphoto_1() {
+        return subphoto_1;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSubphoto_1(String subphoto_1) {
+        this.subphoto_1 = subphoto_1;
     }
 
-    public String getLat() {
-        return lat;
+    public String getSubphoto_2() {
+        return subphoto_2;
     }
 
-    public void setLat(String lat) {
-        this.lat = lat;
+    public void setSubphoto_2(String subphoto_2) {
+        this.subphoto_2 = subphoto_2;
     }
 
-    public String getLng() {
-        return lng;
-    }
-
-    public void setLng(String lng) {
-        this.lng = lng;
-    }
-
-    public String getDistance() {
-        return distance;
-    }
-
-    public void setDistance(String distance) {
-        this.distance = distance;
-    }
-
-	
-	private void readFromParcel(final Parcel in) {
-        columnSpan = in.readInt();
+    private void readFromParcel(final Parcel in) {
+        colSpan = in.readInt();
         rowSpan = in.readInt();
         position = in.readInt();
 
-        name = in.readString();
-        category = in.readString();
-        ownership = in.readString();
-        image_filename = in.readString();
-        image_width = in.readString();
-        image_height = in.readString();
-        tile_size = in.readString();
-        source = in.readString();
-        id = in.readString();
-        lat = in.readString();
-        lng = in.readString();
-        distance = in.readString();
+
+        username = in.readString();
+        aged = in.readString();
+        country = in.readString();
+        state = in.readString();
+        city = in.readString();
+        is_online = in.readInt();
+
+        main_photo = in.readString();
+        subphoto_1 = in.readString();
+        subphoto_2 = in.readString();
+
+
     }
 
     @Override
@@ -202,22 +185,21 @@ public class PeopleInfo implements AsymmetricItem {
 
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
-        dest.writeInt(columnSpan);
+        dest.writeInt(colSpan);
         dest.writeInt(rowSpan);
         dest.writeInt(position);
 
-        dest.writeString(name);
-        dest.writeString(category);
-        dest.writeString(ownership);
-        dest.writeString(image_filename);
-        dest.writeString(image_width);
-        dest.writeString(image_height);
-        dest.writeString(tile_size);
-        dest.writeString(source);
-        dest.writeString(id);
-        dest.writeString(lat);
-        dest.writeString(lng);
-        dest.writeString(distance);
+        dest.writeString(username);
+        dest.writeString(aged);
+        dest.writeString(country);
+        dest.writeString(state);
+        dest.writeString(city);
+        dest.writeInt(is_online);
+
+        dest.writeString(main_photo);
+        dest.writeString(subphoto_1);
+        dest.writeString(subphoto_2);
+
     }
 
 	/* Parcelable interface implementation */

@@ -2,7 +2,7 @@
     xmlns:flipstop="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white90" >
+    android:background="@color/white" >
 
     <com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView
         android:id="@+id/listView"

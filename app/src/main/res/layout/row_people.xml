@@ -68,6 +68,7 @@
         >
         <com.relhs.asianfinder.view.CustomTextView
             app:fontName="MyriadProCond.ttf"
+            android:id="@+id/txtNameAgeGender"
             app:fontColor="#FF000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,6 +76,7 @@
             style="@style/text_Appearance_normal"/>
         <com.relhs.asianfinder.view.CustomTextView
             app:fontName="MyriadProCond.ttf"
+            android:id="@+id/txtLocation"
             app:fontColor="#70000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

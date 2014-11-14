@@ -11,33 +11,44 @@ import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridViewAdapter
 import com.relhs.asianfinder.R;
 import com.relhs.asianfinder.data.PeopleInfo;
 import com.relhs.asianfinder.loader.ImageLoader;
+import com.relhs.asianfinder.view.CustomTextView;
 
 import java.util.ArrayList;
 
 public class PeopleListAdapter extends AsymmetricGridViewAdapter<PeopleInfo> {
 
 	private ImageLoader mLoader;
+    private Context context;
 	
 
-    public PeopleListAdapter(Context context, AsymmetricGridView listView, ArrayList<PeopleInfo> businessList) {
-		super(context, listView, businessList);
-		mLoader = new ImageLoader(context);
+    public PeopleListAdapter(Context context, AsymmetricGridView listView, ArrayList<PeopleInfo> peopleInfoArrayList) {
+		super(context, listView, peopleInfoArrayList);
+        this.mLoader = new ImageLoader(context);
+        this.context = context;
 	}
 
     @Override
     public View getActualView(final int position, View convertView, final ViewGroup parent) {
-        PeopleInfo business = getItem(position);
+        PeopleInfo peopleInfo = getItem(position);
 		
     	if (convertView == null) {
-//			LayoutInflater layoutInflator = LayoutInflater.from(getContext());
-//			convertView = layoutInflator.inflate(R.layout.row_people, parent, false);
+			LayoutInflater layoutInflator = LayoutInflater.from(context);
+			convertView = layoutInflator.inflate(R.layout.row_people, parent, false);
 		}
 		
 		ImageView photoMain = (ImageView) convertView.findViewById(R.id.photoMain);
         ImageView photoThumb1 = (ImageView) convertView.findViewById(R.id.photoThumb1);
         ImageView photoThumb2 = (ImageView) convertView.findViewById(R.id.photoThumb2);
 		
-		mLoader.DisplayImage(business.getImage_filename(), photoMain);
+		mLoader.DisplayImage(peopleInfo.getMain_photo(), photoMain);
+        mLoader.DisplayImage(peopleInfo.getSubphoto_1(), photoThumb1);
+        mLoader.DisplayImage(peopleInfo.getSubphoto_2(), photoThumb2);
+
+        CustomTextView txtNameAgeGender = (CustomTextView) convertView.findViewById(R.id.txtNameAgeGender);
+        CustomTextView txtLocation = (CustomTextView) convertView.findViewById(R.id.txtLocation);
+
+        txtNameAgeGender.setText(peopleInfo.getUsername()+" ("+peopleInfo.getAged()+"/"+peopleInfo.getGender().toUpperCase()+")");
+        txtLocation.setText(peopleInfo.getCity()+", "+peopleInfo.getState()+", "+peopleInfo.getCountry());
 		
         return convertView;
     }
