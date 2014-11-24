@@ -53,6 +53,7 @@ public class PeopleGalleryFragment extends Fragment {
     private AsymmetricGridView mListView;
     private PeoplePhotosGridAdapter adapter;
     private int currentOffset;
+    private LinearLayout noPhoto;
 
     /**
      * Use this factory method to create a new instance of
@@ -91,6 +92,8 @@ public class PeopleGalleryFragment extends Fragment {
         myFragmentView = inflater.inflate(R.layout.fragment_people_profile_gallery, container, false);
         mListView = (AsymmetricGridView) myFragmentView.findViewById(R.id.listView);
         mListView.setRequestedColumnCount(2);
+
+        noPhoto = (LinearLayout) myFragmentView.findViewById(R.id.noPhoto);
 
         new LoadPhotosDataTask().execute();
 
@@ -152,7 +155,8 @@ public class PeopleGalleryFragment extends Fragment {
                     }
                 });
             } else {
-                Toast.makeText(getActivity(), "No More data", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "No More data", Toast.LENGTH_LONG).show();
+                noPhoto.setVisibility(View.VISIBLE);
             }
 
             mProgressDialog.dismiss();

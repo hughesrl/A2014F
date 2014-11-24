@@ -34,4 +34,52 @@
         android:dividerHeight="5dp"
         android:listSelector="#00000000"/>
 
+    <LinearLayout
+        android:id="@+id/noPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rounded_corners"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="VAGRoundedLight.ttf"
+            app:fontStyle="bold"
+            app:fontColor="@android:color/black"
+            style="@style/text_Appearance_normal"
+            android:id="@+id/spinnerTxtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="No Photo to display"
+            android:layout_marginBottom="10dp"/>
+
+        <com.relhs.asianfinder.view.CustomButton
+            app:fontName="MyriadProCond.ttf"
+            app:fontStyle="bold"
+            app:fontColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload Photo"
+            android:id="@+id/btnUpload"
+            android:background="@drawable/custom_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            style="@style/button_appearance_login" />
+
+        <com.relhs.asianfinder.view.CustomButton
+            app:fontName="MyriadProCond.ttf"
+            app:fontStyle="bold"
+            app:fontColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Capture Photo"
+            android:id="@+id/btnCapture"
+            android:background="@drawable/custom_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            style="@style/button_appearance_login" />
+    </LinearLayout>
+
 </RelativeLayout>
