@@ -193,6 +193,12 @@ public class UserInfoOperations {
     public void emptyUser() {
         databaseWrite.delete(DataBaseWrapper.USERINFO, null, null);
     }
+
+    public void emptyAllUserData() {
+        databaseWrite.delete(DataBaseWrapper.USERINFO, null, null);
+        databaseWrite.delete(DataBaseWrapper.MESSAGESTHREADINFO, null, null);
+        databaseWrite.delete(DataBaseWrapper.ROOMINFO, null, null);
+    }
 	
 	public void deleteUser(UserInfo userInfo) {
 		long id = userInfo.getId();

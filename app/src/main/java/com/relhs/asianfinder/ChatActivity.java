@@ -116,47 +116,47 @@ public class ChatActivity extends ListActivity implements View.OnClickListener {
 
             }
         });
-        getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
-            int mLastFirstVisibleItem = 0;
-            boolean mIsScrollingUp;
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-                if (view.getId() == getListView().getId()) {
-                    final int currentFirstVisibleItem = getListView().getFirstVisiblePosition();
-
-                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
-                        mIsScrollingUp = false;
-//                        Toast.makeText(ChatActivity.this, "Down", Toast.LENGTH_LONG).show();
-                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
-                        mIsScrollingUp = true;
-//                        Toast.makeText(ChatActivity.this, "Up", Toast.LENGTH_LONG).show();
-                    }
-                    mLastFirstVisibleItem = currentFirstVisibleItem;
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if(mLastFirstVisibleItem<firstVisibleItem) {
-//                    Log.i("SCROLLING DOWN","TRUE");
-                    if(profileData.getVisibility() == View.INVISIBLE) {
-                        Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
-                        profileData.startAnimation(slide);
-                        profileData.setVisibility(View.VISIBLE);
-                    }
-                }
-                if(mLastFirstVisibleItem>firstVisibleItem) {
-//                    Log.i("SCROLLING UP","TRUE");
-                    if(profileData.getVisibility() == View.VISIBLE) {
-                        Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
-                        profileData.startAnimation(slide);
-                        profileData.setVisibility(View.INVISIBLE);
-                    }
-                }
-                mLastFirstVisibleItem=firstVisibleItem;
-            }
-        });
+//        getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
+//            int mLastFirstVisibleItem = 0;
+//            boolean mIsScrollingUp;
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//
+//                if (view.getId() == getListView().getId()) {
+//                    final int currentFirstVisibleItem = getListView().getFirstVisiblePosition();
+//
+//                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
+//                        mIsScrollingUp = false;
+////                        Toast.makeText(ChatActivity.this, "Down", Toast.LENGTH_LONG).show();
+//                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+//                        mIsScrollingUp = true;
+////                        Toast.makeText(ChatActivity.this, "Up", Toast.LENGTH_LONG).show();
+//                    }
+//                    mLastFirstVisibleItem = currentFirstVisibleItem;
+//                }
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//                if(mLastFirstVisibleItem<firstVisibleItem) {
+////                    Log.i("SCROLLING DOWN","TRUE");
+//                    if(profileData.getVisibility() == View.INVISIBLE) {
+//                        Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
+//                        profileData.startAnimation(slide);
+//                        profileData.setVisibility(View.VISIBLE);
+//                    }
+//                }
+//                if(mLastFirstVisibleItem>firstVisibleItem) {
+////                    Log.i("SCROLLING UP","TRUE");
+//                    if(profileData.getVisibility() == View.VISIBLE) {
+//                        Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+//                        profileData.startAnimation(slide);
+//                        profileData.setVisibility(View.INVISIBLE);
+//                    }
+//                }
+//                mLastFirstVisibleItem=firstVisibleItem;
+//            }
+//        });
         final ImageButton sendMessage = (ImageButton) findViewById(R.id.sendMessage);
         sendMessage.setOnClickListener(this);
         final ImageButton btnEmoticons = (ImageButton) findViewById(R.id.btnEmoticons);

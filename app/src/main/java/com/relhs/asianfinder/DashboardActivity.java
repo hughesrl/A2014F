@@ -87,6 +87,10 @@ public class DashboardActivity extends FragmentActivity
                         .replace(R.id.container, MessagesFragment.newInstance(position + 1))
                         .commit();
                 break;
+            case 6 :
+                Intent iSettings = new Intent(this, SettingsActivity.class);
+                startActivity(iSettings);
+                break;
             default:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))

@@ -12,17 +12,24 @@ public class CustomEditTextView extends EditText {
 
     public CustomEditTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs);
+        if (!isInEditMode()) {
+            init(attrs);
+        }
+
     }
 
     public CustomEditTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
+        if (!isInEditMode()) {
+            init(attrs);
+        }
     }
 
     public CustomEditTextView(Context context) {
         super(context);
-        init(null);
+        if (!isInEditMode()) {
+            init(null);
+        }
     }
 
     private void init(AttributeSet attrs) {

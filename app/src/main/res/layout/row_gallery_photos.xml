@@ -1,0 +1,37 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:id="@+id/photoMain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/ic_launcher"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_weight="1"
+    />
+
+    <com.relhs.asianfinder.view.CustomTextView
+
+        app:fontName="MyriadProCond.ttf"
+        android:id="@+id/txtCategory"
+        app:fontColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="General"
+        android:singleLine="true"
+        android:ellipsize="middle"
+        style="@style/text_Appearance_normal"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_gradient_shape_bus_title"
+        android:padding="5dp"/>
+
+</RelativeLayout>

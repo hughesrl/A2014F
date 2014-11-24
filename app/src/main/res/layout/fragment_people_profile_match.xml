@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="0,1"
+        android:id="@+id/maintable" >
+    </TableLayout>
+    <!--<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        &lt;!&ndash;APPEARANCE&ndash;&gt;
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="@color/white"
+            style="@style/text_Appearance_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:text="APPEARANCE"
+            tools:ignore="HardcodedText"
+            android:background="@drawable/bg_gradient_shape_bus_title"/>
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_appearance"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        &lt;!&ndash;APPEARANCE&ndash;&gt;
+
+        &lt;!&ndash;LIFESTYLE&ndash;&gt;
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="@color/white"
+            style="@style/text_Appearance_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:text="LIFESTYLE"
+            tools:ignore="HardcodedText"
+            android:background="@drawable/bg_gradient_shape_bus_title"/>
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_lifestle"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        &lt;!&ndash;LIFESTYLE&ndash;&gt;
+
+        &lt;!&ndash;CULTURE VALUES&ndash;&gt;
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="@color/white"
+            style="@style/text_Appearance_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:text="CULTURE VALUES"
+            tools:ignore="HardcodedText"
+            android:background="@drawable/bg_gradient_shape_bus_title"/>
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_culture_values"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        &lt;!&ndash;CULTURE VALUES&ndash;&gt;
+
+        &lt;!&ndash;PERSONAL&ndash;&gt;
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="@color/white"
+            style="@style/text_Appearance_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:text="PERSONAL"
+            tools:ignore="HardcodedText"
+            android:background="@drawable/bg_gradient_shape_bus_title"/>
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_personal"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        &lt;!&ndash;PERSONAL&ndash;&gt;
+
+        &lt;!&ndash;INTEREST&ndash;&gt;
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="@color/white"
+            style="@style/text_Appearance_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingLeft="5dp"
+            android:text="INTEREST"
+            tools:ignore="HardcodedText"
+            android:background="@drawable/bg_gradient_shape_bus_title"/>
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_interest"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        &lt;!&ndash;INTEREST&ndash;&gt;
+    </LinearLayout>-->
+</ScrollView>

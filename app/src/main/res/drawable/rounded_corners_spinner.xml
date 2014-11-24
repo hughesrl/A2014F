@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  res/drawable/rounded_edittext.xml -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:drawable="@color/white90" />
+
+    <item android:left="250dp"
+        android:drawable="@drawable/abc_spinner_mtrl_am_alpha">
+    </item>
+</layer-list>

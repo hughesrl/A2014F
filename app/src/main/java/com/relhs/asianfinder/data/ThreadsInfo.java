@@ -10,11 +10,12 @@ public class ThreadsInfo {
     private String messageType;
     private String folder_sticker;
     private String file_sticker;
+    private String date;
 
     public ThreadsInfo(){
 
     }
-    public ThreadsInfo(int threadId, int f, int localId, String message, int t, int isSeen, String messageType, String folder_sticker, String file_sticker) {
+    public ThreadsInfo(int threadId, int f, int localId, String message, int t, int isSeen, String messageType, String folder_sticker, String file_sticker, String date) {
         super();
         setThreadId(threadId);
         setF(f);
@@ -25,6 +26,7 @@ public class ThreadsInfo {
         setMessageType(messageType);
         setFolderSticker(folder_sticker);
         setFileSticker(file_sticker);
+        setDate(date);
     }
 
     public int getThreadId() {
@@ -97,5 +99,13 @@ public class ThreadsInfo {
 
     public void setFileSticker(String file_sticker) {
         this.file_sticker = file_sticker;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

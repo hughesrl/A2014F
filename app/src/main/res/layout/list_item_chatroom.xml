@@ -30,7 +30,6 @@
         android:id="@+id/userName"
         android:layout_gravity="center_horizontal"
         android:singleLine="true"
-        android:text="Robert Hughes"
         android:layout_alignTop="@+id/photo"
         android:layout_toRightOf="@+id/photo"
         android:layout_toEndOf="@+id/photo" />
@@ -45,7 +44,6 @@
         android:layout_gravity="center_horizontal"
         android:gravity="right"
         android:singleLine="true"
-        android:text="10-28-2014"
         android:layout_toEndOf="@+id/userName"
         android:layout_toRightOf="@+id/userName"
         android:layout_alignParentTop="true" />
@@ -59,7 +57,6 @@
         android:id="@+id/briefMsg"
         android:layout_gravity="center_horizontal"
         android:singleLine="true"
-        android:text="Hi hello, heoad  hfdsjha  fkahdfakj ajdhf asdf fasd fasd f fsad fasdf asdf asdfa "
         android:lines="2"
         android:layout_toEndOf="@+id/photo"
         android:layout_toRightOf="@+id/photo"

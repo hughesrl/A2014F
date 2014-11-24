@@ -9,6 +9,7 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.relhs.asianfinder.Constants;
 import com.relhs.asianfinder.DataBaseWrapper;
 import com.relhs.asianfinder.R;
 import com.relhs.asianfinder.data.ThreadsInfo;
@@ -32,6 +33,9 @@ public class ChatRoomCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+        if(messagesOperations.CheckIsDataAlreadyInDBorNot(DataBaseWrapper.MESSAGESTHREADINFO,
+                DataBaseWrapper.ROOMINFO_THREADID,
+                cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID)))) {
 
         TextView userName = (TextView) view.findViewById(R.id.userName);
         TextView briefMsg = (TextView) view.findViewById(R.id.briefMsg);
@@ -42,17 +46,18 @@ public class ChatRoomCursorAdapter extends CursorAdapter {
 
         //lastChatDate.setText(lastThread.get);
         imageLoader.DisplayImage(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_MAINPHOTO)), photo);
-
-        if(messagesOperations.CheckIsDataAlreadyInDBorNot(DataBaseWrapper.MESSAGESTHREADINFO,
-                DataBaseWrapper.ROOMINFO_THREADID,
-                cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID)))) {
-            ThreadsInfo lastThread = messagesOperations.getLastThread(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID)));
+        ThreadsInfo lastThread = messagesOperations.getLastThread(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID)));
 //            if(lastThread.getIsSeen() == 0) {
 //                view.setBackgroundColor(context.getResources().getColor(R.color.orange));
 //            }
-            briefMsg.setText(lastThread.getMessage());
-        }
+            lastChatDate.setText(lastThread.getDate());
+            if(lastThread.getMessageType().equalsIgnoreCase(Constants.TEXT_STICKER)) {
+                briefMsg.setText("Sticker");
+            } else {
+                briefMsg.setText(lastThread.getMessage());
+            }
 
+        }
     }
 
     @Override

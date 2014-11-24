@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
         return myFragmentView;
     }
     public class MyPagerAdapter extends FragmentPagerAdapter implements ActionBar.TabListener , ViewPager.OnPageChangeListener {
-        int[] resId = new int[]{R.drawable.ic_drawer, R.drawable.ic_launcher, R.drawable.ic_drawer, R.drawable.ic_launcher, R.drawable.ic_drawer};
+//        int[] resId = new int[]{R.drawable.ic_drawer, R.drawable.ic_launcher, R.drawable.ic_drawer, R.drawable.ic_launcher, R.drawable.ic_drawer};
 
         private final String[] TITLES = { "Recommedations", "Browse" };
         private ActionBar mActionBar;
@@ -100,10 +100,10 @@ public class HomeFragment extends Fragment {
             Bundle args = getArguments();
             switch(position){
                 case 0: // Check In
-                    SampleListFragment checkInFragment = new SampleListFragment();
-                    checkInFragment.setArguments(args);
+                    RecommendationsFragment recommendationsFragment = new RecommendationsFragment();
+                    recommendationsFragment.setArguments(args);
 
-                    return checkInFragment;
+                    return recommendationsFragment;
                 case 1: // Patient Information
                     BrowseFragment browseFragment = new BrowseFragment();
                     browseFragment.setArguments(args);
@@ -120,12 +120,12 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onPageSelected(int position) {
-            mActionBar.setSelectedNavigationItem(position);
-            int resIdLenght = resId.length;
-            if (position < 0 || position >= resIdLenght)
-                return;
-            int drawableId = resId[position];
-            mActionBar.setIcon(drawableId);
+//            mActionBar.setSelectedNavigationItem(position);
+//            int resIdLenght = resId.length;
+//            if (position < 0 || position >= resIdLenght)
+//                return;
+//            int drawableId = resId[position];
+//            mActionBar.setIcon(drawableId);
         }
 
         @Override

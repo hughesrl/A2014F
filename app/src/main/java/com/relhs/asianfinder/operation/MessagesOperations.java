@@ -23,7 +23,7 @@ public class MessagesOperations {
     private String[] USERS_MESSAGESTHREADINFO_COLUMNS = {  DataBaseWrapper._ID, DataBaseWrapper.MESSAGESTHREADINFO_THREADID,
             DataBaseWrapper.MESSAGESTHREADINFO_F, DataBaseWrapper.MESSAGESTHREADINFO_LOCALID, DataBaseWrapper.MESSAGESTHREADINFO_MESSAGE,
             DataBaseWrapper.MESSAGESTHREADINFO_T, DataBaseWrapper.MESSAGESTHREADINFO_BOOL_SEEN, DataBaseWrapper.MESSAGESTHREADINFO_TYPE, DataBaseWrapper.MESSAGESTHREADINFO_FOLDER,
-            DataBaseWrapper.MESSAGESTHREADINFO_FILE};
+            DataBaseWrapper.MESSAGESTHREADINFO_FILE, DataBaseWrapper._DATE};
 
 	private SQLiteDatabase databaseWrite;
     private SQLiteDatabase databaseRead;
@@ -46,7 +46,7 @@ public class MessagesOperations {
                 ContentValues values = new ContentValues();
 
         if(!CheckIsDataAlreadyInDBorNot(DataBaseWrapper.ROOMINFO, DataBaseWrapper.ROOMINFO_USERID, userId)) {
-            Log.d("-- Robert", "NOT IN DB = "+ main_photo);
+            //Log.d("-- Robert", "NOT IN DB = "+ main_photo);
             values.put(DataBaseWrapper.ROOMINFO_USERID, userId);
             values.put(DataBaseWrapper.ROOMINFO_THREADID, threadId);
             values.put(DataBaseWrapper.ROOMINFO_USERTYPE, userType);
@@ -65,14 +65,21 @@ public class MessagesOperations {
             cursor.close();
             return roomInfo;
         } else {
-            Log.d("-- Robert", "IN DB");
+            //Log.d("-- Robert", "IN DB");
             return null;
         }
     }
     public Cursor getChatRooms() {
         // now that the user is created return it ...
-        Cursor cursor = databaseRead.query(DataBaseWrapper.ROOMINFO,
-                USERS_ROOMINFO_COLUMNS, DataBaseWrapper._ID, null, null, null, null);
+        String Query = "SELECT * FROM "+DataBaseWrapper.ROOMINFO+" AS ri " +
+                "INNER JOIN "+DataBaseWrapper.MESSAGESTHREADINFO+" AS mti " +
+                "ON ri."+DataBaseWrapper.MESSAGESTHREADINFO_THREADID+" = mti."+DataBaseWrapper.ROOMINFO_THREADID +" " +
+                "GROUP BY mti."+DataBaseWrapper.ROOMINFO_THREADID+" " +
+                "ORDER BY mti."+DataBaseWrapper._DATE+" DESC";
+
+        Cursor cursor = databaseRead.rawQuery(Query, null);
+//        Cursor cursor = databaseRead.query(DataBaseWrapper.ROOMINFO,
+//                USERS_ROOMINFO_COLUMNS, DataBaseWrapper._ID, null, null, null, null);
         cursor.moveToFirst();
         return cursor;
     }
@@ -100,7 +107,7 @@ public class MessagesOperations {
         ContentValues values = new ContentValues();
 
         if(!CheckIsDataAlreadyInDBorNot(DataBaseWrapper.MESSAGESTHREADINFO, DataBaseWrapper.MESSAGESTHREADINFO_LOCALID, localId)) {
-            Log.d("-- Robert", "NOT IN DB, INSERT -- " + t );
+            //Log.d("-- Robert", "NOT IN DB, INSERT -- " + t );
             values.put(DataBaseWrapper.MESSAGESTHREADINFO_THREADID, threadId);
             values.put(DataBaseWrapper.MESSAGESTHREADINFO_F, f);
             values.put(DataBaseWrapper.MESSAGESTHREADINFO_LOCALID, localId);
@@ -122,7 +129,7 @@ public class MessagesOperations {
 //            return roomInfo;
 //             return roomInfo;
         } else {
-            Log.d("-- Robert", "IN DB");
+            //Log.d("-- Robert", "IN DB");
         }
         return null;
     }
@@ -141,7 +148,7 @@ public class MessagesOperations {
 
     public Cursor getThreadMessages(String anInt) {
         // now that the user is created return it ...
-        Log.d("-- tid", anInt+"");
+        //Log.d("-- tid", anInt+"");
         Cursor cursor = databaseRead.query(DataBaseWrapper.MESSAGESTHREADINFO,
                 USERS_MESSAGESTHREADINFO_COLUMNS, DataBaseWrapper.MESSAGESTHREADINFO_THREADID+"=?", new String[]{anInt}, null, null, DataBaseWrapper.MESSAGESTHREADINFO_LOCALID+" ASC", null);
 
@@ -279,6 +286,8 @@ public class MessagesOperations {
         threadsInfo.setMessageType(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_TYPE)));
         threadsInfo.setFolderSticker(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_FOLDER)));
         threadsInfo.setFileSticker(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_FILE)));
+
+        threadsInfo.setDate(cursor.getString(cursor.getColumnIndex(DataBaseWrapper._DATE)));
 
         return threadsInfo;
     }

@@ -9,6 +9,7 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.content.Intent;
 import android.provider.Settings.Secure;
 
 
@@ -82,6 +83,8 @@ public class AsianFinderApplication extends Application {
     }
 
     private static boolean activityVisible;
+
+
 
 
 }

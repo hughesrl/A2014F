@@ -40,16 +40,35 @@
             android:name="com.relhs.asianfinder.ProfileActivity"
             android:configChanges="orientation|screenSize"
             android:label="PROFILE"
-            android:parentActivityName="com.relhs.asianfinder.DashboardActivity"
-            android:theme="@style/AppProfileTheme" >
+            android:parentActivityName="com.relhs.asianfinder.DashboardActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DashboardActivity" />
         </activity>
         <activity
+            android:name="com.relhs.asianfinder.PeopleProfileActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="PROFILE"
+            android:parentActivityName="com.relhs.asianfinder.DashboardActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
+        </activity>
+
+        <activity
+            android:name="com.relhs.asianfinder.GallerySlideshowActivity"
+            android:theme="@style/AppThemeNoActionBar" >
+        </activity>
+
+
+        <activity
             android:name="com.relhs.asianfinder.ChatActivity"
             android:label="Chat"
-            android:theme="@style/Theme.TranslucentActionBar.ActionBar.Overlay">
+            android:parentActivityName="com.relhs.asianfinder.DashboardActivity"
+            android:theme="@style/Theme.TranslucentActionBar.ActionBar.Overlay" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
         </activity>
 
         <service android:name="com.relhs.asianfinder.AFPushService" />
@@ -60,6 +79,14 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name="com.relhs.asianfinder.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="com.relhs.asianfinder.DashboardActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
+        </activity>
     </application>
 
 </manifest>

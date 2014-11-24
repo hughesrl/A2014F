@@ -12,5 +12,9 @@ interface IAFPushService {
 
     void getChatMessage(String jsonData);
 
+    void initializeChatting(int userId);
+
+    void initializeChattingOk(int threadId);
+
 
 }

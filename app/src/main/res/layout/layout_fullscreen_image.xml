@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <com.relhs.asianfinder.view.TouchImageView
+        android:id="@+id/imgDisplay"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="4dp"
+        >
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/btnClose"
+            android:clickable="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            />
+        <ImageView
+            android:id="@+id/imgVote"
+            android:clickable="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/vote_button_large"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            />
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#60000000"
+
+        android:gravity="center_vertical">
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="@android:color/white"
+            style="@style/text_Appearance_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photoTitle"
+            android:layout_gravity="center_horizontal|start"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="fdsafdsfsdfs"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/photoComments"
+            android:layout_toStartOf="@+id/photoComments"
+            android:padding="10dp"
+            />
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="@android:color/white"
+            style="@style/text_Appearance_normal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photoComments"
+            android:layout_gravity="center_horizontal|start"
+            android:singleLine="false"
+            android:text="312 Comments"
+            android:padding="10dp"
+            android:clickable="true"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

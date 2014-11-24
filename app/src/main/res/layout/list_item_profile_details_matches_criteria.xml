@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="10dp"
+    android:paddingLeft="10dp"
+    android:paddingEnd="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp"
+    android:background="@drawable/bg_gradient_shape_bus_title"
+    >
+
+    <com.relhs.asianfinder.view.CustomTextView
+        app:fontName="MyriadProCond.ttf"
+        app:fontColor="@color/white"
+        app:fontStyle="bold"
+        style="@style/text_Appearance_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCriteria"
+        android:text="Height"
+        />
+
+</LinearLayout>

@@ -9,6 +9,7 @@ public class PeopleInfo implements AsymmetricItem {
     private int rowSpan;
     private int position;
 
+    private int id;
     private String username;
     private String gender;
     private String aged;
@@ -23,7 +24,7 @@ public class PeopleInfo implements AsymmetricItem {
 
 
     public PeopleInfo() {
-        this(1, 1, 0, "", "", "", "", "", "", 0, "", "", "");
+        this(1, 1, 0, 0, "", "", "", "", "", "", 0, "", "", "");
     }
 	 
 
@@ -32,13 +33,13 @@ public class PeopleInfo implements AsymmetricItem {
 		readFromParcel(in);
 	}
 
-    public PeopleInfo(int colSpan, int rowSpan, int position, String username, String gender, String aged, String country, String state, String city, int is_online,
+    public PeopleInfo(int colSpan, int rowSpan, int position, int id, String username, String gender, String aged, String country, String state, String city, int is_online,
                       String main_photo, String subphoto_1, String subphoto_2) {
         this.colSpan = colSpan;
         this.rowSpan = rowSpan;
         this.position = position;
 
-
+        this.id = id;
         this.username = username;
         this.gender = gender;
         this.aged = aged;
@@ -77,6 +78,13 @@ public class PeopleInfo implements AsymmetricItem {
     }
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -164,6 +172,7 @@ public class PeopleInfo implements AsymmetricItem {
         position = in.readInt();
 
 
+        id = in.readInt();
         username = in.readString();
         aged = in.readString();
         country = in.readString();
@@ -189,6 +198,7 @@ public class PeopleInfo implements AsymmetricItem {
         dest.writeInt(rowSpan);
         dest.writeInt(position);
 
+        dest.writeInt(id);
         dest.writeString(username);
         dest.writeString(aged);
         dest.writeString(country);

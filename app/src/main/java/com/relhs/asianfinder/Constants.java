@@ -16,12 +16,18 @@ public class Constants {
     public final static String TAG_DATA = "data";
 
 
+    public static final String ARG_PROFILE = "arg_profile";
+    public static final String ARG_MATCHES = "arg_matches";
+    public static final String ARG_PHOTOS = "arg_photos";
+
+
     // PEOPLE LISTING
     public final static String TAG_ACCOUNTS = "accounts";
     // PROFILE
     public final static String TAG_PROFILE = "profile";
     public final static String TAG_PREFERENCES = "preferences";
     public final static String TAG_PHOTOS = "photos";
+    public final static String TAG_MATCHES = "matches";
     // PROFILE BASIC
     public final static String TAG_BASIC = "basic";
 

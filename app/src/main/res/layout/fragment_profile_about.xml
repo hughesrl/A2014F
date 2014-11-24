@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nirhart.parallaxscroll.views.ParallaxScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    app:parallax_factor="1.9">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/header_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:background="@drawable/pic0"
+        />
+        <RelativeLayout
+            android:id="@+id/quotesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/white"
+                app:fontStyle="italics"
+                style="@style/text_Appearance_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/sample_quotes"
+                android:ellipsize="end"
+                android:background="@drawable/bg_gradient_shape_bus_title"
+                android:padding="5dp"/>
+            <ImageButton
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editQuotes"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                />
+        </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/informations_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_below="@+id/header_imageview"
+        android:padding="5dp">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="105dp"
+            android:layout_marginLeft="105dp"
+            android:id="@+id/usernameLayout">
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/black"
+                app:fontStyle="bold"
+                style="@style/text_Appearance_large"
+                android:id="@+id/txtUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RobHughes"
+                android:gravity="start"
+                tools:ignore="HardcodedText"
+                />
+            <ImageButton
+                android:layout_toRightOf="@+id/txtUsername"
+                android:layout_toEndOf="@+id/txtUsername"
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editUsername"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                />
+        </RelativeLayout>
+
+
+
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="MyriadProCond.ttf"
+            app:fontColor="#FF707070"
+            style="@style/text_Appearance_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="12 Favorites | 5 Interest | 4.5K Views"
+            android:ellipsize="end"
+            android:layout_marginStart="105dp"
+            android:layout_marginLeft="105dp"
+            tools:ignore="HardcodedText"/>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:id="@+id/descriptionLayout">
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="#FF707070"
+                style="@style/text_Appearance_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Say something about myself, Say something about myself, Say something about myself"
+                android:ellipsize="end"
+
+                tools:ignore="HardcodedText"/>
+            <ImageButton
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editDescription"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                />
+        </RelativeLayout>
+
+        <!--BASIC-->
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:background="@drawable/bg_gradient_shape_bus_title"
+            tools:ignore="HardcodedText">
+
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/white"
+                style="@style/text_Appearance_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:text="BASIC"
+                android:layout_toLeftOf="@+id/editBasic"
+                android:layout_toStartOf="@+id/editBasic"
+                />
+            <ImageButton
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editBasic"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_action_edit"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_basic"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        <!--BASIC-->
+
+
+
+
+        <!--APPEARANCE-->
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:background="@drawable/bg_gradient_shape_bus_title"
+            tools:ignore="HardcodedText">
+
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/white"
+                style="@style/text_Appearance_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:text="APPEARANCE"
+                android:layout_toLeftOf="@+id/editAppearance"
+                android:layout_toStartOf="@+id/editAppearance"
+                />
+            <ImageButton
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editAppearance"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_action_edit"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_appearance"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        <!--APPEARANCE-->
+
+        <!--LIFESTYLE-->
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:background="@drawable/bg_gradient_shape_bus_title"
+            tools:ignore="HardcodedText">
+
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/white"
+                style="@style/text_Appearance_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:text="LIFESTYLE"
+                android:layout_toLeftOf="@+id/editLifestyle"
+                android:layout_toStartOf="@+id/editLifestyle"
+                />
+            <ImageButton
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editLifestyle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_action_edit"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_lifestle"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        <!--LIFESTYLE-->
+
+        <!--CULTURE VALUES-->
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:background="@drawable/bg_gradient_shape_bus_title"
+            tools:ignore="HardcodedText">
+
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/white"
+                style="@style/text_Appearance_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:text="CULTURE VALUES"
+                android:layout_toLeftOf="@+id/editCultureValues"
+                android:layout_toStartOf="@+id/editCultureValues"
+                />
+            <ImageButton
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editCultureValues"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_action_edit"/>
+        </RelativeLayout>
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_culture_values"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        <!--CULTURE VALUES-->
+
+        <!--PERSONAL-->
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:background="@drawable/bg_gradient_shape_bus_title"
+            tools:ignore="HardcodedText">
+
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/white"
+                style="@style/text_Appearance_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:text="PERSONAL"
+                android:layout_toLeftOf="@+id/editPersonal"
+                android:layout_toStartOf="@+id/editPersonal"
+                />
+            <ImageButton
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editPersonal"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_action_edit"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_personal"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        <!--PERSONAL-->
+
+        <!--INTEREST-->
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:background="@drawable/bg_gradient_shape_bus_title"
+            tools:ignore="HardcodedText">
+
+            <com.relhs.asianfinder.view.CustomTextView
+                app:fontName="MyriadProCond.ttf"
+                app:fontColor="@color/white"
+                style="@style/text_Appearance_normal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:text="INTEREST"
+                android:layout_toLeftOf="@+id/editInterest"
+                android:layout_toStartOf="@+id/editInterest"
+                />
+            <ImageButton
+                android:background="@drawable/ic_action_edit"
+                android:id="@+id/editInterest"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_action_edit"/>
+        </RelativeLayout>
+        <View
+            android:background="@drawable/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layerType="software" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/list_recycled_parts_interest"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"/>
+        <!--INTEREST-->
+
+    </LinearLayout>
+
+    <!-- cheat code: negative margin -->
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/informations_container"
+        android:layout_marginBottom="-75dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp">
+        <ImageView
+            android:id="@+id/photoMain"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            />
+        <ImageButton
+            android:background="@drawable/ic_action_edit"
+            android:id="@+id/editProfilePhoto"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
+</com.nirhart.parallaxscroll.views.ParallaxScrollView>

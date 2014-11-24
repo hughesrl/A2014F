@@ -235,11 +235,12 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         // Start the service
                         startService(new Intent(LoginActivity.this, AFPushService.class));
 
-                        Intent i = new Intent(getApplication(), DashboardActivity.class);
+                        Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                         progress.dismiss();
+                        LoginActivity.this.finish();
                         startActivity(i);
+
                     }
                 }
 

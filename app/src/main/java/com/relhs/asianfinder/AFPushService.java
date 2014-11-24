@@ -181,42 +181,41 @@ public class AFPushService extends Service {
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-                    Log.d("HUGHES", "Go ONLINE: " + credentials.toString());
+                    //Log.d("HUGHES", "Go ONLINE: " + credentials.toString());
                     socket.emit("online", credentials);
                 }
             }).on("onlineOk", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-                    Log.d("-- onlineOk", Arrays.toString(args));
+                    //Log.d("-- onlineOk", Arrays.toString(args));
                     socket.emit("onlineChat", credentials); // show online in chat
                 }
             }).on("onlineChatOk", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
                     try {
-                        Log.d("-- onlineChatOk", Arrays.toString(args));
+                        //Log.d("-- onlineChatOk", Arrays.toString(args));
                         JSONArray argsArray = new JSONArray(Arrays.toString(args));
                         JSONObject viewingData = argsArray.getJSONObject(0);
                         JSONObject jsonObjectStickers = viewingData.getJSONObject("stickers");
                         JSONObject jsonObjectStickersFiles = jsonObjectStickers.getJSONObject("files");
 
                         //String stickersUrl = jsonObjectStickersFiles.getString("url");
-
                         //Log.d("-- onlineChatOk STICKERS", stickersUrl);
-
+                        int threadIdRoom = 0;
                         JSONArray jsonObjectRoomMembers = viewingData.getJSONArray("roomMembers");
                         for (int i = 0; i < jsonObjectRoomMembers.length(); i++) {
                             JSONObject c = jsonObjectRoomMembers.getJSONObject(i);
 
                             int userId = c.getInt("userId");
-                            int threadId = c.getInt("threadId");
+                            threadIdRoom = c.getInt("threadId");
                             String userType = c.getString("userType");
                             String userName = c.getString("userName");
                             String main_photo = getString(R.string.api_photos) + c.getString("main_photo");
                             int is_chatting = c.getInt("is_chatting");
                             String lastOnline = c.getString("lastOnline");
 
-                            messagesOperations.createRoom(userId, threadId, userType, userName,
+                            messagesOperations.createRoom(userId, threadIdRoom, userType, userName,
                                     main_photo, is_chatting, lastOnline);
                         }
                         JSONArray jsonObjectThreads = viewingData.getJSONArray("threads");
@@ -237,14 +236,16 @@ public class AFPushService extends Service {
 
                                 if (cM.has("s")) {
                                     JSONObject cMSticker = cM.getJSONObject("s");
-                                    Log.d("-- robert", cMSticker.toString());
-                                    Log.d("-- robert",  cMSticker.getString("folder")+"/"+ cMSticker.getString("file"));
+                                    //Log.d("-- robert", cMSticker.toString());
+                                    //Log.d("-- robert",  cMSticker.getString("folder")+"/"+ cMSticker.getString("file"));
                                     messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, "", timestamp, seen, cMSticker.getString("folder"), cMSticker.getString("file"));
                                 } else {
                                     messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, seen, "", "");
                                 }
                             }
                         }
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -260,7 +261,7 @@ public class AFPushService extends Service {
             }).on("receiveNotification", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-                    Log.d("HUGHES STARTVIEWING DATA", "receiveNotification " + Arrays.toString(args));
+                    //Log.d("HUGHES STARTVIEWING DATA", "receiveNotification " + Arrays.toString(args));
                     notification = new Notification(R.drawable.ic_launcher, Arrays.toString(args), System.currentTimeMillis());
 
                     Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
@@ -278,55 +279,57 @@ public class AFPushService extends Service {
                         JSONArray argsArray = new JSONArray(Arrays.toString(args));
                         JSONObject viewingData = argsArray.getJSONObject(0);
 
-                        JSONArray jsonObjectRoomMembers = viewingData.getJSONArray("userData");
-                        for (int i = 0; i < jsonObjectRoomMembers.length(); i++) {
-                            JSONObject c = jsonObjectRoomMembers.getJSONObject(i);
+                        JSONObject jsonObjectUserData = viewingData.getJSONObject("userData");
 
-                            int userId = c.getInt("userId");
-                            int threadId = c.getInt("threadId");
-                            String userType = c.getString("userType");
-                            String userName = c.getString("userName");
-                            String main_photo = getString(R.string.api_photos) + c.getString("main_photo");
-                            int is_chatting = c.getInt("is_chatting");
-                            String lastOnline = c.getString("lastOnline");
+                        int userId = jsonObjectUserData.getInt("userId");
+                        int threadIdRoom = jsonObjectUserData.getInt("threadId");
+                        String userType = jsonObjectUserData.getString("userType");
+                        String userName = jsonObjectUserData.getString("userName");
+                        String main_photo = getString(R.string.api_photos) + jsonObjectUserData.getString("main_photo");
+                        int is_chatting = jsonObjectUserData.getInt("is_chatting");
+                        String lastOnline = jsonObjectUserData.getString("lastOnline");
 
-                            messagesOperations.createRoom(userId, threadId, userType, userName,
-                                    main_photo, is_chatting, lastOnline);
+                        messagesOperations.createRoom(userId, threadIdRoom, userType, userName,
+                                main_photo, is_chatting, lastOnline);
 
-                            sendResultChatRoom();
-                        }
-                        JSONArray jsonObjectThreads = viewingData.getJSONArray("threads");
-                        for (int i = 0; i < jsonObjectThreads.length(); i++) {
-                            JSONObject c = jsonObjectThreads.getJSONObject(i);
-                            int threadId = c.getInt("threadId");
+                        myBinder.initializeChattingOk(threadIdRoom);
 
-                            JSONArray jsonObjectThreadsMessages = c.getJSONArray("messages");
-                            for (int ii = 0; ii < jsonObjectThreadsMessages.length(); ii++) {
-                                JSONObject cM = jsonObjectThreadsMessages.getJSONObject(ii);
+//                        JSONArray jsonObjectThreads = viewingData.getJSONArray("threads");
+//                        for (int i = 0; i < jsonObjectThreads.length(); i++) {
+//                            JSONObject c = jsonObjectThreads.getJSONObject(i);
+//                            int threadId = c.getInt("threadId");
+//
+//                            JSONArray jsonObjectThreadsMessages = c.getJSONArray("messages");
+//                            for (int ii = 0; ii < jsonObjectThreadsMessages.length(); ii++) {
+//                                JSONObject cM = jsonObjectThreadsMessages.getJSONObject(ii);
+//
+//                                int f = cM.getInt("f");
+//                                int localId = cM.getInt("localId");
+//                                String m = cM.getString("m");
+//                                String timestamp = cM.getString("t");
+//                                int tid = cM.getInt("tid");
+//                                int seen = cM.getInt("seen");
+//
+//                                if (cM.has("s")) {
+//                                    JSONObject cMSticker = cM.getJSONObject("s");
+//                                    messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, m, timestamp, seen, cMSticker.getString("folder"), cMSticker.getString("file"));
+//                                } else {
+//                                    messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, seen, "", "");
+//                                }
+//                            }
+//                        }
 
-                                int f = cM.getInt("f");
-                                int localId = cM.getInt("localId");
-                                String m = cM.getString("m");
-                                String timestamp = cM.getString("t");
-                                int tid = cM.getInt("tid");
-                                int seen = cM.getInt("seen");
 
-                                if (cM.has("s")) {
-                                    JSONObject cMSticker = cM.getJSONObject("s");
-                                    messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, m, timestamp, seen, cMSticker.getString("folder"), cMSticker.getString("file"));
-                                } else {
-                                    messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, seen, "", "");
-                                }
-                            }
-                        }
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (RemoteException e) {
                         e.printStackTrace();
                     }
                 }
             }).on("chat", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-                    Log.d("-- hughes", "chat " + Arrays.toString(args));
+                    //Log.d("-- hughes", "chat " + Arrays.toString(args));
                     try {
                         myBinder.getChatMessage(Arrays.toString(args));
                     } catch (RemoteException e) {
@@ -336,7 +339,7 @@ public class AFPushService extends Service {
             }).on("receiveSticker", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-                    Log.d("-- hughes", "chat " + Arrays.toString(args));
+                    //Log.d("-- hughes", "chat " + Arrays.toString(args));
                     try {
                         myBinder.getChatMessage(Arrays.toString(args));
                     } catch (RemoteException e) {
@@ -368,6 +371,8 @@ public class AFPushService extends Service {
 //        }
 //    }
 
+
+
     public void sendResultChatRoom() {
         Intent intent = new Intent(AFPS_RESULT);
         intent.setAction(AFPS_ACTION_REFRESH_CHATROOM);
@@ -381,7 +386,26 @@ public class AFPushService extends Service {
         broadcaster.sendBroadcast(intent);
     }
 
-    public IAFPushService.Stub myBinder = new IAFPushService.Stub() {
+    public IAFPushService.Stub myBinder = new IAFPushService.Stub(){
+
+        public void initializeChatting(int userId) {
+            try {
+                JSONObject sendMessage = new JSONObject();
+                sendMessage.putOpt("userId", userId);
+
+                socket.emit("chatWith", sendMessage);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        public void initializeChattingOk(int threadId) {
+            Log.d("-- robert", "threadId : "+threadId);
+
+            Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+            intent.putExtra("threadId", threadId+"");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplication().startActivity(intent);
+        }
 
         public void sendChatMessage(int userId, String message, int localId) {
             try {
@@ -420,23 +444,20 @@ public class AFPushService extends Service {
 
                 if (cM.has("s")) {
                     JSONObject cMSticker = cM.getJSONObject("s");
-                    Log.d("-- robert",  cMSticker.getString("folder")+"/"+ cMSticker.getString("file"));
+
                     messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, "", timestamp, mySeen, cMSticker.getString("folder"), cMSticker.getString("file"));
-
-
-                    notification.setLatestEventInfo(AFPushService.this, roomDetails.getUserName(), "Sticker", pendingIntent);
-
-                    mgr.notify(NOTIFICATION_ID, notification);
+                    if(userInformation.getUser_id() != f) {
+                        notification.setLatestEventInfo(AFPushService.this, roomDetails.getUserName(), "Sticker", pendingIntent);
+                        mgr.notify(NOTIFICATION_ID, notification);
+                    }
                 } else {
                     messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, mySeen, "", "");
-
-                    notification.setLatestEventInfo(AFPushService.this, roomDetails.getUserName(),
-                            cM.getString("m"), pendingIntent);
-
-                    mgr.notify(NOTIFICATION_ID, notification);
+                    if(userInformation.getUser_id() != f) {
+                        notification.setLatestEventInfo(AFPushService.this, roomDetails.getUserName(),
+                                cM.getString("m"), pendingIntent);
+                        mgr.notify(NOTIFICATION_ID, notification);
+                    }
                 }
-
-
 
                 if(AsianFinderApplication.isActivityVisible()) {
                     sendResultChat(cM.getString("tid"));

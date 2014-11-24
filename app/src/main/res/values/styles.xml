@@ -28,7 +28,11 @@
     </style>
 
     <style name="Widget.ActionBar.Transparent">
-        <item name="android:background">@android:color/transparent</item>
+        <item name="android:background">#80000000</item>
+    </style>
+
+    <style name="text_Appearance_extra_small">
+        <item name="android:textSize">@dimen/text_appearance_extra_small</item>
     </style>
 
     <style name="text_Appearance_small">
@@ -101,6 +105,7 @@
         <item name="android:backgroundDimEnabled">true</item>
 
     </style>
+
 
 
 </resources>
