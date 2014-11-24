@@ -175,18 +175,17 @@ public class PeopleAboutFragment extends Fragment implements View.OnClickListene
 
 
             // PHOTOS
-            if(!mParamPhotos.isEmpty()) {
-                JSONArray jsonArrayPhotos = new JSONArray(mParamPhotos);
-
+            JSONArray jsonArrayPhotos = new JSONArray(mParamPhotos);
+            if(jsonArrayPhotos.length() > 0) {
                 JSONObject jsonObjectPhotos = jsonArrayPhotos.getJSONObject(0);
 
                 imageLoader.DisplayImage(jsonObjectPhotos.getString("file"), header_imageview);
                 imageLoader.DisplayImageRounded(jsonObjectPhotos.getString("file"), photoMain, 150, 150);
             } else {
-                String noPhoto = getResources().getString(R.string.api_photos)+"/assets/img/no_photo_female.jpg";
+                String noPhoto;
                 if(jsonObjectBasic.get("gender").toString().equalsIgnoreCase("m")) {
                     noPhoto = getResources().getString(R.string.api_photos)+"/assets/img/no_photo_male.jpg";
-                } else if(jsonObjectBasic.get("gender").toString().equalsIgnoreCase("f")) {
+                } else {
                     noPhoto = getResources().getString(R.string.api_photos)+"/assets/img/no_photo_female.jpg";
                 }
 

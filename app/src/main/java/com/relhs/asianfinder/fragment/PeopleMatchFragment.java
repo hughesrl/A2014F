@@ -113,9 +113,14 @@ public class PeopleMatchFragment extends Fragment {
 
         try {
             JSONArray jsonArrayPhotos = new JSONArray(mParamPhotos);
-            JSONObject jsonObjectPhotos = jsonArrayPhotos.getJSONObject(0);
+            if(jsonArrayPhotos.length() > 0) {
+                JSONObject jsonObjectPhotos = jsonArrayPhotos.getJSONObject(0);
+                imageLoader.DisplayImage(jsonObjectPhotos.getString("file"), yours);
+            } else {
+                String noPhoto = getResources().getString(R.string.api_photos)+"/assets/img/no_photo_male.jpg";
+                imageLoader.DisplayImage(noPhoto, yours);
+            }
 
-            imageLoader.DisplayImage(jsonObjectPhotos.getString("file"), yours);
             imageLoader.DisplayImage(userInfo.getMain_photo(), mine);
         } catch (JSONException e) {
             e.printStackTrace();

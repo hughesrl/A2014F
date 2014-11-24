@@ -137,12 +137,11 @@
       <file leaf-file-name="PeopleAboutFragment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleAboutFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0529661" vertical-offset="1985" max-vertical-offset="4046">
-              <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6927966" vertical-offset="2104" max-vertical-offset="4029">
+              <caret line="188" column="102" selection-start-line="188" selection-start-column="102" selection-end-line="188" selection-end-column="102" />
               <folding>
-                <element signature="e#8239#8284#0" expanded="true" />
-                <element signature="e#8435#8480#0" expanded="true" />
-                <element signature="e#8636#8681#0" expanded="true" />
+                <element signature="e#8353#8398#0" expanded="true" />
+                <element signature="e#8487#8532#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -153,6 +152,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-1.28" vertical-offset="189" max-vertical-offset="1071">
               <caret line="13" column="28" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PeopleProfileActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/PeopleProfileActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1849" max-vertical-offset="3995">
+              <caret line="164" column="0" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -181,6 +190,18 @@
           </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PeopleMatchFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleMatchFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1279" max-vertical-offset="3604">
+              <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+              <folding>
+                <element signature="e#4459#4504#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -1511,7 +1532,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_profile_details_matches.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_profile_details_matches_header.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_profile_details_matches_criteria.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleMatchFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/DashboardActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings_activity_settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_data_sync.xml" />
@@ -1527,6 +1547,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_fullscreen_image.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/rounded_corners_profile_actions.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_people_profile_about.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleMatchFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleAboutFragment.java" />
       </list>
     </option>
@@ -2163,7 +2184,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32857144" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45054945" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45054945" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2371,16 +2392,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleMatchFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.6" vertical-offset="1357" max-vertical-offset="3944">
-          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_profile_details_matches_criteria.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25847954" vertical-offset="0" max-vertical-offset="855">
@@ -2558,14 +2569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/PeopleProfileActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3995">
-          <caret line="52" column="22" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleGalleryFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="631" max-vertical-offset="2278">
@@ -2687,14 +2690,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/PeopleProfileActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1849" max-vertical-offset="3995">
+          <caret line="164" column="0" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleMatchFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1279" max-vertical-offset="3604">
+          <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+          <folding>
+            <element signature="e#4459#4504#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/relhs/asianfinder/fragment/PeopleAboutFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0529661" vertical-offset="1985" max-vertical-offset="4046">
-          <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6927966" vertical-offset="2104" max-vertical-offset="4029">
+          <caret line="188" column="102" selection-start-line="188" selection-start-column="102" selection-end-line="188" selection-end-column="102" />
           <folding>
-            <element signature="e#8239#8284#0" expanded="true" />
-            <element signature="e#8435#8480#0" expanded="true" />
-            <element signature="e#8636#8681#0" expanded="true" />
+            <element signature="e#8353#8398#0" expanded="true" />
+            <element signature="e#8487#8532#0" expanded="true" />
           </folding>
         </state>
       </provider>
