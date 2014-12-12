@@ -11,9 +11,10 @@ public class PeoplePhotosInfo implements AsymmetricItem {
 
     private String category;
     private String file;
+    private String commentsCount;
 
     public PeoplePhotosInfo() {
-        this(1, 1, 0, "", "");
+        this(1, 1, 0, "", "", "");
     }
 
 	public PeoplePhotosInfo(Parcel in) {
@@ -21,13 +22,14 @@ public class PeoplePhotosInfo implements AsymmetricItem {
 		readFromParcel(in);
 	}
 
-    public PeoplePhotosInfo(int colSpan, int rowSpan, int position, String category, String file) {
+    public PeoplePhotosInfo(int colSpan, int rowSpan, int position, String category, String file, String commentsCount) {
         this.colSpan = colSpan;
         this.rowSpan = rowSpan;
         this.position = position;
 
         this.category = category;
         this.file = file;
+        this.commentsCount = commentsCount;
     }
 
     public int getColumnSpan() {
@@ -70,6 +72,14 @@ public class PeoplePhotosInfo implements AsymmetricItem {
         this.file = file;
     }
 
+    public String getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(String commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
     private void readFromParcel(final Parcel in) {
         colSpan = in.readInt();
         rowSpan = in.readInt();
@@ -77,6 +87,7 @@ public class PeoplePhotosInfo implements AsymmetricItem {
 
         category = in.readString();
         file = in.readString();
+        commentsCount = in.readString();
 
     }
 
@@ -93,6 +104,7 @@ public class PeoplePhotosInfo implements AsymmetricItem {
 
         dest.writeString(category);
         dest.writeString(file);
+        dest.writeString(commentsCount);
     }
 
 	/* Parcelable interface implementation */

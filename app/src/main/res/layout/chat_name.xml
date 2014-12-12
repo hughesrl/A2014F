@@ -1,0 +1,11 @@
+<com.relhs.asianfinder.view.CustomTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:textSize="20sp"
+    app:fontName="MyriadProCond.ttf"
+    app:fontColor="@color/header"
+    android:text="Robert"/>

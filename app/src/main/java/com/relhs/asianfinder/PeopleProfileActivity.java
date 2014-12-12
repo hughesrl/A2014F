@@ -24,7 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.nineoldandroids.view.ViewHelper;
 import com.relhs.asianfinder.data.PeopleInfo;
 import com.relhs.asianfinder.data.PeoplePhotosInfo;
 import com.relhs.asianfinder.data.UserInfo;
@@ -186,7 +185,8 @@ public class PeopleProfileActivity extends FragmentActivity {
         @Override
         protected ArrayList<PeopleInfo> doInBackground(Void... args) {
 
-            JSONObject json = jParser.getJSONFromUrl(getResources().getString(R.string.api)+"?act=profile&did=fasdfasdfasd&_pid="+pid, null);
+            String did = ((AsianFinderApplication)getApplication()).getDeviceId();
+            JSONObject json = jParser.getJSONFromUrl(getResources().getString(R.string.api)+"?act=profile&did="+did+"&_pid="+pid, null);
             Log.d("-- robert", json.toString());
             try {
                 JSONArray android = json.getJSONArray(Constants.TAG_OS);
@@ -269,6 +269,10 @@ public class PeopleProfileActivity extends FragmentActivity {
             pager.setOffscreenPageLimit(2);
             tabs.setViewPager(pager);
         }
+    }
+
+    public String getDeviceId() {
+        return ((AsianFinderApplication) getApplication()).getDeviceId();
     }
 
 }

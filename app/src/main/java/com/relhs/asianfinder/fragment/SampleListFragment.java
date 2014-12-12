@@ -34,7 +34,7 @@ public class SampleListFragment extends ScrollTabHolderFragment implements OnScr
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mPosition = getArguments().getInt(ARG_POSITION);
+		mPosition = 1;//getArguments().getInt(ARG_POSITION);
 
 		mListItems = new ArrayList<String>();
 

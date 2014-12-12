@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="20dp"
+    >
+    <LinearLayout
+        android:background="@drawable/rounded_corners"
+        android:id="@+id/layoutLoadingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="30dp"
+        android:minHeight="200dp"
+        android:minWidth="200dp"
+        android:layout_centerInParent="true">
+        <ProgressBar
+            android:id="@+id/loadingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleLarge"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:background="@drawable/rounded_corners"
+        android:id="@+id/layoutData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        >
+        <com.relhs.asianfinder.view.CustomTextView
+            app:fontName="VAGRoundedLight.ttf"
+            app:fontStyle="bold"
+            app:fontColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:id="@+id/lbl_your_name"
+            android:text="Your name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            style="@style/text_Appearance_large"/>
+        <ListView
+            android:layout_below="@+id/lbl_your_name"
+            android:id="@+id/listMultipleSelection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnOk" />
+        <LinearLayout
+            android:id="@+id/layoutRange"
+            android:layout_below="@+id/lbl_your_name"
+            android:layout_above="@+id/btnOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <Spinner
+                android:id="@+id/spinnerFrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/rounded_corners_spinner"
+                android:layout_marginBottom="10dp"
+                />
+            <Spinner
+                android:id="@+id/spinnerTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/rounded_corners_spinner"
+                />
+        </LinearLayout>
+
+        <com.relhs.asianfinder.view.CustomButton
+            android:layout_alignParentBottom="true"
+            app:fontName="MyriadProCond.ttf"
+            app:fontStyle="bold"
+            app:fontColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblDone"
+            android:id="@+id/btnOk"
+            android:background="@drawable/custom_button"
+            android:layout_gravity="center_horizontal"
+            style="@style/button_appearance_login"
+            android:visibility="gone"/>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

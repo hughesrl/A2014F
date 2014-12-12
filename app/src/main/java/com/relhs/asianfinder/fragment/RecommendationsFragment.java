@@ -21,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
+import com.relhs.asianfinder.AsianFinderApplication;
 import com.relhs.asianfinder.Constants;
+import com.relhs.asianfinder.DashboardActivity;
 import com.relhs.asianfinder.PeopleProfileActivity;
 import com.relhs.asianfinder.R;
 import com.relhs.asianfinder.adapter.PeopleListAdapter;
@@ -50,7 +52,7 @@ public class RecommendationsFragment extends Fragment {
 
     private int currentOffset = 0;
 
-    private String did = "fasdfasdfasd";
+
 
     JSONParser jParser;
     private AsymmetricGridView mListView;
@@ -103,7 +105,8 @@ public class RecommendationsFragment extends Fragment {
         mListView = (AsymmetricGridView) myFragmentView.findViewById(R.id.listView);
         mListView.setRequestedColumnCount(2);
 
-        String url = getResources().getString(R.string.api)+"?act=search&t=mymatches&did="+did;
+
+        String url = getResources().getString(R.string.api)+"?act=search&t=mymatches&did="+ ((DashboardActivity)getActivity()).getDeviceId();
         new GetAllNearest(mParamLong, mParamLat, url).execute();
 
 

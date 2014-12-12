@@ -39,19 +39,31 @@
     <string name="action_example">Example action</string>
     <string name="action_help">Help</string>
     <string name="action_filter">Filter</string>
+    <string name="action_search">Search</string>
 
     <string name="sample_quotes">\"Beauty is in the eye of BEER holder.\"</string>
+
+    <string name="lblDone">Done</string>
 
     <string-array name="drawer_menu">
         <item>PROFILE</item>
         <item>HOME</item>
-        <item>MATCHES</item>
         <item>MY LIST</item>
+        <item>MAIL</item>
         <item>MESSAGES</item>
         <item>NOTIFICATIONS</item>
         <item>SETTINGS</item>
     </string-array>
 
+    <string name="lblSearch">Search</string>
+    <string name="lblAdvanceSearch">Show Advance Search</string>
+    <string name="lblSearchDisplayName">Display Name</string>
+    <string name="lblSearchGender">Gender</string>
+    <string name="lblSearchAge">Age Range</string>
+    <string name="lblSearchLocation">Location</string>
+    <string name="lblSearchLocationCountry">Country</string>
+    <string name="lblSearchLocationState">State</string>
+    <string name="lblSearchLocationCity">City</string>
 
 
 </resources>

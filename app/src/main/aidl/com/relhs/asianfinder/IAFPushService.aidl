@@ -10,6 +10,8 @@ interface IAFPushService {
      */
     void sendChatMessage(int userId, String message, int localId);
 
+    void sendSticker(String folder, String file, int userId, int localId);
+
     void getChatMessage(String jsonData);
 
     void initializeChatting(int userId);

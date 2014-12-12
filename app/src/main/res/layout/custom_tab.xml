@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:padding="5dp">
+
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_send"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tab_icon"
+         />
+
+
+</LinearLayout>
+
+
+

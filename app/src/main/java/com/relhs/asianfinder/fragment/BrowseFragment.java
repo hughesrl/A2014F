@@ -21,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
+import com.relhs.asianfinder.AsianFinderApplication;
 import com.relhs.asianfinder.Constants;
+import com.relhs.asianfinder.DashboardActivity;
 import com.relhs.asianfinder.PeopleProfileActivity;
 import com.relhs.asianfinder.R;
 import com.relhs.asianfinder.adapter.PeopleListAdapter;
@@ -50,12 +52,15 @@ public class BrowseFragment extends Fragment {
 
     private int currentOffset = 0;
 
-    private String did = "fasdfasdfasd";
-
     JSONParser jParser;
     private AsymmetricGridView mListView;
     private PeopleListAdapter adapter;
     private ArrayList<PeopleInfo> peopleInfoArrayList = new ArrayList<PeopleInfo>();
+
+    private JSONArray jsonArrayServerResponse;
+    private int totalRecordCount;
+    private int totalPageCount;
+    private int currentPage;
 
 
     /**
@@ -109,7 +114,7 @@ public class BrowseFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 SpinnerItems spinnerItems = (SpinnerItems) parentView.getItemAtPosition(position);
-                String url = getResources().getString(R.string.api)+"?act=search&t="+spinnerItems.getSpinnerValue().toLowerCase().trim()+"&did="+did;
+                String url = getResources().getString(R.string.api)+"?act=search&t="+spinnerItems.getSpinnerValue().toLowerCase().trim()+"&did="+ ((DashboardActivity)getActivity()).getDeviceId();
                 new GetAllNearest(mParamLong, mParamLat, url).execute();
             }
 
@@ -163,6 +168,7 @@ public class BrowseFragment extends Fragment {
                     JSONObject jsonObjectData = jsonObject.getJSONObject(Constants.TAG_DATA);
 
                     jsonArrayAccounts = jsonObjectData.getJSONArray(Constants.TAG_ACCOUNTS);
+                    jsonArrayServerResponse = jsonObjectData.getJSONArray("server_response");
 
                     for (int i = 0; i < jsonArrayAccounts.length(); i++) {
                         JSONObject jsonObjectAccounts = jsonArrayAccounts.getJSONObject(i);
@@ -206,6 +212,10 @@ public class BrowseFragment extends Fragment {
                         peopleInfoArrayList.add(peopleInfo);
                     }
                     currentOffset += jsonArrayAccounts.length();
+
+                    totalRecordCount = jsonArrayServerResponse.getJSONObject(0).getInt("total_record_count");
+                    currentPage = jsonArrayServerResponse.getJSONObject(0).getInt("current_page");
+                    totalPageCount = jsonArrayServerResponse.getJSONObject(0).getInt("total_page_count");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -242,7 +252,9 @@ public class BrowseFragment extends Fragment {
                         int count = mListView.getCount();
                         if (scrollState == SCROLL_STATE_IDLE) {
                             if (mListView.getLastVisiblePosition() >= count-threshold) {
-                                new LoadMoreDataTask(api_url).execute();
+                                if(totalPageCount > currentPage) {
+                                    new LoadMoreDataTask(api_url).execute();
+                                }
                             }
                         }
                     }
@@ -294,11 +306,10 @@ public class BrowseFragment extends Fragment {
                     JSONObject jsonObjectData = jsonObject.getJSONObject(Constants.TAG_DATA);
 
                     jsonArrayAccounts = jsonObjectData.getJSONArray(Constants.TAG_ACCOUNTS);
+                    jsonArrayServerResponse = jsonObjectData.getJSONArray("server_response");
 
                     for (int i = 0; i < jsonArrayAccounts.length(); i++) {
                         JSONObject jsonObjectAccounts = jsonArrayAccounts.getJSONObject(i);
-                        // Storing  JSON item in a Variable
-                        // Height of the row is 3/4 of the screen width
                         int colSpan = 1;
                         int rowSpan = 1;
 
@@ -331,12 +342,18 @@ public class BrowseFragment extends Fragment {
                             subphoto_2 = jsonObjectPHOTOS.getString("subphoto_2");
                         }
 
-                        PeopleInfo peopleInfo = new PeopleInfo(colSpan, rowSpan, currentOffset + i, id, username, gender, aged, country, state,
-                                city, is_online, main_photo, subphoto_1, subphoto_2);
+                        PeopleInfo peopleInfo = new PeopleInfo(colSpan, rowSpan, currentOffset + i,
+                                id, username, gender,
+                                aged, country, state, city, is_online,
+                                main_photo, subphoto_1, subphoto_2);
 
                         peopleInfoArrayList.add(peopleInfo);
                     }
                     currentOffset += jsonArrayAccounts.length();
+
+                    totalRecordCount = jsonArrayServerResponse.getJSONObject(0).getInt("total_record_count");
+                    currentPage = jsonArrayServerResponse.getJSONObject(0).getInt("current_page");
+                    totalPageCount = jsonArrayServerResponse.getJSONObject(0).getInt("total_page_count");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

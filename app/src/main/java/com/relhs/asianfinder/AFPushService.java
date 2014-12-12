@@ -113,7 +113,7 @@ public class AFPushService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
         // For time consuming an long tasks you can launch a new thread here...
-        Toast.makeText(this, " Service Started", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, " Service Started", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -135,7 +135,7 @@ public class AFPushService extends Service {
         }
     }
     public void IsBoundable(){
-        Toast.makeText(this,"I bind like butter", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"I bind like butter", Toast.LENGTH_LONG).show();
     }
 
     public void sendMessage(String message){
@@ -194,7 +194,7 @@ public class AFPushService extends Service {
                 @Override
                 public void call(Object... args) {
                     try {
-                        //Log.d("-- onlineChatOk", Arrays.toString(args));
+                        Log.d("-- onlineChatOk", Arrays.toString(args));
                         JSONArray argsArray = new JSONArray(Arrays.toString(args));
                         JSONObject viewingData = argsArray.getJSONObject(0);
                         JSONObject jsonObjectStickers = viewingData.getJSONObject("stickers");
@@ -204,43 +204,47 @@ public class AFPushService extends Service {
                         //Log.d("-- onlineChatOk STICKERS", stickersUrl);
                         int threadIdRoom = 0;
                         JSONArray jsonObjectRoomMembers = viewingData.getJSONArray("roomMembers");
-                        for (int i = 0; i < jsonObjectRoomMembers.length(); i++) {
-                            JSONObject c = jsonObjectRoomMembers.getJSONObject(i);
+                        if(jsonObjectRoomMembers.length() > 0) {
+                            for (int i = 0; i < jsonObjectRoomMembers.length(); i++) {
+                                JSONObject c = jsonObjectRoomMembers.getJSONObject(i);
 
-                            int userId = c.getInt("userId");
-                            threadIdRoom = c.getInt("threadId");
-                            String userType = c.getString("userType");
-                            String userName = c.getString("userName");
-                            String main_photo = getString(R.string.api_photos) + c.getString("main_photo");
-                            int is_chatting = c.getInt("is_chatting");
-                            String lastOnline = c.getString("lastOnline");
+                                int userId = c.getInt("userId");
+                                threadIdRoom = c.getInt("threadId");
+                                String userType = c.getString("userType");
+                                String userName = c.getString("userName");
+                                String main_photo = getString(R.string.api_photos) + c.getString("main_photo");
+                                int is_chatting = c.getInt("is_chatting");
+                                String lastOnline = c.getString("lastOnline");
 
-                            messagesOperations.createRoom(userId, threadIdRoom, userType, userName,
-                                    main_photo, is_chatting, lastOnline);
+                                messagesOperations.createRoom(userId, threadIdRoom, userType, userName,
+                                        main_photo, is_chatting, lastOnline);
+                            }
                         }
                         JSONArray jsonObjectThreads = viewingData.getJSONArray("threads");
-                        for (int i = 0; i < jsonObjectThreads.length(); i++) {
-                            JSONObject c = jsonObjectThreads.getJSONObject(i);
-                            int threadId = c.getInt("threadId");
+                        if(jsonObjectThreads.length() > 0) {
+                            for (int i = 0; i < jsonObjectThreads.length(); i++) {
+                                JSONObject c = jsonObjectThreads.getJSONObject(i);
+                                int threadId = c.getInt("threadId");
 
-                            JSONArray jsonObjectThreadsMessages = c.getJSONArray("messages");
-                            for (int ii = 0; ii < jsonObjectThreadsMessages.length(); ii++) {
-                                JSONObject cM = jsonObjectThreadsMessages.getJSONObject(ii);
+                                JSONArray jsonObjectThreadsMessages = c.getJSONArray("messages");
+                                for (int ii = 0; ii < jsonObjectThreadsMessages.length(); ii++) {
+                                    JSONObject cM = jsonObjectThreadsMessages.getJSONObject(ii);
 
-                                int f = cM.getInt("f");
-                                int localId = cM.getInt("localId");
-                                String m = cM.getString("m");
-                                String timestamp = cM.getString("t");
-                                int tid = cM.getInt("tid");
-                                int seen = cM.getInt("seen");
+                                    int f = cM.getInt("f");
+                                    int localId = cM.getInt("localId");
+                                    String m = cM.getString("m");
+                                    String timestamp = cM.getString("t");
+                                    int tid = cM.getInt("tid");
+                                    int seen = cM.getInt("seen");
 
-                                if (cM.has("s")) {
-                                    JSONObject cMSticker = cM.getJSONObject("s");
-                                    //Log.d("-- robert", cMSticker.toString());
-                                    //Log.d("-- robert",  cMSticker.getString("folder")+"/"+ cMSticker.getString("file"));
-                                    messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, "", timestamp, seen, cMSticker.getString("folder"), cMSticker.getString("file"));
-                                } else {
-                                    messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, seen, "", "");
+                                    if (cM.has("s")) {
+                                        JSONObject cMSticker = cM.getJSONObject("s");
+                                        //Log.d("-- robert", cMSticker.toString());
+                                        //Log.d("-- robert",  cMSticker.getString("folder")+"/"+ cMSticker.getString("file"));
+                                        messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, "", timestamp, seen, cMSticker.getString("folder"), cMSticker.getString("file"));
+                                    } else {
+                                        messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, seen, "", "");
+                                    }
                                 }
                             }
                         }
@@ -401,7 +405,12 @@ public class AFPushService extends Service {
         public void initializeChattingOk(int threadId) {
             Log.d("-- robert", "threadId : "+threadId);
 
-            Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+//            Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+//            intent.putExtra("threadId", threadId+"");
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            getApplication().startActivity(intent);
+
+            Intent intent = new Intent(getBaseContext(), ChatRoomsActivity.class);
             intent.putExtra("threadId", threadId+"");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplication().startActivity(intent);
@@ -418,8 +427,22 @@ public class AFPushService extends Service {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
+        public void sendSticker(String folder, String file, int userId, int localId) {
+            try {
+                JSONObject sendSticker = new JSONObject();
+                sendSticker.putOpt("folder", folder);
+                sendSticker.putOpt("file", file);
+                sendSticker.putOpt("userId", userId);
+                sendSticker.putOpt("localId", localId);
+                sendSticker.putOpt("message", "");
+
+                socket.emit("sendSticker", sendSticker);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         public void getChatMessage(String jsonData) {
             try {
                 JSONArray argsArray = new JSONArray(jsonData);

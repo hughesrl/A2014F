@@ -80,6 +80,25 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
     public static final String STICKERSINFO_FILE = "filename";
 
 
+    public static final String PREFERENCEINFO = "PreferenceInfo";
+    public static final String PREFERENCEINFO_CATEGORY = "category";
+    public static final String PREFERENCEINFO_DBNAME = "dbname";
+    public static final String PREFERENCEINFO_LABEL = "label";
+    public static final String PREFERENCEINFO_TYPE = "type";
+    public static final String PREFERENCEINFO_VALUE = "value";
+    public static final String PREFERENCEINFO_IDS = "ids";
+
+    public static final String MYLISTINFO = "MyListInfo";
+    public static final String MYLISTINFO_USERID = "userid";
+    public static final String MYLISTINFO_USERNAME = "username";
+    public static final String MYLISTINFO_AGE = "age";
+    public static final String MYLISTINFO_GENDER = "gender";
+    public static final String MYLISTINFO_LOCATION = "location";
+    public static final String MYLISTINFO_LIST_TYPE = "list_type";
+    public static final String MYLISTINFO_PHOTO1 = "photo1";
+    public static final String MYLISTINFO_PHOTO2 = "photo2";
+    public static final String MYLISTINFO_PHOTO3 = "photo3";
+
 
 
 	// creation SQLite statement
@@ -157,6 +176,30 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
             + STICKERSINFO_FILE + " text not null, "
             + _DATE + " datetime default current_timestamp);";
 
+    private static final String DATABASE_CREATE_PREFERENCEINFO = "CREATE TABLE " + PREFERENCEINFO
+            + "(" + _ID + " integer primary key autoincrement, "
+            + PREFERENCEINFO_CATEGORY + " text not null, "
+            + PREFERENCEINFO_DBNAME + " text not null, "
+            + PREFERENCEINFO_LABEL + " text not null, "
+            + PREFERENCEINFO_TYPE + " text not null, "
+            + PREFERENCEINFO_VALUE + " text, "
+            + PREFERENCEINFO_IDS + " text, "
+            + _DATE + " datetime default current_timestamp);";
+
+    private static final String DATABASE_CREATE_MYLISTINFO = "CREATE TABLE " + MYLISTINFO
+            + "(" + _ID + " integer primary key autoincrement, "
+            + MYLISTINFO_USERID + " text not null, "
+            + MYLISTINFO_USERNAME + " text, "
+            + MYLISTINFO_AGE + " text, "
+            + MYLISTINFO_GENDER + " text, "
+            + MYLISTINFO_LOCATION + " text, "
+            + MYLISTINFO_PHOTO1 + " text, "
+            + MYLISTINFO_PHOTO2 + " text, "
+            + MYLISTINFO_PHOTO3 + " text, "
+            + MYLISTINFO_LIST_TYPE + " text, "
+            + _DATE + " datetime default current_timestamp);";
+
+
 
 	public DataBaseWrapper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -174,6 +217,12 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
         //Sticker
         db.execSQL(DATABASE_CREATE_STICKERCATEGORYINFO);
         db.execSQL(DATABASE_CREATE_STICKERSINFO);
+
+        // Preference
+        db.execSQL(DATABASE_CREATE_PREFERENCEINFO);
+
+        // My List
+        db.execSQL(DATABASE_CREATE_MYLISTINFO);
 	}
 
 	@Override
@@ -186,6 +235,13 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
         //Messaging
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_ROOMINFO);
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_MESSAGESTHREADINFO);
+
+        // Preference
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_PREFERENCEINFO);
+
+        // My List
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_MYLISTINFO);
+
 		onCreate(db);
 	}
 

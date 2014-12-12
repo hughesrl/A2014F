@@ -47,39 +47,14 @@
             app:fontName="VAGRoundedLight.ttf"
             app:fontStyle="bold"
             app:fontColor="@android:color/black"
-            style="@style/text_Appearance_normal"
+            style="@style/text_Appearance_large"
             android:id="@+id/spinnerTxtTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="No Photo to display"
-            android:layout_marginBottom="10dp"/>
+            android:text="No photo to display"
+            android:layout_margin="10dp"/>
 
-        <com.relhs.asianfinder.view.CustomButton
-            app:fontName="MyriadProCond.ttf"
-            app:fontStyle="bold"
-            app:fontColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Upload Photo"
-            android:id="@+id/btnUpload"
-            android:background="@drawable/custom_button"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            style="@style/button_appearance_login" />
-
-        <com.relhs.asianfinder.view.CustomButton
-            app:fontName="MyriadProCond.ttf"
-            app:fontStyle="bold"
-            app:fontColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Capture Photo"
-            android:id="@+id/btnCapture"
-            android:background="@drawable/custom_button"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            style="@style/button_appearance_login" />
     </LinearLayout>
 
 </RelativeLayout>

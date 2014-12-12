@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/bubbleLeft"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="5dip"
         android:layout_gravity="end"
@@ -77,7 +77,7 @@
     <RelativeLayout
         android:id="@+id/bubbleRight"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="5dip"
         android:layout_gravity="end"

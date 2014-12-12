@@ -42,14 +42,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.nineoldandroids.view.ViewHelper;
+
 import com.relhs.asianfinder.data.PeopleInfo;
 import com.relhs.asianfinder.data.UserInfo;
-import com.relhs.asianfinder.flavienlaurent.notboringactionbar.AlphaForegroundColorSpan;
-import com.relhs.asianfinder.flavienlaurent.notboringactionbar.KenBurnsSupportView;
+
 import com.relhs.asianfinder.fragment.BrowseFragment;
 import com.relhs.asianfinder.fragment.PeopleAboutFragment;
 import com.relhs.asianfinder.fragment.ProfileAboutFragment;
+import com.relhs.asianfinder.fragment.ProfileGalleryFragment;
+import com.relhs.asianfinder.fragment.ProfilePreferenceFragment;
 import com.relhs.asianfinder.fragment.SampleListFragment;
 import com.relhs.asianfinder.fragment.ScrollTabHolder;
 import com.relhs.asianfinder.fragment.ScrollTabHolderFragment;
@@ -73,6 +74,7 @@ import java.util.List;
 public class ProfileActivity extends FragmentActivity {
     private ImageLoader imageLoader;
     private UserInfoOperations userOperations;
+    private UserInfo userInfo;
 
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
@@ -83,10 +85,18 @@ public class ProfileActivity extends FragmentActivity {
 
     public static IAFPushService mIAFPushService;
     private boolean mBound;
+    private MenuItem menuSettings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        // TODO: !IMPORTANT DATABASE OPERATION
+        userOperations = new UserInfoOperations(this);
+        userOperations.open();
+        userInfo = userOperations.getUser();
+        // TODO: !IMPORTANT DATABASE OPERATION
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         pager = (ViewPager) findViewById(R.id.pager);
@@ -95,11 +105,14 @@ public class ProfileActivity extends FragmentActivity {
 
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
         pager.setPageMargin(pageMargin);
+        pager.setOffscreenPageLimit(2);
         tabs.setViewPager(pager);
     }
 
 
-    public class MyPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
+
+
+    public class MyPagerAdapter extends FragmentPagerAdapter {
         //int[] resId = new int[]{R.drawable.ic_drawer, R.drawable.ic_launcher, R.drawable.ic_drawer, R.drawable.ic_launcher, R.drawable.ic_drawer};
 
         private final String[] TITLES = { "About", "Gallery", "Preference" };
@@ -119,44 +132,45 @@ public class ProfileActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int position) {
             Fragment f = new Fragment();
-//            Bundle args = getArguments();
+            Bundle args = new Bundle();
+
+            args.putString(Constants.ARG_PROFILE, userInfo.getBasic());
+//            args.putString(Constants.ARG_MATCHES, jsonObjectMatches.toString());
+            args.putString(Constants.ARG_PHOTOS, userInfo.getPhotos());
+            args.putString(Constants.ARG_PREFERENCE, userInfo.getPreference());
+
             switch(position){
                 case 0: // About
                     ProfileAboutFragment peopleAboutFragment = new ProfileAboutFragment();
+                    peopleAboutFragment.setArguments(args);
                     return peopleAboutFragment;
                 case 1: // Patient Information
-                    BrowseFragment galleryFragment = new BrowseFragment();
-
-                    return galleryFragment;
+                    ProfileGalleryFragment profileGalleryFragment = new ProfileGalleryFragment();
+                    profileGalleryFragment.setArguments(args);
+                    return profileGalleryFragment;
                 case 2: // Patient Information
-                    BrowseFragment moreFragment = new BrowseFragment();
-
-                    return moreFragment;
+                    ProfilePreferenceFragment profilePreferenceFragment = new ProfilePreferenceFragment();
+                    profilePreferenceFragment.setArguments(args);
+                    return profilePreferenceFragment;
             }
             return null;
         }
-
-        @Override
-        public void onPageScrolled(int i, float v, int i2) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            mActionBar.setSelectedNavigationItem(position);
-//            int resIdLenght = resId.length;
-//            if (position < 0 || position >= resIdLenght)
-//                return;
-//            int drawableId = resId[position];
-//            mActionBar.setIcon(drawableId);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int i) {
-
-        }
     }
 
-    
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.profile_menu, menu);
+//        menuSettings = menu.findItem(R.id.action_settings);
+//        return true;
+//    }
+
+    public String getDeviceId() {
+        return ((AsianFinderApplication) getApplication()).getDeviceId();
+    }
+
+
+
+
+
 }
 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    android:orientation="vertical">
+
+    <com.relhs.asianfinder.view.CustomEditTextView
+        app:fontName="MyriadProCond.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etDisplayName"
+        android:background="@drawable/rounded_corners"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"
+        android:hint="@string/lblSearchDisplayName" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerGender"
+        android:background="@drawable/rounded_corners_spinner"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"
+        android:hint="@string/lblSearchGender"
+        />
+    <com.relhs.asianfinder.view.CustomEditTextView
+        android:enabled="false"
+        app:fontName="MyriadProCond.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etAgeRange"
+        android:background="@drawable/rounded_corners"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"
+        android:hint="@string/lblSearchAge" />
+    <com.relhs.asianfinder.view.CustomEditTextView
+        android:enabled="false"
+        app:fontName="MyriadProCond.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etLocation"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/rounded_corners"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"
+        android:hint="@string/lblSearchLocation" />
+    <com.relhs.asianfinder.view.CustomButton
+        app:fontName="MyriadProCond.ttf"
+        app:fontStyle="bold"
+        app:fontColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lblSearch"
+        android:id="@+id/btnBasicSearch"
+        android:background="@drawable/custom_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        style="@style/button_appearance_login"
+        />
+
+
+</LinearLayout>

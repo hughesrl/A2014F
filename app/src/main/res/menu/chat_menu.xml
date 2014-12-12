@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.relhs.asianfinder.DashboardActivity" >
+    <item android:id="@+id/action_send_gift"
+        android:title="Send Gift"
+        android:icon="@drawable/ic_menu_send_gift"
+        android:showAsAction="collapseActionView|ifRoom"
+        />
+    <item android:id="@+id/action_send_load"
+        android:title="Send Load"
+        android:icon="@drawable/ic_menu_send_load"
+        android:showAsAction="collapseActionView|ifRoom"
+        />
+</menu>

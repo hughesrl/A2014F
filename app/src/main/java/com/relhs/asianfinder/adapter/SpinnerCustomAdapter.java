@@ -34,7 +34,7 @@ public class SpinnerCustomAdapter extends ArrayAdapter<SpinnerItems> {
         LayoutInflater inflater = context.getLayoutInflater();
         View row = inflater.inflate(R.layout.spinner_row, parent, false);
         TextView name = (TextView) row.findViewById(R.id.spinnerTxtTitle);
-        Typeface myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/VAGRoundedLight.ttf");
+        Typeface myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/MyriadProCond.ttf");
 
         name.setTypeface(myTypeFace, Typeface.NORMAL);
         name.setGravity(Gravity.LEFT);

@@ -7,7 +7,7 @@
     android:padding="5dp">
 
     <com.relhs.asianfinder.view.CustomTextView
-        app:fontName="VAGRoundedLight.ttf"
+        app:fontName="MyriadProCond.ttf"
         app:fontStyle="bold"
         app:fontColor="@android:color/black"
         style="@style/text_Appearance_normal"

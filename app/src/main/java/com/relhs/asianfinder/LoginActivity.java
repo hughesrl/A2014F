@@ -15,7 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.relhs.asianfinder.data.ProfilePreferenceDataInfo;
+import com.relhs.asianfinder.data.ProfilePreferenceHeaderInfo;
 import com.relhs.asianfinder.data.UserInfo;
+import com.relhs.asianfinder.loader.Utils;
+import com.relhs.asianfinder.operation.PreferenceInfoOperations;
 import com.relhs.asianfinder.operation.UserInfoOperations;
 import com.relhs.asianfinder.utils.JSONParser;
 import com.relhs.asianfinder.view.CustomButton;
@@ -33,14 +37,12 @@ import java.util.List;
 
 
 public class LoginActivity extends Activity implements View.OnClickListener{
-
-    ProgressDialog progress;
-
     private CustomEditTextView etUsername;
     private CustomEditTextView etPassword;
     private String txtUsername;
     private String txtPassword;
     private UserInfoOperations userOperations;
+    private PreferenceInfoOperations preferenceInfoOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         // TODO: !IMPORTANT DATABASE OPERATION
         userOperations = new UserInfoOperations(this);
         userOperations.open();
+
+        preferenceInfoOperations = new PreferenceInfoOperations(this);
+        preferenceInfoOperations.open();
         // TODO: !IMPORTANT DATABASE OPERATION
 
         Toast.makeText(this, "isLogin "+userOperations.isLogin(), Toast.LENGTH_LONG).show();
@@ -63,7 +68,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         btnLogin.setOnClickListener(this);
 
         Notification notification=new Notification(R.drawable.ic_launcher,"Saanvi Birthday!", System.currentTimeMillis());
-        Intent intent=new Intent(getApplicationContext(), DashboardActivity.class);
+        Intent intent=new Intent(getApplicationContext(), IndexActivity.class);
         PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
         notification.setLatestEventInfo(getBaseContext(), "Reminder: Saanvi Birthday",
                 "Today is your friend Saanvi's Birthday, please wish her", pendingIntent);
@@ -74,7 +79,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             } else {
                 Log.d("HUGHES", "Already Running");
             }
-            Intent i = new Intent(this, DashboardActivity.class);
+            Intent i = new Intent(this, IndexActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
@@ -89,10 +94,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 txtUsername = etUsername.getText().toString();
                 txtPassword = etPassword.getText().toString();
                 if(!txtUsername.isEmpty()) {
-                    progress = new ProgressDialog(LoginActivity.this);
-                    progress.setCanceledOnTouchOutside(false);
-
-                    new LoginTask(progress, txtUsername, txtPassword).execute();
+                    new LoginTask(txtUsername, txtPassword).execute();
                 } else {
                     Toast.makeText(this, "Fill up form correctly", Toast.LENGTH_LONG).show();
                 }
@@ -129,21 +131,26 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
 
     private class LoginTask extends AsyncTask<String, String, JSONObject> {
-        private ProgressDialog progress;
+        private ProgressDialog mProgressDialog;
+
         private String sUsername;
         private String sPassword;
         private JSONArray jsonArray;
 
-        public LoginTask(ProgressDialog progress, String txtUsername, String txtPassword) {
+        public LoginTask(String txtUsername, String txtPassword) {
             // TODO Auto-generated constructor stub
-            this.progress = progress;
             this.sUsername = txtUsername;
             this.sPassword = txtPassword;
         }
 
         @Override
         protected void onPreExecute() {
-            progress.show();
+            if (mProgressDialog == null) {
+                mProgressDialog = Utils.createProgressDialog(LoginActivity.this);
+                mProgressDialog.show();
+            } else {
+                mProgressDialog.show();
+            }
         }
         @Override
         protected JSONObject doInBackground(String... params) {
@@ -154,25 +161,22 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             paramsAPI.add(new BasicNameValuePair("pass", sPassword));
 
             JSONParser jParser = new JSONParser();
-            Log.d("HUGHES", paramsAPI.toString());
+//            Log.d("HUGHES", paramsAPI.toString());
 
             return jParser.getJSONFromUrl(getString(R.string.api), paramsAPI);
         }
 
         @Override
         protected void onPostExecute(JSONObject jObj) {
-            progress.dismiss();
-            Log.d("retResponse", jObj.toString());
-
+            String personal = "";
             try {
                 // Getting JSON Array from URL
                 // Also Assume to return only one record
                 jsonArray = jObj.getJSONArray(AsianFinderApplication.TAG_OS);
                 JSONObject c = jsonArray.getJSONObject(0);
 
-                Log.d("HUGHES LOGIN", c.toString());
-
                 if(!c.getBoolean(AsianFinderApplication.TAG_STATUS)) {
+                    mProgressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), c.getString(AsianFinderApplication.TAG_MESSAGE), Toast.LENGTH_LONG).show();
                 } else {
                     //final
@@ -209,16 +213,42 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     //Log.d("-- robert -- lifestyle", lifestyle);
                     String culture_values = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_CULTURE_VALUES).toString();
                     //Log.d("-- robert -- culture_values", culture_values);
-                    String personal = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_PERSONAL).toString();
+                    if(jsonObjectProfile.has(DataBaseWrapper.USERINFO_JSON_PERSONAL)) {
+                        personal = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_PERSONAL).toString();
+                    }
                     //Log.d("-- robert -- personal", personal);
                     String interest = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_INTEREST).toString();
                     //Log.d("-- robert -- interest", interest);
                     String others = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_OTHERS).toString();
                     //Log.d("-- robert -- others", others);
 
+                    /********PREFERENCE********/
                     JSONArray jsonArrayPreferences = jsonArrayLoginDataObject.getJSONArray(Constants.TAG_PREFERENCES);
+                    JSONObject jsonObjectPreference = jsonArrayPreferences.getJSONObject(0);
+
+                    if(jsonObjectPreference.has(Constants.TAG_BASIC)) {
+                        JSONArray jsonArrayPrefBasic = jsonObjectPreference.getJSONArray(Constants.TAG_BASIC);
+                        saveToDatabase(Constants.TAG_BASIC, jsonArrayPrefBasic);
+                    }
+                    if(jsonObjectPreference.has(Constants.TAG_APPEARANCE)) {
+                        JSONArray jsonArrayPrefAppearance = jsonObjectPreference.getJSONArray(Constants.TAG_APPEARANCE);
+                        saveToDatabase(Constants.TAG_APPEARANCE, jsonArrayPrefAppearance);
+                    }
+                    if(jsonObjectPreference.has(Constants.TAG_LIFESTYLE)) {
+                        JSONArray jsonArrayPrefLifestyle = jsonObjectPreference.getJSONArray(Constants.TAG_LIFESTYLE);
+                        saveToDatabase(Constants.TAG_LIFESTYLE, jsonArrayPrefLifestyle);
+                    }
+                    if(jsonObjectPreference.has(Constants.TAG_CULTURE_VALUES)) {
+                        JSONArray jsonArrayPrefCultureValues = jsonObjectPreference.getJSONArray(Constants.TAG_CULTURE_VALUES);
+                        saveToDatabase(Constants.TAG_CULTURE_VALUES, jsonArrayPrefCultureValues);
+                    }
+                    if(jsonObjectPreference.has(Constants.TAG_PERSONAL)) {
+                        JSONArray jsonArrayPrefPersonal = jsonObjectPreference.getJSONArray(Constants.TAG_PERSONAL);
+                        saveToDatabase(Constants.TAG_PERSONAL, jsonArrayPrefPersonal);
+                    }
+
                     String preferences = jsonArrayPreferences.toString();
-                    //Log.d("-- robert -- preferences", preferences);
+                    /********PREFERENCE********/
 
                     JSONArray jsonArrayPhotos = jsonArrayLoginDataObject.getJSONArray(Constants.TAG_PHOTOS);
                     String photos = jsonArrayPhotos.toString();
@@ -235,12 +265,11 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                         // Start the service
                         startService(new Intent(LoginActivity.this, AFPushService.class));
 
-                        Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+                        Intent i = new Intent(LoginActivity.this, IndexActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        progress.dismiss();
+                        mProgressDialog.dismiss();
                         LoginActivity.this.finish();
                         startActivity(i);
-
                     }
                 }
 
@@ -259,6 +288,30 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             }
         }
         return false;
+    }
+
+    private void saveToDatabase(String category, JSONArray jsonArray) {
+        try {
+            for (int i=0; i<jsonArray.length()-1; i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String value = jsonObject.getString("value");
+                if (jsonObject.getString("dbname").equalsIgnoreCase("living_in")) {
+                    if(!value.isEmpty()) {
+                        JSONArray jsonArrayPrefBasicLivingIn = new JSONArray(value);
+                        JSONObject jsonObjectPrefBasicLivingIn = jsonArrayPrefBasicLivingIn.getJSONObject(0);
+                        value = jsonObjectPrefBasicLivingIn.getString("city") + ", " +
+                                jsonObjectPrefBasicLivingIn.getString("state") + ", " + jsonObjectPrefBasicLivingIn.getString("country");
+                        if (jsonObjectPrefBasicLivingIn.has("length")) {
+                            value = jsonObjectPrefBasicLivingIn.getString("length") + " within " + value;
+                        }
+                    }
+                }
+                preferenceInfoOperations.addUserPreference(category, jsonObject.getString("dbname"), jsonObject.getString("label"), jsonObject.getString("type"),
+                        value, jsonObject.getString("ids"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 

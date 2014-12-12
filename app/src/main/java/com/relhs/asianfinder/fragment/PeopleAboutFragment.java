@@ -2,12 +2,9 @@ package com.relhs.asianfinder.fragment;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,17 +16,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
 import com.relhs.asianfinder.Constants;
+import com.relhs.asianfinder.DashboardActivity;
 import com.relhs.asianfinder.IAFPushService;
 import com.relhs.asianfinder.PeopleProfileActivity;
 import com.relhs.asianfinder.R;
@@ -37,8 +30,9 @@ import com.relhs.asianfinder.adapter.PeopleListAdapter;
 import com.relhs.asianfinder.data.PeopleInfo;
 import com.relhs.asianfinder.loader.ImageLoader;
 import com.relhs.asianfinder.loader.Utils;
+import com.relhs.asianfinder.operation.MyListOperations;
+import com.relhs.asianfinder.operation.UserInfoOperations;
 import com.relhs.asianfinder.utils.JSONParser;
-import com.relhs.asianfinder.view.CustomButton;
 import com.relhs.asianfinder.view.CustomTextView;
 
 import org.json.JSONArray;
@@ -64,6 +58,18 @@ public class PeopleAboutFragment extends Fragment implements View.OnClickListene
     private boolean mBound;
 
     private int userId;
+    private String userName;
+    private String userAge;
+    private String userGender;
+    private String userLocation;
+    private String userp1;
+    private String userp2;
+    private String userp3;
+
+    private ImageButton btnAddToFavorites;
+    private ImageButton btnSendInterest;
+
+    private MyListOperations myListOperations;
 
     /**
      * Use this factory method to create a new instance of
@@ -95,6 +101,11 @@ public class PeopleAboutFragment extends Fragment implements View.OnClickListene
             mParamPhotos = getArguments().getString(Constants.ARG_PHOTOS);
         }
 
+        // TODO: !IMPORTANT DATABASE OPERATION
+        myListOperations = new MyListOperations(getActivity());
+        myListOperations.open();
+        // TODO: !IMPORTANT DATABASE OPERATION
+
         imageLoader = new ImageLoader(getActivity());
     }
 
@@ -118,6 +129,12 @@ public class PeopleAboutFragment extends Fragment implements View.OnClickListene
         btnSendGift.setOnClickListener(this);
         ImageButton btnSendLoad = (ImageButton) myFragmentView.findViewById(R.id.btnSendLoad);
         btnSendLoad.setOnClickListener(this);
+
+        btnAddToFavorites = (ImageButton) myFragmentView.findViewById(R.id.btnAddToFavorites);
+        btnAddToFavorites.setOnClickListener(this);
+        btnSendInterest = (ImageButton) myFragmentView.findViewById(R.id.btnSendInterest);
+        btnSendInterest.setOnClickListener(this);
+
         try {
             // PROFILE
             JSONObject jsonObjectProfile = new JSONObject(mParamProfile);
@@ -126,8 +143,12 @@ public class PeopleAboutFragment extends Fragment implements View.OnClickListene
             JSONObject jsonObjectBasic = jsonArrayBasic.getJSONObject(0);
 
             txtUsername.setText(jsonObjectBasic.get("username").toString()+ " ("+jsonObjectBasic.get("aged").toString().trim()+")");
+            userName = jsonObjectBasic.get("username").toString();
+            userAge = jsonObjectBasic.get("aged").toString().trim();
+            userGender = jsonObjectBasic.get("gender").toString().trim();
             if(jsonObjectBasic.has("city") && jsonObjectBasic.has("state") && jsonObjectBasic.has("country")) {
                 txtLocation.setText(jsonObjectBasic.get("city").toString()+", "+jsonObjectBasic.get("state").toString()+", "+jsonObjectBasic.get("country").toString());
+                userLocation = jsonObjectBasic.get("city").toString()+", "+jsonObjectBasic.get("state").toString()+", "+jsonObjectBasic.get("country").toString();
             }
             // HEADING
             if(jsonObjectBasic.has("heading")) {
@@ -181,6 +202,8 @@ public class PeopleAboutFragment extends Fragment implements View.OnClickListene
 
                 imageLoader.DisplayImage(jsonObjectPhotos.getString("file"), header_imageview);
                 imageLoader.DisplayImageRounded(jsonObjectPhotos.getString("file"), photoMain, 150, 150);
+
+                userp1 = jsonObjectPhotos.getString("file");
             } else {
                 String noPhoto;
                 if(jsonObjectBasic.get("gender").toString().equalsIgnoreCase("m")) {
@@ -217,6 +240,16 @@ public class PeopleAboutFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.btnSendLoad:
                 showWindowFromUrl("http://store.pass-load.com/store.php?cat=cellphone-loads");
+                break;
+
+            case R.id.btnAddToFavorites:
+                    String favoritesAPI = getResources().getString(R.string.api)+"?act=action-adds&t=favorites&did="+ ((PeopleProfileActivity)getActivity()).getDeviceId() +"&_pid="+userId+"&test=1";
+                    new AddToMyList(favoritesAPI, Constants.TAG_MYLIST_FAVORITES).execute();
+                break;
+
+            case R.id.btnSendInterest:
+                    String interestAPI = getResources().getString(R.string.api)+"?act=action-adds&t=interest&did="+ ((PeopleProfileActivity)getActivity()).getDeviceId() +"&_pid="+userId+"&test=1";
+                    new AddToMyList(interestAPI, Constants.TAG_MYLIST_INTEREST).execute();
                 break;
         }
     }
@@ -271,6 +304,62 @@ public class PeopleAboutFragment extends Fragment implements View.OnClickListene
         });
         webNewsFeed.loadUrl(url);
         dialog.show();
+    }
 
+
+    private class AddToMyList extends AsyncTask<Void, Void, Boolean> {
+        private String api_url;
+        private String listType;
+        private ProgressDialog mProgressDialog;
+
+        public AddToMyList(String api_url, String listType) {
+            // TODO Auto-generated constructor stub
+            this.api_url = api_url;
+            this.listType = listType;
+        }
+        @Override
+        protected void onPreExecute() {
+            if (mProgressDialog == null) {
+                mProgressDialog = Utils.createProgressDialog(getActivity());
+                mProgressDialog.show();
+            } else {
+                mProgressDialog.show();
+            }
+        }
+        @Override
+        protected Boolean doInBackground(Void... args) {
+            JSONParser jParser = new JSONParser();
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONFromUrl(api_url, null);
+            try {
+                JSONArray android = json.getJSONArray(Constants.TAG_OS);
+                JSONObject jsonObject = android.getJSONObject(0);
+                if(!jsonObject.getBoolean(Constants.TAG_STATUS)) { // false
+                    Log.d("-- robert", jsonObject.getString(Constants.TAG_MESSAGE));
+                } else { // true
+                    Log.d("-- robert ADD", jsonObject.getString(Constants.TAG_MESSAGE));
+                    //JSONObject jsonObjectData = jsonObject.getJSONObject(Constants.TAG_DATA);
+
+
+                    myListOperations.addToMyList(userId, userName, userAge, userGender, userLocation, listType, userp1, "", "");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        @Override
+        protected void onPostExecute(Boolean ret) {
+            if(ret) {
+                if(listType.equalsIgnoreCase(Constants.TAG_MYLIST_FAVORITES)) {
+                    btnAddToFavorites.setVisibility(View.GONE);
+                }
+                if(listType.equalsIgnoreCase(Constants.TAG_MYLIST_INTEREST)) {
+                    btnSendInterest.setVisibility(View.GONE);
+                }
+            }
+
+            mProgressDialog.dismiss();
+        }
     }
 }

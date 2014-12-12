@@ -4,6 +4,10 @@ import android.app.Activity;
 
 import android.app.ActionBar;
 
+import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.SearchView;
 
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.fragment.HomeFragment;
@@ -32,6 +37,8 @@ public class DashboardActivity extends FragmentActivity
     private CharSequence mTitle;
     private UserInfoOperations userOperations;
     private UserInfo userInformation;
+
+    private long backPressedTime = 0;    // used by onBackPressed()
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +89,14 @@ public class DashboardActivity extends FragmentActivity
                         .replace(R.id.container, HomeFragment.newInstance(position + 1))
                         .commit();
                 break;
+            case 3 :
+                Intent mailActivity = new Intent(this, MailActivity.class);
+                startActivity(mailActivity);
+                break;
+
             case 4 :
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, MessagesFragment.newInstance(position + 1))
-                        .commit();
+                Intent chatRoomsActivity = new Intent(this, ChatRoomsActivity.class);
+                startActivity(chatRoomsActivity);
                 break;
             case 6 :
                 Intent iSettings = new Intent(this, SettingsActivity.class);
@@ -112,13 +123,13 @@ public class DashboardActivity extends FragmentActivity
                 mTitle = "Home";
                 break;
             case 3:
-                mTitle = "Matches";
-                break;
-            case 4:
                 mTitle = "My List";
                 break;
+            case 4:
+                mTitle = "Mail";
+                break;
             case 5:
-                mTitle = "Messages";
+                mTitle = "Chat";
                 break;
             case 6:
                 mTitle = "Notifications";
@@ -137,6 +148,28 @@ public class DashboardActivity extends FragmentActivity
         actionBar.setTitle(mTitle);
     }
 
+    @Override
+    public void onBackPressed() {
+//        long t = System.currentTimeMillis();
+//        if (t - backPressedTime > 2000) {    // 2 secs
+//            backPressedTime = t;
+//            Toast.makeText(this, "Press back again to logout",
+//                    Toast.LENGTH_SHORT).show();
+//        } else {    // this guy is serious
+//            // clean up
+//            super.onBackPressed();       // bye
+//        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        DashboardActivity.super.onBackPressed();
+                    }
+                }).create().show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -145,9 +178,18 @@ public class DashboardActivity extends FragmentActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.dashboard, menu);
+            // Associate searchable configuration with the SearchView
+//            SearchManager searchManager =
+//                    (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//            SearchView searchView =
+//                    (SearchView) menu.findItem(R.id.action_filter).getActionView();
+//            searchView.setSearchableInfo(
+//                    searchManager.getSearchableInfo(getComponentName()));
+
             restoreActionBar();
             return true;
         }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -159,6 +201,10 @@ public class DashboardActivity extends FragmentActivity
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_filter) {
+            Intent intentFilter = new Intent(this, SearchActivity.class);
+            startActivity(intentFilter);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -201,6 +247,10 @@ public class DashboardActivity extends FragmentActivity
             ((DashboardActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+    }
+
+    public String getDeviceId() {
+        return ((AsianFinderApplication) getApplication()).getDeviceId();
     }
 
 

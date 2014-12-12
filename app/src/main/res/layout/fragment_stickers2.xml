@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/grid"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:horizontalSpacing="4dip"
+    android:numColumns="auto_fit"
+    android:stretchMode="columnWidth"
+    android:verticalSpacing="4dip"
+    android:padding="4dip" />-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bgcolor"
+    >
+<GridLayout
+    android:id="@+id/grid"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top|center"
+    >
+
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="3"
+        android:src="@drawable/sticker_1"/>
+
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="3"
+        android:layout_rowSpan="2"
+        android:src="@drawable/sticker_2"/>
+
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="4"
+        android:src="@drawable/sticker_3"/>
+
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="4"
+        android:src="@drawable/sticker_4"/>
+<!---->
+
+
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:src="@drawable/sticker_5"/>
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="3"
+        android:layout_column="0"
+
+        android:src="@drawable/sticker_8"/>
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="2"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2"
+        android:src="@drawable/sticker_6"/>
+
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="4"
+        android:layout_rowSpan="2"
+        android:src="@drawable/sticker_7"/>
+
+
+    <ImageView
+        android:padding="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:src="@drawable/sticker_9"/>
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="4"
+        android:layout_column="3"
+        android:layout_columnSpan="3"
+        android:src="@drawable/sticker_10"/>
+
+
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="5"
+        android:layout_column="0"
+        android:layout_columnSpan="4"
+        android:src="@drawable/sticker_11"/>
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="5"
+        android:layout_column="4"
+        android:layout_columnSpan="2"
+        android:src="@drawable/sticker_12"/>
+
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="6"
+        android:layout_column="0"
+        android:layout_columnSpan="4"
+        android:src="@drawable/sticker_13"/>
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="7"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:src="@drawable/sticker_15"/>
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="7"
+        android:layout_column="1"
+        android:layout_columnSpan="2"
+        android:src="@drawable/sticker_16"/>
+
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_row="6"
+        android:layout_column="4"
+        android:layout_rowSpan="2"
+        android:layout_columnSpan="2"
+        android:src="@drawable/sticker_14"/>
+
+
+
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="10"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:src="@drawable/sticker_17"/>
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="10"
+            android:layout_column="3"
+            android:layout_columnSpan="3"
+            android:src="@drawable/sticker_18"/>
+
+
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="11"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:src="@drawable/sticker_19"/>
+    <ImageView
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="11"
+        android:layout_columnSpan="3"
+        android:src="@drawable/sticker_20"/>
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="12"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_21"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="13"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_22"/>
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="12"
+            android:layout_rowSpan="2"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_23"/>
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="12"
+            android:layout_rowSpan="2"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_24"/>
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="14"
+            android:layout_column="0"
+            android:src="@drawable/sticker_25"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="14"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_26"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="14"
+            android:layout_column="3"
+            android:layout_rowSpan="2"
+            android:layout_columnSpan="3"
+            android:src="@drawable/sticker_27"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="15"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:src="@drawable/sticker_28"/>
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="19"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:src="@drawable/sticker_29"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="19"
+            android:layout_column="3"
+            android:layout_columnSpan="3"
+            android:src="@drawable/sticker_30"/>
+
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="20"
+            android:layout_column="0"
+            android:layout_rowSpan="2"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_31"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="20"
+            android:layout_column="2"
+            android:layout_rowSpan="2"
+            android:src="@drawable/sticker_32"/>
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="20"
+            android:layout_column="3"
+            android:layout_columnSpan="3"
+            android:src="@drawable/sticker_34"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="21"
+            android:layout_column="3"
+            android:src="@drawable/sticker_35"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="21"
+            android:layout_column="4"
+            android:src="@drawable/sticker_36"/>
+
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="22"
+            android:layout_column="1"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_37"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="22"
+            android:layout_column="3"
+            android:layout_columnSpan="4"
+            android:src="@drawable/sticker_38"/>
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="23"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:src="@drawable/sticker_39"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="23"
+            android:layout_column="3"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_41"/>
+
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="24"
+            android:layout_column="0"
+            android:layout_rowSpan="2"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_40"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="24"
+            android:layout_column="2"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_42"/>
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="25"
+            android:layout_column="2"
+            android:layout_columnSpan="2"
+            android:src="@drawable/sticker_43"/>
+
+
+        <ImageView
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="24"
+            android:layout_column="4"
+            android:layout_columnSpan="2"
+            android:layout_rowSpan="2"
+            android:src="@drawable/sticker_45"/>
+    <!---->
+
+</GridLayout>
+</ScrollView>
+

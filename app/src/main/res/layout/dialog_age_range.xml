@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corners_white"
+    android:layout_gravity="center"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+    <com.relhs.asianfinder.view.CustomTextView
+        app:fontName="VAGRoundedLight.ttf"
+        app:fontStyle="bold"
+        app:fontColor="@android:color/black"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Age Range"
+        android:id="@+id/pageTitle"
+        android:layout_gravity="center_horizontal"
+        style="@style/text_Appearance_normal"
+        android:shadowColor="@android:color/darker_gray"
+        android:paddingBottom="20dp"
+        />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerFrom"
+        android:background="@drawable/rounded_corners_spinner"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"
+        android:hint="@string/lblSearchGender"
+        />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerTo"
+        android:background="@drawable/rounded_corners_spinner"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"
+        android:hint="@string/lblSearchGender"
+        />
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+        <com.relhs.asianfinder.view.CustomButton
+            app:fontName="MyriadProCond.ttf"
+            app:fontStyle="bold"
+            app:fontColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/btnDialogCancel"
+            android:background="@drawable/custom_button_blue"
+            android:layout_gravity="center_horizontal"
+            style="@style/button_appearance_login"
+            android:layout_weight="1"
+            />
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="5dp"
+            android:layout_weight=".1"/>
+
+        <com.relhs.asianfinder.view.CustomButton
+            app:fontName="MyriadProCond.ttf"
+            app:fontStyle="bold"
+            app:fontColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ok"
+            android:id="@+id/btnDialogOkay"
+            android:background="@drawable/custom_button"
+            android:layout_gravity="center_horizontal"
+            style="@style/button_appearance_login"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

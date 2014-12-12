@@ -19,6 +19,7 @@ public class Constants {
     public static final String ARG_PROFILE = "arg_profile";
     public static final String ARG_MATCHES = "arg_matches";
     public static final String ARG_PHOTOS = "arg_photos";
+    public static final String ARG_PREFERENCE = "arg_preference";
 
 
     // PEOPLE LISTING
@@ -94,6 +95,7 @@ public class Constants {
     public final static String TAG_HOME_TYPE = "home_type";
     public final static String TAG_LIVING_SITUATION = "living_situation";
     public final static String TAG_WILLING_TO_RELOCATE = "willing_to_relocate";
+    public final static String TAG_LIFESTYLE = "lifestyle";
 
     // PROFILE -- CULTURE VALUES
     public final static String TAG_CULTURE_VALUES_TABLE = "CultureValues";
@@ -104,18 +106,21 @@ public class Constants {
     public final static String TAG_RELIGION = "religion";
     public final static String TAG_RELIGIOUS_VALUES = "religious_values";
     public final static String TAG_STAR_SIGN = "star_sign";
+    public final static String TAG_CULTURE_VALUES = "culture_values";
 
     // PROFILE -- PERSONAL
     public final static String TAG_PERSONAL_TABLE = "Personal";
     public final static String TAG_BUST = "bust";
     public final static String TAG_WAIST = "waist";
     public final static String TAG_HIPS = "hips";
+    public final static String TAG_PERSONAL = "personal";
 
     // PROFILE -- INTEREST
     public final static String TAG_INTEREST_TABLE = "Interest";
     public final static String TAG_FOOD = "food";
     public final static String TAG_MUSIC = "music";
     public final static String TAG_SPORTS = "sports";
+    public final static String TAG_INTEREST = "interest";
 
     // ------------------------------------------------------
 
@@ -163,4 +168,19 @@ public class Constants {
     public final static String TAG_SUBCATEGORYLEV1= "lev1";
     public final static String TAG_SUBCATEGORYLEV2= "lev2";
 
+
+
+    // SEARCH
+    public final static String TAG_SEARCH_DISPLAYNAME= "displayname";
+    public final static String TAG_SEARCH_GENDER= "gender";
+    public final static String TAG_SEARCH_AGE_FROM= "_aged1";
+    public final static String TAG_SEARCH_AGE_TO= "_aged2";
+    public final static String TAG_SEARCH_COUNTRY= "_living_in_country";
+    public final static String TAG_SEARCH_STATE= "_living_in_state";
+    public final static String TAG_SEARCH_CITY= "_living_in_city";
+
+
+    // MY LIST
+    public final static String TAG_MYLIST_FAVORITES = "_favorites";
+    public final static String TAG_MYLIST_INTEREST = "_interest";
 }

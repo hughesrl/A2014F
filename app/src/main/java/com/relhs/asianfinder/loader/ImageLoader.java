@@ -40,7 +40,7 @@ public class ImageLoader {
     }
     
 //    final int stub_id= android.R.drawable.alert_dark_frame;
-    
+
     public void DisplayImage(String url, ImageView imageView) {
         imageViews.put(imageView, url);
         Bitmap bitmap=memoryCache.get(url);
@@ -52,6 +52,18 @@ public class ImageLoader {
             imageView.setImageDrawable(null);
         }
     }
+    public void DisplayImageFromAssets(String url, ImageView imageView) {
+        imageViews.put(imageView, url);
+        Bitmap bitmap=memoryCache.get(url);
+        if(bitmap!=null)
+            imageView.setImageBitmap(bitmap);
+        else
+        {
+            queuePhoto(url, imageView, false, 0, 0);
+            imageView.setImageDrawable(null);
+        }
+    }
+
     public void DisplayImageRounded(String url, ImageView imageView, int width, int height) {
         imageViews.put(imageView, url);
         Bitmap bitmap=memoryCache.get(url);

@@ -124,7 +124,7 @@ public class PeopleGalleryFragment extends Fragment {
                     int colSpan = 1;
                     int rowSpan = 1;
 
-                    PeoplePhotosInfo peoplePhotosInfo = new PeoplePhotosInfo(colSpan, rowSpan, currentOffset + i, jsonObjectPhotos.getString("category"), jsonObjectPhotos.getString("file"));
+                    PeoplePhotosInfo peoplePhotosInfo = new PeoplePhotosInfo(colSpan, rowSpan, currentOffset + i, jsonObjectPhotos.getString("category"), jsonObjectPhotos.getString("file"), jsonObjectPhotos.getString("number_of_comments"));
                     peoplePhotosArrayList.add(peoplePhotosInfo);
                 }
                 currentOffset += jsonArrayPhotos.length();

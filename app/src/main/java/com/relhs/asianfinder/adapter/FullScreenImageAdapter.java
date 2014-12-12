@@ -69,6 +69,11 @@ public class FullScreenImageAdapter extends PagerAdapter {
         photoComments = (CustomTextView) viewLayout.findViewById(R.id.photoComments);
 
         photoTitle.setText(_imagePaths.get(position).getCategory());
+        if(_imagePaths.get(position).getCommentsCount().equalsIgnoreCase("0")) {
+            photoComments.setText("Post Comment");
+        } else {
+            photoComments.setText(_imagePaths.get(position).getCommentsCount()+" Comments");
+        }
         imageLoader.DisplayImage(_imagePaths.get(position).getFile(), imgDisplay);
 
         // close button click event

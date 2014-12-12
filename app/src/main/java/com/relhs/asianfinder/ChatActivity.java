@@ -9,28 +9,42 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.nkzawa.socketio.client.Socket;
@@ -39,6 +53,9 @@ import com.relhs.asianfinder.adapter.ThreadCursorAdapter;
 import com.relhs.asianfinder.data.RoomInfo;
 import com.relhs.asianfinder.data.ThreadsInfo;
 import com.relhs.asianfinder.data.UserInfo;
+import com.relhs.asianfinder.fragment.EmoticonsStickerFragment;
+import com.relhs.asianfinder.fragment.RecommendationsFragment;
+import com.relhs.asianfinder.fragment.SampleListFragment;
 import com.relhs.asianfinder.loader.ImageLoader;
 import com.relhs.asianfinder.operation.MessagesOperations;
 import com.relhs.asianfinder.operation.UserInfoOperations;
@@ -47,10 +64,10 @@ import com.relhs.asianfinder.view.CustomButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ChatActivity extends ListActivity implements View.OnClickListener {
+public class ChatActivity extends FragmentActivity implements View.OnClickListener {
 
     private RelativeLayout chatInputLayout;
-    private LinearLayout emoticsContent;
+    private FrameLayout emoticsContent;
     private static boolean keyboardHidden = true;
     private static int reduceHeight = 0;
     private int position = 0;
@@ -73,22 +90,33 @@ public class ChatActivity extends ListActivity implements View.OnClickListener {
 
     private boolean mBound;
 
-    public EditText txtMessage;
+    private EditText txtMessage;
     private ImageView chatPhoto;
     private ImageLoader imageLoader;
     private RelativeLayout profileData;
 
+    private int emoticonsShowing = 0;
+
+    public FragmentManager mFragmentManager;
+
+    ListView lv;
+    private int actionBarHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+
+
         imageLoader = new ImageLoader(this);
         profileData = (RelativeLayout) findViewById(R.id.profileData);
         txtMessage = (EditText) findViewById(R.id.txtMessage);
         chatPhoto = (ImageView) findViewById(R.id.chatPhoto);
+
+        mFragmentManager = getSupportFragmentManager();
         imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
 
         Bundle intentExtra = getIntent().getExtras();
         threadId = intentExtra.getString("threadId");
@@ -108,63 +136,43 @@ public class ChatActivity extends ListActivity implements View.OnClickListener {
                 messagesOperations,userInfoOperations,
                 0);
 
-        getListView().setAdapter(customAdapter);
+        lv = (ListView) findViewById(R.id.chatMessages);
+        lv.setAdapter(customAdapter);
 
-        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             }
         });
-//        getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
-//            int mLastFirstVisibleItem = 0;
-//            boolean mIsScrollingUp;
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState) {
-//
-//                if (view.getId() == getListView().getId()) {
-//                    final int currentFirstVisibleItem = getListView().getFirstVisiblePosition();
-//
-//                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
-//                        mIsScrollingUp = false;
-////                        Toast.makeText(ChatActivity.this, "Down", Toast.LENGTH_LONG).show();
-//                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
-//                        mIsScrollingUp = true;
-////                        Toast.makeText(ChatActivity.this, "Up", Toast.LENGTH_LONG).show();
-//                    }
-//                    mLastFirstVisibleItem = currentFirstVisibleItem;
-//                }
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                if(mLastFirstVisibleItem<firstVisibleItem) {
-////                    Log.i("SCROLLING DOWN","TRUE");
-//                    if(profileData.getVisibility() == View.INVISIBLE) {
-//                        Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
-//                        profileData.startAnimation(slide);
-//                        profileData.setVisibility(View.VISIBLE);
-//                    }
-//                }
-//                if(mLastFirstVisibleItem>firstVisibleItem) {
-////                    Log.i("SCROLLING UP","TRUE");
-//                    if(profileData.getVisibility() == View.VISIBLE) {
-//                        Animation slide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
-//                        profileData.startAnimation(slide);
-//                        profileData.setVisibility(View.INVISIBLE);
-//                    }
-//                }
-//                mLastFirstVisibleItem=firstVisibleItem;
-//            }
-//        });
+        // Defining default height of keyboard which is equal to 230 dip
+        final float popUpheight = getResources().getDimension(
+                R.dimen.keyboard_height);
+
+        emoticsContent = (FrameLayout) findViewById(R.id.emoticsContentFrame);
+        ViewGroup.LayoutParams emoticsContentParams = emoticsContent.getLayoutParams();
+        emoticsContentParams.height = (int) popUpheight;
+        emoticsContent.setLayoutParams(emoticsContentParams);
+        emoticsContent.setVisibility(View.GONE);
+
+        txtMessage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    emoticsContent.setVisibility(View.GONE);
+                    emoticonsShowing = 0;
+                }
+            }
+        });
+        txtMessage.setOnClickListener(this);
         final ImageButton sendMessage = (ImageButton) findViewById(R.id.sendMessage);
         sendMessage.setOnClickListener(this);
         final ImageButton btnEmoticons = (ImageButton) findViewById(R.id.btnEmoticons);
         btnEmoticons.setOnClickListener(this);
-        final CustomButton btnSendGift = (CustomButton) findViewById(R.id.btnSendGift);
-        btnSendGift.setOnClickListener(this);
-        final CustomButton btnSendLoad = (CustomButton) findViewById(R.id.btnSendLoad);
-        btnSendLoad.setOnClickListener(this);
+//        final CustomButton btnSendGift = (CustomButton) findViewById(R.id.btnSendGift);
+//        btnSendGift.setOnClickListener(this);
+//        final CustomButton btnSendLoad = (CustomButton) findViewById(R.id.btnSendLoad);
+//        btnSendLoad.setOnClickListener(this);
 
         receiver = new BroadcastReceiver() {
             @Override
@@ -174,12 +182,29 @@ public class ChatActivity extends ListActivity implements View.OnClickListener {
         };
         imageLoader.DisplayImage(roomDetails.getMain_photo(), chatPhoto);
 
-        getActionBar().setTitle(roomDetails.getUserName());
+        TextView upTextView = (TextView) getLayoutInflater().inflate(R.layout.chat_name, null);
+        getActionBar().setIcon(AsianFinderApplication.getTextAsBitmap(ChatActivity.this, upTextView, roomDetails.getUserName()));
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.chat_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_send_gift) {
+            showWindowFromUrl("http://store.pass-load.com/index.php");
+        }
+        if (id == R.id.action_send_load) {
+            showWindowFromUrl("http://store.pass-load.com/store.php?cat=cellphone-loads");
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private boolean listIsAtTop()   {
-        if(getListView().getChildCount() == 0) return true;
-        return getListView().getChildAt(0).getTop() == 0;
+        if(lv.getChildCount() == 0) return true;
+        return lv.getChildAt(0).getTop() == 0;
     }
 
     @Override
@@ -224,32 +249,92 @@ public class ChatActivity extends ListActivity implements View.OnClickListener {
         AsianFinderApplication.activityPaused();
     }
     @Override
-    public void onClick(View view) {
+    public void onBackPressed() {
+        if(emoticonsShowing == 1) {
+            emoticsContent.setVisibility(View.GONE);
+            emoticonsShowing = 0;
+        } else {
+            this.finish();
+        }
+    }
+    @Override
+    public void onClick(final View view) {
         switch (view.getId()) {
+            case R.id.txtMessage:
+                if(emoticonsShowing == 1) {
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        emoticsContent.setVisibility(View.GONE);
+                        emoticonsShowing = 0;
+                    }
+                }
+            break;
             case R.id.sendMessage:
                 if(txtMessage.getText().toString().trim().equalsIgnoreCase("")) {
                     //Toast.makeText(this, "0", Toast.LENGTH_LONG).show();
                 } else {
                     try {
                         lastThreadInfo = messagesOperations.getLastThread(threadId);
+                        //Log.d("-- robert CA", roomDetails.getUserId()+", "+txtMessage.getText().toString().trim()+", "+lastThreadInfo.getLocalId() + 1);
                         mIAFPushService.sendChatMessage(roomDetails.getUserId(), txtMessage.getText().toString().trim(), lastThreadInfo.getLocalId() + 1);
 
                         txtMessage.setText("");
                         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        emoticsContent.setVisibility(View.GONE);
+                        emoticonsShowing = 0;
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
                 }
             break;
             case R.id.btnEmoticons:
+                if(emoticonsShowing == 0) {
+                    ChatActions();
+                    emoticonsShowing = 1;
+                    if(imm.isActive()) {
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        emoticsContent.setVisibility(View.VISIBLE);
+                    }
+                } else {
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        emoticsContent.setVisibility(View.GONE);
+                        emoticonsShowing = 0;
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                }
+
+
                 break;
-            case R.id.btnSendGift:
-                showWindowFromUrl("http://store.pass-load.com/index.php");
-                break;
-            case R.id.btnSendLoad:
-                showWindowFromUrl("http://store.pass-load.com/store.php?cat=cellphone-loads");
-                break;
+//            case R.id.btnSendGift:
+//                showWindowFromUrl("http://store.pass-load.com/index.php");
+//                break;
+//            case R.id.btnSendLoad:
+//                showWindowFromUrl("http://store.pass-load.com/store.php?cat=cellphone-loads");
+//                break;
         }
+    }
+
+    public void ChatActions() {
+        mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        EmoticonsStickerFragment myFragment = new EmoticonsStickerFragment();
+
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        transaction.replace(R.id.emoticsContentFrame, myFragment, "EMOTICONS_FRAGMENT");
+        transaction.commit();
     }
 
     public void showWindowFromUrl(String url) {
@@ -280,4 +365,15 @@ public class ChatActivity extends ListActivity implements View.OnClickListener {
         dialog.show();
 
     }
+
+    public void appendMessage(String text) {
+        txtMessage.append(text);
+    }
+
+    public void sendStickerMsg(String folder, String file) throws RemoteException {
+        lastThreadInfo = messagesOperations.getLastThread(threadId);
+        mIAFPushService.sendSticker(folder, file, roomDetails.getUserId(), lastThreadInfo.getLocalId() + 1);
+    }
+
+
 }
