@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -25,6 +26,7 @@ import com.relhs.asianfinder.AsianFinderApplication;
 import com.relhs.asianfinder.Constants;
 import com.relhs.asianfinder.DashboardActivity;
 import com.relhs.asianfinder.PeopleProfileActivity;
+import com.relhs.asianfinder.ProfileActivity;
 import com.relhs.asianfinder.R;
 import com.relhs.asianfinder.adapter.PeopleListAdapter;
 import com.relhs.asianfinder.data.PeopleInfo;
@@ -127,6 +129,8 @@ public class BrowseFragment extends Fragment {
 
         return myFragmentView;
     }
+
+
     /************************* ASYNSTASK HERE *************************/
     private class GetAllNearest extends AsyncTask<Void, Void, ArrayList<PeopleInfo>> {
         private double longitude;

@@ -25,6 +25,7 @@ import android.widget.SearchView;
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.fragment.HomeFragment;
 import com.relhs.asianfinder.fragment.MessagesFragment;
+import com.relhs.asianfinder.fragment.MyListFragment;
 import com.relhs.asianfinder.fragment.NavigationDrawerFragment;
 import com.relhs.asianfinder.fragment.ProfileFragment;
 import com.relhs.asianfinder.operation.UserInfoOperations;
@@ -87,6 +88,11 @@ public class DashboardActivity extends FragmentActivity
             case 1 :
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, HomeFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 2 :
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, MyListFragment.newInstance(position + 1))
                         .commit();
                 break;
             case 3 :

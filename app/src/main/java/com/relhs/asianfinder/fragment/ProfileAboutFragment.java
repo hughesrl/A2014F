@@ -117,9 +117,11 @@ public class ProfileAboutFragment extends Fragment implements View.OnClickListen
             showDetails(inflater, jsonArrayCultureValues, list_recycled_parts_culture_values);
 
             // PERSONAL
-            JSONArray jsonArrayPersonal = new JSONArray(userInfo.getPersonal());
-            LinearLayout list_recycled_parts_personal = (LinearLayout) myFragmentView.findViewById(R.id.list_recycled_parts_personal);
-            showDetails(inflater, jsonArrayPersonal, list_recycled_parts_personal);
+//            if(!userInfo.getPersonal().isEmpty()) {
+                JSONArray jsonArrayPersonal = new JSONArray(userInfo.getPersonal());
+                LinearLayout list_recycled_parts_personal = (LinearLayout) myFragmentView.findViewById(R.id.list_recycled_parts_personal);
+                showDetails(inflater, jsonArrayPersonal, list_recycled_parts_personal);
+//            }
 
             // INTEREST
             JSONArray jsonArrayInterest = new JSONArray(userInfo.getInterest());

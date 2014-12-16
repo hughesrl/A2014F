@@ -1,9 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.relhs.asianfinder.DashboardActivity" >
-    <item android:id="@+id/action_upload_photo"
-        android:title="Upload Photo"
-        android:icon="@drawable/ic_menu_camera"
+    <item android:id="@+id/action_send_gift"
+        android:title="Send Gift"
+        android:icon="@drawable/ic_menu_compose"
         android:showAsAction="collapseActionView|ifRoom"
         />
 </menu>

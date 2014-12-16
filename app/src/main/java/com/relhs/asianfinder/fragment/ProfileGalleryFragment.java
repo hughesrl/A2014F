@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,14 @@ import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
 import com.relhs.asianfinder.Constants;
 import com.relhs.asianfinder.GallerySlideshowActivity;
 import com.relhs.asianfinder.R;
+import com.relhs.asianfinder.adapter.MyListCursorAdapter;
+import com.relhs.asianfinder.adapter.PeoplePhotosCursorGridAdapter;
 import com.relhs.asianfinder.adapter.PeoplePhotosGridAdapter;
 import com.relhs.asianfinder.data.PeoplePhotosInfo;
 import com.relhs.asianfinder.loader.ImageLoader;
 import com.relhs.asianfinder.loader.Utils;
+import com.relhs.asianfinder.operation.MyListOperations;
+import com.relhs.asianfinder.operation.PhotosInfoOperations;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +50,8 @@ public class ProfileGalleryFragment extends Fragment {
     private PeoplePhotosGridAdapter adapter;
     private int currentOffset;
     private LinearLayout noPhoto;
+    private PhotosInfoOperations photosInfoOperations;
+    private PeoplePhotosCursorGridAdapter customAdapter;
 
     /**
      * Use this factory method to create a new instance of
@@ -75,6 +82,13 @@ public class ProfileGalleryFragment extends Fragment {
             mParamMatches = getArguments().getString(Constants.ARG_MATCHES);
             mParamPhotos = getArguments().getString(Constants.ARG_PHOTOS);
         }
+
+        // TODO: !IMPORTANT DATABASE OPERATION
+        photosInfoOperations = new PhotosInfoOperations(getActivity());
+        photosInfoOperations.open();
+        // TODO: !IMPORTANT DATABASE OPERATION
+
+
         imageLoader = new ImageLoader(getActivity());
     }
 
@@ -110,20 +124,22 @@ public class ProfileGalleryFragment extends Fragment {
         }
         @Override
         protected ArrayList<PeoplePhotosInfo> doInBackground(Void... args) {
-            try {
-                JSONArray jsonArrayPhotos = new JSONArray(mParamPhotos);
-                for (int i = 0; i < jsonArrayPhotos.length(); i++) {
-                    JSONObject jsonObjectPhotos = jsonArrayPhotos.getJSONObject(i);
-                    int colSpan = 1;
-                    int rowSpan = 1;
-
-                    PeoplePhotosInfo peoplePhotosInfo = new PeoplePhotosInfo(colSpan, rowSpan, currentOffset + i, jsonObjectPhotos.getString("category"), jsonObjectPhotos.getString("file"), jsonObjectPhotos.getString("number_of_comments"));
-                    peoplePhotosArrayList.add(peoplePhotosInfo);
-                }
-                currentOffset += jsonArrayPhotos.length();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Log.d("-- robert", "Total : "+photosInfoOperations.getPhotoCount());
+            peoplePhotosArrayList = photosInfoOperations.getAllPhotos();
+//            try {
+//                JSONArray jsonArrayPhotos = new JSONArray(mParamPhotos);
+//                for (int i = 0; i < jsonArrayPhotos.length(); i++) {
+//                    JSONObject jsonObjectPhotos = jsonArrayPhotos.getJSONObject(i);
+//                    int colSpan = 1;
+//                    int rowSpan = 1;
+//
+//                    PeoplePhotosInfo peoplePhotosInfo = new PeoplePhotosInfo(colSpan, rowSpan, currentOffset + i, jsonObjectPhotos.getString("category"), jsonObjectPhotos.getString("file"), jsonObjectPhotos.getString("number_of_comments"));
+//                    peoplePhotosArrayList.add(peoplePhotosInfo);
+//                }
+//                currentOffset += jsonArrayPhotos.length();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
             return peoplePhotosArrayList;
         }
         @Override

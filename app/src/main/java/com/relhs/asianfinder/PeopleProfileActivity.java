@@ -49,7 +49,7 @@ public class PeopleProfileActivity extends FragmentActivity {
     private ViewPager pager;
     private MyPagerAdapter pagerAdapter;
     private int intentPID;
-    private PeopleInfo peopleInfo;
+    //private PeopleInfo peopleInfo;
 
     private JSONObject jsonObjectProfile;
     private JSONObject jsonObjectMatches;
@@ -64,7 +64,7 @@ public class PeopleProfileActivity extends FragmentActivity {
 
         Intent i = getIntent();
         intentPID = i.getIntExtra(INTENT_PID, 0);
-        peopleInfo = i.getParcelableExtra(INTENT_PDATA);
+        //peopleInfo = i.getParcelableExtra(INTENT_PDATA);
 
         new LoadProfileDataTask(intentPID).execute();
     }
@@ -208,7 +208,6 @@ public class PeopleProfileActivity extends FragmentActivity {
                     jsonObjectPhotos = jsonArrayPhotos; //jsonArrayPhotos.getJSONObject(0);
 
 //                    jsonObjectProfile.getJSONArray("basic");
-
 //                    String basic = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_BASIC).toString();
 //                    //Log.d("-- robert -- basic", basic);
 //                    String appearance = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_APPEARANCE).toString();

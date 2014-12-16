@@ -19,6 +19,7 @@ import com.relhs.asianfinder.data.ProfilePreferenceDataInfo;
 import com.relhs.asianfinder.data.ProfilePreferenceHeaderInfo;
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.loader.Utils;
+import com.relhs.asianfinder.operation.PhotosInfoOperations;
 import com.relhs.asianfinder.operation.PreferenceInfoOperations;
 import com.relhs.asianfinder.operation.UserInfoOperations;
 import com.relhs.asianfinder.utils.JSONParser;
@@ -43,6 +44,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private String txtPassword;
     private UserInfoOperations userOperations;
     private PreferenceInfoOperations preferenceInfoOperations;
+    private PhotosInfoOperations photoInfoOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
         preferenceInfoOperations = new PreferenceInfoOperations(this);
         preferenceInfoOperations.open();
+
+        photoInfoOperations = new PhotosInfoOperations(this);
+        photoInfoOperations.open();
         // TODO: !IMPORTANT DATABASE OPERATION
 
         Toast.makeText(this, "isLogin "+userOperations.isLogin(), Toast.LENGTH_LONG).show();
@@ -252,6 +257,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
                     JSONArray jsonArrayPhotos = jsonArrayLoginDataObject.getJSONArray(Constants.TAG_PHOTOS);
                     String photos = jsonArrayPhotos.toString();
+                    savePhotosToDatabase(jsonArrayPhotos);
                     //Log.d("-- robert -- photos", photos);
 
                     int isLogin = 1;
@@ -308,6 +314,21 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                 }
                 preferenceInfoOperations.addUserPreference(category, jsonObject.getString("dbname"), jsonObject.getString("label"), jsonObject.getString("type"),
                         value, jsonObject.getString("ids"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void savePhotosToDatabase(JSONArray jsonArray) {
+        try {
+            for (int i=0; i<jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String file = jsonObject.getString("file");
+                String category = jsonObject.getString("category");
+                String number_of_comments = jsonObject.getString("number_of_comments");
+
+                photoInfoOperations.addPhoto(file, category, number_of_comments);
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -99,7 +99,17 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
     public static final String MYLISTINFO_PHOTO2 = "photo2";
     public static final String MYLISTINFO_PHOTO3 = "photo3";
 
+    public static final String PHOTOSINFO = "PhotosInfo";
+    public static final String PHOTOSINFO_URL = "photoUrl";
+    public static final String PHOTOSINFO_CATEGORY = "photoCategory";
+    public static final String PHOTOSINFO_NUM_COMMENTS = "photoNumComments";
 
+    private static final String DATABASE_CREATE_PHOTOSINFO = "CREATE TABLE " + PHOTOSINFO
+            + "(" + _ID + " integer primary key autoincrement, "
+            + PHOTOSINFO_URL + " text not null, "
+            + PHOTOSINFO_CATEGORY + " text not null, "
+            + PHOTOSINFO_NUM_COMMENTS + " integer, "
+            + _DATE + " datetime default current_timestamp);";
 
 	// creation SQLite statement
     private static final String DATABASE_CREATE_USERINFO = "CREATE TABLE " + USERINFO
@@ -208,6 +218,7 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DATABASE_CREATE_USERINFO);
+        db.execSQL(DATABASE_CREATE_PHOTOSINFO);
         db.execSQL(DATABASE_CREATE_EMOTICONSINFO);
 
         //Messaging
@@ -230,6 +241,7 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
 		// you should do some logging in here
 		// ..
 		db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_USERINFO);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_PHOTOSINFO);
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_EMOTICONSINFO);
 
         //Messaging

@@ -99,15 +99,14 @@ public class MyListFragment extends Fragment {
             Bundle args = getArguments();
             switch(position){
                 case 0: // Check In
-                    FavoritesListFragment favoritesListFragment= new FavoritesListFragment();
-                    favoritesListFragment.setArguments(args);
+                    ListFavoritesFragment listFavoritesFragment = new ListFavoritesFragment();
+                    listFavoritesFragment.setArguments(args);
 
-                    return favoritesListFragment;
+                    return listFavoritesFragment;
                 case 1: // Patient Information
-                    SampleListFragment browseFragment = new SampleListFragment();
-                    browseFragment.setArguments(args);
-
-                    return browseFragment;
+                    ListInterestFragment listInterestFragment = new ListInterestFragment();
+                    listInterestFragment.setArguments(args);
+                    return listInterestFragment;
                 case 2: // Patient Information
                     SampleListFragment browseFragment2 = new SampleListFragment();
                     browseFragment2.setArguments(args);

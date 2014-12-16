@@ -10,71 +10,48 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.relhs.asianfinder.adapter.ChatRoomCursorAdapter;
+import com.relhs.asianfinder.adapter.MailMainAdapter;
+import com.relhs.asianfinder.adapter.NavigationDrawerAdapter;
+import com.relhs.asianfinder.data.MailMainItem;
+import com.relhs.asianfinder.data.NavDrawerItem;
+import com.relhs.asianfinder.loader.ImageLoader;
 import com.relhs.asianfinder.operation.MessagesOperations;
+
+import java.util.ArrayList;
 
 public class MailActivity extends ListActivity {
     public static final String TAG = MailActivity.class.getSimpleName();
-    private static final String ARG_SECTION_NUMBER = "section_number";
-    private int mParamItemNumber;
 
-    private PagerSlidingTabStrip tabs;
-    private ViewPager pager;
-
-    ProgressDialog progress;
-
-    private MessagesOperations messagesOperations;
-    public ChatRoomCursorAdapter customAdapter;
-    private BroadcastReceiver receiver;
-    private String threadId;
+    private ArrayList<MailMainItem> mListItems;
+    private MailMainAdapter adapter;
+    private ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages_chatroom);
+        setContentView(R.layout.activity_mail_main);
 
-        messagesOperations = new MessagesOperations(this);
-        messagesOperations.open();
+        imageLoader = new ImageLoader(this);
+        mListItems = new ArrayList<MailMainItem>();
 
-        customAdapter = new ChatRoomCursorAdapter(
-                this,
-                messagesOperations.getChatRooms(),
-                messagesOperations,
-                0);
+        ArrayList<MailMainItem> mailMainItems = prepareListData();
 
-        getListView().setAdapter(customAdapter);
-        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Cursor c = (Cursor) customAdapter.getItem(position);
+        // Set Adapter
+        adapter = new MailMainAdapter(this, mailMainItems, imageLoader);
 
-                Intent i = new Intent(MailActivity.this, ChatActivity.class);
-                i.putExtra("threadId", c.getInt(c.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID))+"");
-                startActivity(i);
-            }
-        });
-
-        receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if(intent.getAction().equalsIgnoreCase(AFPushService.AFPS_ACTION_REFRESH_CHATROOM)) {
-                    customAdapter.changeCursor(messagesOperations.getChatRooms());
-                }
-            }
-        };
-
-        Bundle intentExtra = getIntent().getExtras();
-        if(intentExtra != null) {
-            threadId = intentExtra.getString("threadId");
-            Intent intent = new Intent(getBaseContext(), ChatActivity.class);
-            intent.putExtra("threadId", threadId+"");
-            startActivity(intent);
-        }
+        getListView().setAdapter(adapter);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mail_menu, menu);
+        return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -88,26 +65,17 @@ public class MailActivity extends ListActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        LocalBroadcastManager.getInstance(this).registerReceiver((receiver), new IntentFilter(AFPushService.AFPS_RESULT));
-    }
-
-    @Override
-    public void onStop() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-        super.onStop();
-    }
-
 
     public String getDeviceId() {
         return ((AsianFinderApplication) getApplication()).getDeviceId();
     }
 
-
-
-
+    private ArrayList<MailMainItem> prepareListData() {
+        mListItems.add(0,new MailMainItem("Inbox", false, ""));
+        mListItems.add(1,new MailMainItem("Sent", false, ""));
+        mListItems.add(2,new MailMainItem("Trash", false, ""));
+        return mListItems;
+    }
 
 }
 

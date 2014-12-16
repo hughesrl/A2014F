@@ -51,7 +51,6 @@ public class MyListOperations {
                 ContentValues values = new ContentValues();
 
         if(!CheckIsDataAlreadyInDBorNot(DataBaseWrapper.MYLISTINFO, DataBaseWrapper.MYLISTINFO_USERID, userId)) {
-            //Log.d("-- Robert", "NOT IN DB = "+ main_photo);
             values.put(DataBaseWrapper.MYLISTINFO_USERID, userId);
             values.put(DataBaseWrapper.MYLISTINFO_USERNAME, userName);
             values.put(DataBaseWrapper.MYLISTINFO_AGE, age);
@@ -63,18 +62,19 @@ public class MyListOperations {
             values.put(DataBaseWrapper.MYLISTINFO_PHOTO3, subphoto_2);
 
             long Id = databaseWrite.insert(DataBaseWrapper.MYLISTINFO, null, values);
+
+            Log.d("-- robert", userName+" INSERTED "+Id);
         } else {
-            //Log.d("-- Robert", "IN DB");
-//            return null;
+            Log.d("-- robert", userName+" IN DB");
         }
     }
 
-    public MyListInfo getMyListByType(String listType) {
+    public Cursor getMyListByType(String listType) {
         Cursor cursor = databaseRead.query(DataBaseWrapper.MYLISTINFO,
                 USERS_MYLISTINFO_COLUMNS, DataBaseWrapper.MYLISTINFO_LIST_TYPE+"=?", new String[]{listType}, null, null, null, null);
         cursor.moveToFirst();
 
-        return parseMyListInfo(cursor);
+        return cursor;
     }
 
 

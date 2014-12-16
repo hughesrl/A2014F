@@ -9,22 +9,24 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.relhs.asianfinder.Constants;
+import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
+import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridViewAdapter;
 import com.relhs.asianfinder.DataBaseWrapper;
 import com.relhs.asianfinder.R;
-import com.relhs.asianfinder.data.MyListInfo;
-import com.relhs.asianfinder.data.ThreadsInfo;
+import com.relhs.asianfinder.data.PeoplePhotosInfo;
 import com.relhs.asianfinder.loader.ImageLoader;
-import com.relhs.asianfinder.operation.MessagesOperations;
 import com.relhs.asianfinder.operation.MyListOperations;
+import com.relhs.asianfinder.view.CustomTextView;
 
-public class MyListCursorAdapter extends CursorAdapter {
+import java.util.ArrayList;
+
+public class PeoplePhotosCursorGridAdapter extends CursorAdapter {
 
     private MyListOperations myListOperations;
     private LayoutInflater mInflater;
     private ImageLoader imageLoader;
 
-    public MyListCursorAdapter(Context context, Cursor c, MyListOperations mO, int flags) {
+    public PeoplePhotosCursorGridAdapter(Context context, Cursor c, MyListOperations mO, int flags) {
         super(context, c, flags);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
