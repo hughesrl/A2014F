@@ -195,9 +195,17 @@ public class UserInfoOperations {
     }
 
     public void emptyAllUserData() {
+        // User Informations
         databaseWrite.delete(DataBaseWrapper.USERINFO, null, null);
+        databaseWrite.delete(DataBaseWrapper.PHOTOSINFO, null, null);
+        // Preference
+        databaseWrite.delete(DataBaseWrapper.PREFERENCEINFO, null, null);
+        // My List
+        databaseWrite.delete(DataBaseWrapper.MYLISTINFO, null, null);
+        // Chat / Messaging
         databaseWrite.delete(DataBaseWrapper.MESSAGESTHREADINFO, null, null);
         databaseWrite.delete(DataBaseWrapper.ROOMINFO, null, null);
+
     }
 	
 	public void deleteUser(UserInfo userInfo) {

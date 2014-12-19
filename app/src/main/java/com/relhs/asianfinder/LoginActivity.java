@@ -21,6 +21,7 @@ import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.loader.Utils;
 import com.relhs.asianfinder.operation.PhotosInfoOperations;
 import com.relhs.asianfinder.operation.PreferenceInfoOperations;
+import com.relhs.asianfinder.operation.UserDetailsInfoOperations;
 import com.relhs.asianfinder.operation.UserInfoOperations;
 import com.relhs.asianfinder.utils.JSONParser;
 import com.relhs.asianfinder.view.CustomButton;
@@ -43,6 +44,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private String txtUsername;
     private String txtPassword;
     private UserInfoOperations userOperations;
+    private UserDetailsInfoOperations userDetailsInfoOperations;
     private PreferenceInfoOperations preferenceInfoOperations;
     private PhotosInfoOperations photoInfoOperations;
 
@@ -54,6 +56,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         // TODO: !IMPORTANT DATABASE OPERATION
         userOperations = new UserInfoOperations(this);
         userOperations.open();
+
+        userDetailsInfoOperations = new UserDetailsInfoOperations(this);
+        userDetailsInfoOperations.open();
 
         preferenceInfoOperations = new PreferenceInfoOperations(this);
         preferenceInfoOperations.open();
@@ -207,25 +212,39 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     String session_id = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_SESSION_ID);
                     String user_token = jsonArrayLoginDataObject.getString(DataBaseWrapper.USERINFO_TOKEN);
 
+
+                    /********USER DETAILS********/
                     JSONArray jsonArrayProfile = jsonArrayLoginDataObject.getJSONArray(Constants.TAG_PROFILE);
                     JSONObject jsonObjectProfile = jsonArrayProfile.getJSONObject(0);
 
-                    String basic = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_BASIC).toString();
-                    //Log.d("-- robert -- basic", basic);
-                    String appearance = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_APPEARANCE).toString();
-                    //Log.d("-- robert -- appearance", appearance);
-                    String lifestyle = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_LIFESTYLE).toString();
-                    //Log.d("-- robert -- lifestyle", lifestyle);
-                    String culture_values = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_CULTURE_VALUES).toString();
-                    //Log.d("-- robert -- culture_values", culture_values);
-                    if(jsonObjectProfile.has(DataBaseWrapper.USERINFO_JSON_PERSONAL)) {
-                        personal = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_PERSONAL).toString();
+                    if(jsonObjectProfile.has(Constants.TAG_BASIC)) {
+                        JSONArray jsonArrayPrefBasic = jsonObjectProfile.getJSONArray(Constants.TAG_BASIC);
+                        saveUserDetailsToDatabase(Constants.TAG_BASIC, jsonArrayPrefBasic);
                     }
-                    //Log.d("-- robert -- personal", personal);
-                    String interest = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_INTEREST).toString();
-                    //Log.d("-- robert -- interest", interest);
-                    String others = jsonObjectProfile.getJSONArray(DataBaseWrapper.USERINFO_JSON_OTHERS).toString();
-                    //Log.d("-- robert -- others", others);
+                    if(jsonObjectProfile.has(Constants.TAG_APPEARANCE)) {
+                        JSONArray jsonArrayPrefAppearance = jsonObjectProfile.getJSONArray(Constants.TAG_APPEARANCE);
+                        saveUserDetailsToDatabase(Constants.TAG_APPEARANCE, jsonArrayPrefAppearance);
+                    }
+                    if(jsonObjectProfile.has(Constants.TAG_LIFESTYLE)) {
+                        JSONArray jsonArrayPrefLifestyle = jsonObjectProfile.getJSONArray(Constants.TAG_LIFESTYLE);
+                        saveUserDetailsToDatabase(Constants.TAG_LIFESTYLE, jsonArrayPrefLifestyle);
+                    }
+                    if(jsonObjectProfile.has(Constants.TAG_CULTURE_VALUES)) {
+                        JSONArray jsonArrayPrefCultureValues = jsonObjectProfile.getJSONArray(Constants.TAG_CULTURE_VALUES);
+                        saveUserDetailsToDatabase(Constants.TAG_CULTURE_VALUES, jsonArrayPrefCultureValues);
+                    }
+                    if(jsonObjectProfile.has(Constants.TAG_PERSONAL)) {
+                        JSONArray jsonArrayPrefPersonal = jsonObjectProfile.getJSONArray(Constants.TAG_PERSONAL);
+                        saveUserDetailsToDatabase(Constants.TAG_PERSONAL, jsonArrayPrefPersonal);
+                    }
+                    if(jsonObjectProfile.has(Constants.TAG_INTEREST)) {
+                        JSONArray jsonArrayPrefInterest = jsonObjectProfile.getJSONArray(Constants.TAG_INTEREST);
+                        saveUserDetailsToDatabase(Constants.TAG_INTEREST, jsonArrayPrefInterest);
+                    }
+                    if(jsonObjectProfile.has(Constants.TAG_OTHERS)) {
+                        JSONArray jsonArrayPrefOthers = jsonObjectProfile.getJSONArray(Constants.TAG_OTHERS);
+                        saveUserDetailsToDatabase(Constants.TAG_OTHERS, jsonArrayPrefOthers);
+                    }
 
                     /********PREFERENCE********/
                     JSONArray jsonArrayPreferences = jsonArrayLoginDataObject.getJSONArray(Constants.TAG_PREFERENCES);
@@ -233,23 +252,23 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
                     if(jsonObjectPreference.has(Constants.TAG_BASIC)) {
                         JSONArray jsonArrayPrefBasic = jsonObjectPreference.getJSONArray(Constants.TAG_BASIC);
-                        saveToDatabase(Constants.TAG_BASIC, jsonArrayPrefBasic);
+                        savePreferenceToDatabase(Constants.TAG_BASIC, jsonArrayPrefBasic);
                     }
                     if(jsonObjectPreference.has(Constants.TAG_APPEARANCE)) {
                         JSONArray jsonArrayPrefAppearance = jsonObjectPreference.getJSONArray(Constants.TAG_APPEARANCE);
-                        saveToDatabase(Constants.TAG_APPEARANCE, jsonArrayPrefAppearance);
+                        savePreferenceToDatabase(Constants.TAG_APPEARANCE, jsonArrayPrefAppearance);
                     }
                     if(jsonObjectPreference.has(Constants.TAG_LIFESTYLE)) {
                         JSONArray jsonArrayPrefLifestyle = jsonObjectPreference.getJSONArray(Constants.TAG_LIFESTYLE);
-                        saveToDatabase(Constants.TAG_LIFESTYLE, jsonArrayPrefLifestyle);
+                        savePreferenceToDatabase(Constants.TAG_LIFESTYLE, jsonArrayPrefLifestyle);
                     }
                     if(jsonObjectPreference.has(Constants.TAG_CULTURE_VALUES)) {
                         JSONArray jsonArrayPrefCultureValues = jsonObjectPreference.getJSONArray(Constants.TAG_CULTURE_VALUES);
-                        saveToDatabase(Constants.TAG_CULTURE_VALUES, jsonArrayPrefCultureValues);
+                        savePreferenceToDatabase(Constants.TAG_CULTURE_VALUES, jsonArrayPrefCultureValues);
                     }
                     if(jsonObjectPreference.has(Constants.TAG_PERSONAL)) {
                         JSONArray jsonArrayPrefPersonal = jsonObjectPreference.getJSONArray(Constants.TAG_PERSONAL);
-                        saveToDatabase(Constants.TAG_PERSONAL, jsonArrayPrefPersonal);
+                        savePreferenceToDatabase(Constants.TAG_PERSONAL, jsonArrayPrefPersonal);
                     }
 
                     String preferences = jsonArrayPreferences.toString();
@@ -264,7 +283,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     final UserInfo userInfo = userOperations.addUser(userId,username,firstname,gender,country,state,city,email,
                             membership_expiration,membership_type,main_photo,user_type,
                             membership_expired,validate,domain_id,user_phone,session_id,user_token,
-                            basic, appearance, lifestyle, culture_values, personal, interest, others, preferences, photos, isLogin);
+                            "", "", "", "", "", "", "", preferences, photos, isLogin);
 //                    userOperations.close();
 
                     if(user_type.equalsIgnoreCase("u")) {
@@ -296,7 +315,31 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         return false;
     }
 
-    private void saveToDatabase(String category, JSONArray jsonArray) {
+    private void saveUserDetailsToDatabase(String category, JSONArray jsonArray) {
+        try {
+            for (int i=0; i<jsonArray.length()-1; i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String value = jsonObject.getString("value");
+                if (jsonObject.getString("dbname").equalsIgnoreCase("living_in")) {
+                    if(!value.isEmpty()) {
+                        JSONArray jsonArrayPrefBasicLivingIn = new JSONArray(value);
+                        JSONObject jsonObjectPrefBasicLivingIn = jsonArrayPrefBasicLivingIn.getJSONObject(0);
+                        value = jsonObjectPrefBasicLivingIn.getString("city") + ", " +
+                                jsonObjectPrefBasicLivingIn.getString("state") + ", " + jsonObjectPrefBasicLivingIn.getString("country");
+                        if (jsonObjectPrefBasicLivingIn.has("length")) {
+                            value = jsonObjectPrefBasicLivingIn.getString("length") + " within " + value;
+                        }
+                    }
+                }
+                userDetailsInfoOperations.addUserDetails(category, jsonObject.getString("dbname"), jsonObject.getString("label"), jsonObject.getString("type"),
+                        value, jsonObject.getString("ids"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void savePreferenceToDatabase(String category, JSONArray jsonArray) {
         try {
             for (int i=0; i<jsonArray.length()-1; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);

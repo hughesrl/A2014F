@@ -72,7 +72,7 @@
         <activity
             android:name="com.relhs.asianfinder.ProfileActivity"
             android:configChanges="orientation|screenSize"
-            android:label="PROFILE"
+            android:label=""
             android:parentActivityName="com.relhs.asianfinder.DashboardActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -88,6 +88,12 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DashboardActivity" />
+        </activity>
+
+        <activity
+            android:name="com.relhs.asianfinder.GalleryActivity"
+            android:label="Gallery"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
@@ -144,6 +150,12 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DashboardActivity" />
+        </activity>
+
+        <activity
+            android:name="com.relhs.asianfinder.UserPreferenceActivity"
+            android:label="User Preference"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

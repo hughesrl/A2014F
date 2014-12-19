@@ -44,6 +44,14 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
 
     public static final String USERINFO_ISLOGIN = "_is_login";
 
+    public static final String USERDETAILSINFO = "UserDetailsInfo";
+    public static final String USERDETAILSINFO_CATEGORY = "category";
+    public static final String USERDETAILSINFO_DBNAME = "dbname";
+    public static final String USERDETAILSINFO_LABEL = "label";
+    public static final String USERDETAILSINFO_TYPE = "type";
+    public static final String USERDETAILSINFO_VALUE = "value";
+    public static final String USERDETAILSINFO_IDS = "ids";
+
 
 
 
@@ -144,6 +152,16 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
             + USERINFO_ISLOGIN + " integer not null, "
             + _DATE + " datetime default current_timestamp);";
 
+    private static final String DATABASE_CREATE_USERDETAILSINFO = "CREATE TABLE " + USERDETAILSINFO
+            + "(" + _ID + " integer primary key autoincrement, "
+            + USERDETAILSINFO_CATEGORY + " text not null, "
+            + USERDETAILSINFO_DBNAME + " text not null, "
+            + USERDETAILSINFO_LABEL + " text not null, "
+            + USERDETAILSINFO_TYPE + " text not null, "
+            + USERDETAILSINFO_VALUE + " text, "
+            + USERDETAILSINFO_IDS + " text, "
+            + _DATE + " datetime default current_timestamp);";
+
     private static final String DATABASE_CREATE_EMOTICONSINFO = "CREATE TABLE " + EMOTICONSINFO
             + "(" + _ID + " integer primary key autoincrement, "
             + EMOTICONSINFO_FILE + " text not null, "
@@ -218,41 +236,45 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DATABASE_CREATE_USERINFO);
+        db.execSQL(DATABASE_CREATE_USERDETAILSINFO);
         db.execSQL(DATABASE_CREATE_PHOTOSINFO);
-        db.execSQL(DATABASE_CREATE_EMOTICONSINFO);
 
+        // Preference
+        db.execSQL(DATABASE_CREATE_PREFERENCEINFO);
+        // My List
+        db.execSQL(DATABASE_CREATE_MYLISTINFO);
         //Messaging
         db.execSQL(DATABASE_CREATE_ROOMINFO);
         db.execSQL(DATABASE_CREATE_MESSAGESTHREADINFO);
 
-        //Sticker
+        // ------------------------STATIC CONTENT------------------------
+        // Emoticons
+        db.execSQL(DATABASE_CREATE_EMOTICONSINFO);
+        // Sticker
         db.execSQL(DATABASE_CREATE_STICKERCATEGORYINFO);
         db.execSQL(DATABASE_CREATE_STICKERSINFO);
-
-        // Preference
-        db.execSQL(DATABASE_CREATE_PREFERENCEINFO);
-
-        // My List
-        db.execSQL(DATABASE_CREATE_MYLISTINFO);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// you should do some logging in here
-		// ..
-		db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_USERINFO);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_USERINFO);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_USERDETAILSINFO);
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_PHOTOSINFO);
-        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_EMOTICONSINFO);
 
+        // Preference
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_PREFERENCEINFO);
+        // My List
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_MYLISTINFO);
         //Messaging
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_ROOMINFO);
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_MESSAGESTHREADINFO);
 
-        // Preference
-        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_PREFERENCEINFO);
-
-        // My List
-        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_MYLISTINFO);
+        // ------------------------STATIC CONTENT------------------------
+        // Emoticons
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_EMOTICONSINFO);
+        // Sticker
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_STICKERCATEGORYINFO);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_STICKERSINFO);
 
 		onCreate(db);
 	}

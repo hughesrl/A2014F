@@ -48,6 +48,7 @@
     </string-array>
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
+    <string name="pref_title_user_preference">User Preference</string>
     <string name="pref_title_sign_out">Sign Out</string>
 
     <!-- Example settings for Notifications -->

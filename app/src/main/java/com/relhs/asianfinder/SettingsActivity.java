@@ -1,4 +1,18 @@
 package com.relhs.asianfinder;
+/*
+'os' => array('','show-online','show-busy'),
+'dp' => array('','display-profile','hide-profile'),
+'sp' => array('','active','off'),
+'enm' => array('','yes','no'),
+'eime' => array('','yes','no'),
+'enm' => array('','yes','no'),
+'eop' => array('','yes','no'),
+'nnm' => array('','yes','no'),
+'nime' => array('','yes','no'),
+'nsv' => array('','yes','no'),
+'nsame' => array('','yes','no'),
+
+ */
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
@@ -105,22 +119,28 @@ public class SettingsActivity extends PreferenceActivity {
         // Bind the summaries of EditText/List/Dialog/Ringtone preferences to
         // their values. When their values change, their summaries are updated
         // to reflect the new value, per the Android Design guidelines.
-        bindPreferenceSummaryToValue(findPreference("example_text"));
-        bindPreferenceSummaryToValue(findPreference("example_list"));
-        bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
-        bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+        //bindPreferenceSummaryToValue(findPreference("example_text"));
+        //bindPreferenceSummaryToValue(findPreference("example_list"));
+        //bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
+        //bindPreferenceSummaryToValue(findPreference("sync_frequency"));
 
+        Preference prefUserPreference = findPreference("user_preference_preference");
+        prefUserPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent testIntent = new Intent(getApplicationContext(), UserPreferenceActivity.class);
+                startActivity(testIntent);
+                return true;
+            }
+        });
 
         Preference prefLogout = findPreference("logout_preference");
         prefLogout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
             public boolean onPreferenceClick(Preference preference) {
-//                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
-//                Intent testIntent = new Intent(getApplicationContext(), Activity2.class);
-//                startActivity(testIntent);
                 new SignOutDataTask().execute();
-
                 return true;
             }
         });
@@ -316,12 +336,12 @@ public class SettingsActivity extends PreferenceActivity {
         }
         @Override
         protected void onPreExecute() {
-//            if (mProgressDialog == null) {
-//                mProgressDialog = Utils.createProgressDialog(getApplicationContext());
-//                mProgressDialog.show();
-//            } else {
-//                mProgressDialog.show();
-//            }
+            if (mProgressDialog == null) {
+                mProgressDialog = Utils.createProgressDialog(getApplicationContext());
+                mProgressDialog.show();
+            } else {
+                mProgressDialog.show();
+            }
         }
         @Override
         protected ArrayList<PeopleInfo> doInBackground(Void... args) {
@@ -344,7 +364,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
         @Override
         protected void onPostExecute(ArrayList<PeopleInfo> peopleInfoArrayList) {
-//            mProgressDialog.dismiss();
+            mProgressDialog.dismiss();
             Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
             loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(loginIntent);

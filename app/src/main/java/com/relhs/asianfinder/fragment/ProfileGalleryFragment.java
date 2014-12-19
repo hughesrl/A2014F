@@ -1,5 +1,6 @@
 package com.relhs.asianfinder.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
 import com.relhs.asianfinder.Constants;
 import com.relhs.asianfinder.GallerySlideshowActivity;
+import com.relhs.asianfinder.ProfileActivity;
 import com.relhs.asianfinder.R;
 import com.relhs.asianfinder.adapter.MyListCursorAdapter;
 import com.relhs.asianfinder.adapter.PeoplePhotosCursorGridAdapter;
@@ -32,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class ProfileGalleryFragment extends Fragment {
+public class ProfileGalleryFragment extends Fragment implements ProfileActivity.UpdateListListener {
     public static final String TAG = HomeFragment.class.getSimpleName();
     public static final String ARG_SECTION_NUMBER = "section_number";
     public static final String ARG_PROFILE = "arg_profile";
@@ -88,7 +90,6 @@ public class ProfileGalleryFragment extends Fragment {
         photosInfoOperations.open();
         // TODO: !IMPORTANT DATABASE OPERATION
 
-
         imageLoader = new ImageLoader(getActivity());
     }
 
@@ -96,22 +97,26 @@ public class ProfileGalleryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myFragmentView = inflater.inflate(R.layout.fragment_people_profile_gallery, container, false);
         mListView = (AsymmetricGridView) myFragmentView.findViewById(R.id.listView);
-        mListView.setRequestedColumnCount(2);
 
         noPhoto = (LinearLayout) myFragmentView.findViewById(R.id.noPhoto);
 
-        new LoadPhotosDataTask(inflater).execute();
+        new LoadPhotosDataTask().execute();
 
         return myFragmentView;
     }
 
+    @Override
+    public void onUpdateListClick(Activity activity, String action) {
+        new LoadPhotosDataTask().execute();
+    }
+
     private class LoadPhotosDataTask extends AsyncTask<Void, Void, ArrayList<PeoplePhotosInfo>> {
         private ProgressDialog mProgressDialog;
-        private LayoutInflater _inflater;
+        //private LayoutInflater _inflater;
 
-        public LoadPhotosDataTask(LayoutInflater inflater) {
+        public LoadPhotosDataTask() {
             // TODO Auto-generated constructor stub
-            this._inflater = inflater;
+            //this._inflater = inflater;
         }
         @Override
         protected void onPreExecute() {

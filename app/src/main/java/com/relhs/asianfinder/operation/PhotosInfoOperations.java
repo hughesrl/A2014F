@@ -60,9 +60,20 @@ public class PhotosInfoOperations {
     public ArrayList<PeoplePhotosInfo> getAllPhotos() {
         // now that the user is created return it ...
         Cursor cursor = databaseRead.query(DataBaseWrapper.PHOTOSINFO,
-                PHOTOS_TABLE_COLUMNS, DataBaseWrapper._ID, null, null, null, null);
+                PHOTOS_TABLE_COLUMNS, DataBaseWrapper._ID, null, null, null, DataBaseWrapper._DATE+" DESC");
         cursor.moveToFirst();
         ArrayList<PeoplePhotosInfo> peoplePhotosInfo = parsePreferenceInfoAsArray(cursor);
+        cursor.close();
+
+        return peoplePhotosInfo;
+    }
+    public PeoplePhotosInfo getLastPhoto() {
+        // now that the user is created return it ...
+        Cursor cursor = databaseRead.query(DataBaseWrapper.PHOTOSINFO,
+                PHOTOS_TABLE_COLUMNS, DataBaseWrapper._ID, null, null, null, DataBaseWrapper._DATE+" DESC", "1");
+
+        cursor.moveToFirst();
+        PeoplePhotosInfo peoplePhotosInfo= parsePhotoInfo(cursor);
         cursor.close();
 
         return peoplePhotosInfo;

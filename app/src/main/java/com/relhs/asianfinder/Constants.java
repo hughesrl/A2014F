@@ -122,6 +122,8 @@ public class Constants {
     public final static String TAG_SPORTS = "sports";
     public final static String TAG_INTEREST = "interest";
 
+    public final static String TAG_OTHERS = "others";
+
     // ------------------------------------------------------
 
     public final static String TAG_OS_COUNTRY = "country";

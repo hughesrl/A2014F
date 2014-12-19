@@ -110,7 +110,7 @@ public class ProfilePreferenceEditDialogFragment extends DialogFragment {
         return myFragmentView;
     }
 
-    private class LoadMultipleSelectionDataTask extends AsyncTask<Void, Void, JSONObject> {
+     private class LoadMultipleSelectionDataTask extends AsyncTask<Void, Void, JSONObject> {
         private ProgressDialog mProgressDialog;
         private JSONParser jParser;
         private JSONArray jsonArray;
