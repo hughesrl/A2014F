@@ -76,4 +76,13 @@ public class SpinnerCustomAdapter extends ArrayAdapter<SpinnerItems> {
         }
         return 0;
     }
+
+    public int getPositionByValue(String value) {
+        for(int s=0;s<=(spinnerItems.size()-1);s++) {
+            if(spinnerItems.get(s).getSpinnerValue().equalsIgnoreCase(value)) {
+                return s;
+            }
+        }
+        return 0;
+    }
 }

@@ -13,7 +13,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.relhs.asianfinder.DashboardActivity;
@@ -80,7 +79,7 @@ public class HomeFragment extends Fragment {
     public class MyPagerAdapter extends FragmentPagerAdapter implements ActionBar.TabListener , ViewPager.OnPageChangeListener {
 //        int[] resId = new int[]{R.drawable.ic_drawer, R.drawable.ic_launcher, R.drawable.ic_drawer, R.drawable.ic_launcher, R.drawable.ic_drawer};
 
-        private final String[] TITLES = { "Recommedations", "Browse" };
+        private final String[] TITLES = { "Recommendation", "Browse" };
         private ActionBar mActionBar;
 
         public MyPagerAdapter(FragmentManager fm) {

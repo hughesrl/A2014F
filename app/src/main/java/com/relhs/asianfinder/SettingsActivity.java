@@ -33,23 +33,12 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
-
-import com.relhs.asianfinder.adapter.PeopleListAdapter;
 import com.relhs.asianfinder.data.PeopleInfo;
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.loader.Utils;
 import com.relhs.asianfinder.operation.UserInfoOperations;
 import com.relhs.asianfinder.utils.JSONParser;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -337,7 +326,7 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         protected void onPreExecute() {
             if (mProgressDialog == null) {
-                mProgressDialog = Utils.createProgressDialog(getApplicationContext());
+                mProgressDialog = Utils.createProgressDialog(SettingsActivity.this);
                 mProgressDialog.show();
             } else {
                 mProgressDialog.show();
@@ -346,19 +335,21 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         protected ArrayList<PeopleInfo> doInBackground(Void... args) {
             // Getting JSON from URL
-            JSONObject json = jParser.getJSONFromUrl(getResources().getString(R.string.api)+"?act=action-remove&t="+userInfo.getUser_type()+"&did="+
-                    ((AsianFinderApplication)getApplication()).getDeviceId()+"&_pid="+userInfo.getUser_id(), null);
-            try {
-                JSONArray android = json.getJSONArray(Constants.TAG_OS);
-                JSONObject jsonObject = android.getJSONObject(0);
-                if(!jsonObject.getBoolean(Constants.TAG_STATUS)) { // false
-                    Log.d("-- robert", jsonObject.getString(Constants.TAG_MESSAGE));
-                } else { // true
-                    userOperations.emptyAllUserData();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            JSONObject json = jParser.getJSONFromUrl(getResources().getString(R.string.api)+"?act=action-remove&t="+userInfo.getUser_type()+"&did="+
+//                    ((AsianFinderApplication)getApplication()).getDeviceId()+"&_pid="+userInfo.getUser_id(), null);
+//            try {
+//                // TODO: Sorry! Invalid parameter value(s). API RETURN
+//                JSONArray android = json.getJSONArray(Constants.TAG_OS);
+//                JSONObject jsonObject = android.getJSONObject(0);
+//                if(!jsonObject.getBoolean(Constants.TAG_STATUS)) { // false
+//                    Log.d("-- robert", jsonObject.getString(Constants.TAG_MESSAGE));
+//                } else { // true
+//                    userOperations.emptyAllUserData();
+//                }
+                userOperations.emptyAllUserData();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
             return null;
         }

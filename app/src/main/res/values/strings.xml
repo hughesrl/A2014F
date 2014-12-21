@@ -49,9 +49,9 @@
         <item>PROFILE</item>
         <item>HOME</item>
         <item>MY LIST</item>
-        <item>MAIL</item>
+        <!--<item>MAIL</item>-->
         <item>MESSAGES</item>
-        <item>NOTIFICATIONS</item>
+        <!--<item>NOTIFICATIONS</item>-->
         <item>SETTINGS</item>
     </string-array>
 

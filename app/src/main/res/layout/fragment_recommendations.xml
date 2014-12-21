@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Update Preferences"
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnUpdatePreference"
             android:background="@drawable/custom_button"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"

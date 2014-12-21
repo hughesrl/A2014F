@@ -10,20 +10,22 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.relhs.asianfinder.R;
-import com.relhs.asianfinder.data.PreferenceMultipleSelectionModel;
+import com.relhs.asianfinder.data.UserDetailsMultipleSelectionModel;
 
 import java.util.List;
 
-public class PreferenceMultipleSelectionArrayAdapter extends ArrayAdapter<PreferenceMultipleSelectionModel> {
+public class ProfileUserDetailsMultipleSelectionArrayAdapter extends ArrayAdapter<UserDetailsMultipleSelectionModel> {
 
-    private final List<PreferenceMultipleSelectionModel> list;
+    private final List<UserDetailsMultipleSelectionModel> list;
     private final Context context;
     private LayoutInflater vi;
+    private final String ids;
 
-    public PreferenceMultipleSelectionArrayAdapter(Context context, List<PreferenceMultipleSelectionModel> list) {
+    public ProfileUserDetailsMultipleSelectionArrayAdapter(Context context, List<UserDetailsMultipleSelectionModel> list, String Ids) {
         super(context, 0, list);
         this.context = context;
         this.list = list;
+        this.ids = Ids;
         vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -44,11 +46,12 @@ public class PreferenceMultipleSelectionArrayAdapter extends ArrayAdapter<Prefer
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView,
                                                      boolean isChecked) {
-                            PreferenceMultipleSelectionModel element = (PreferenceMultipleSelectionModel) viewHolder.checkbox
+                            UserDetailsMultipleSelectionModel element = (UserDetailsMultipleSelectionModel) viewHolder.checkbox
                                     .getTag();
                             element.setSelected(buttonView.isChecked());
                         }
                     });
+
             view.setTag(viewHolder);
             viewHolder.checkbox.setTag(list.get(position));
         } else {
@@ -56,8 +59,9 @@ public class PreferenceMultipleSelectionArrayAdapter extends ArrayAdapter<Prefer
             ((ViewHolder) view.getTag()).checkbox.setTag(list.get(position));
         }
         ViewHolder holder = (ViewHolder) view.getTag();
+
         holder.text.setText(list.get(position).getCaption());
-        if(list.get(position).getSelectionType().equalsIgnoreCase("multiple")) { // multiple,single,minmax,text
+        if(list.get(position).getSelectionType().equalsIgnoreCase("multiple")) { // multiple, single, minmax, text
             holder.checkbox.setChecked(list.get(position).isSelected());
         } else if(list.get(position).getSelectionType().equalsIgnoreCase("single")) {
             holder.checkbox.setVisibility(View.GONE);

@@ -16,7 +16,7 @@ interface IAFPushService {
 
     void initializeChatting(int userId);
 
-    void initializeChattingOk(int threadId);
+    void initializeChattingOk(int threadId, boolean displayThread);
 
 
 }

@@ -34,8 +34,8 @@ public class ChatRoomCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         if(messagesOperations.CheckIsDataAlreadyInDBorNot(DataBaseWrapper.MESSAGESTHREADINFO,
-                DataBaseWrapper.ROOMINFO_THREADID,
-                cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID)))) {
+                DataBaseWrapper.MESSAGESTHREADINFO_THREADID,
+                cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID)), 0, null)) {
 
         TextView userName = (TextView) view.findViewById(R.id.userName);
         TextView briefMsg = (TextView) view.findViewById(R.id.briefMsg);

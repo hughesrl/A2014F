@@ -19,11 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.relhs.asianfinder.AsianFinderApplication;
-import com.relhs.asianfinder.ProfileActivity;
 import com.relhs.asianfinder.R;
+import com.relhs.asianfinder.UserPreferenceActivity;
 import com.relhs.asianfinder.adapter.PreferenceMultipleSelectionArrayAdapter;
 import com.relhs.asianfinder.adapter.PreferenceRangeSelectionAdapter;
-import com.relhs.asianfinder.adapter.SpinnerCustomAdapter;
 import com.relhs.asianfinder.data.PreferenceMultipleSelectionModel;
 import com.relhs.asianfinder.loader.Utils;
 import com.relhs.asianfinder.utils.JSONParser;
@@ -104,7 +103,6 @@ public class ProfilePreferenceEditDialogFragment extends DialogFragment {
         spinnerFrom = (Spinner) myFragmentView.findViewById(R.id.spinnerFrom);
         spinnerTo = (Spinner) myFragmentView.findViewById(R.id.spinnerTo);
 
-
         new LoadMultipleSelectionDataTask(inflater, mParamDbName, null).execute();
 
         return myFragmentView;
@@ -139,7 +137,7 @@ public class ProfilePreferenceEditDialogFragment extends DialogFragment {
         }
         @Override
         protected JSONObject doInBackground(Void... args) {
-            String did = ((ProfileActivity)getActivity()).getDeviceId();
+            String did = ((UserPreferenceActivity)getActivity()).getDeviceId();
             return jParser.getJSONFromUrl(getResources().getString(R.string.api) + "?act=preference&t=fetch&did=" + did + "&k=" + _k, null);
         }
         @Override
@@ -162,7 +160,7 @@ public class ProfilePreferenceEditDialogFragment extends DialogFragment {
                     for (int i=0; i<jsonArrayOptions.length(); i++) {
                         JSONObject jsonObjectOptions = jsonArrayOptions.getJSONObject(i);
                         PreferenceMultipleSelectionModel preferenceMultipleSelectionModel = new PreferenceMultipleSelectionModel(jsonObjectOptions.getString("value"),
-                                jsonObjectOptions.getString("caption"), selectionType);
+                                jsonObjectOptions.getString("caption"), selectionType, false);
                         list.add(preferenceMultipleSelectionModel);
                     }
                 }

@@ -15,9 +15,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.relhs.asianfinder.AsianFinderApplication;
 import com.relhs.asianfinder.Constants;
 import com.relhs.asianfinder.R;
 import com.relhs.asianfinder.adapter.SpinnerCustomAdapter;
@@ -33,11 +31,19 @@ import java.util.ArrayList;
 
 public class LocationSelectionDialogFragment extends DialogFragment {
 
+    public static final String ARG_COUNTRY = "country";
+    public static final String ARG_STATE = "state";
+    public static final String ARG_CITY = "city";
+
     private String purposeToOpen;
 
     private Spinner spinnerLocationCountry;
     private Spinner spinnerLocationState;
     private Spinner spinnerLocationCity;
+
+    private String mParamCountry = "";
+    private String mParamState = "";
+    private String mParamCity = "";
 
 
     final ArrayList<SpinnerItems> spinnerCountryItems = new ArrayList<SpinnerItems>();
@@ -94,6 +100,12 @@ public class LocationSelectionDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NORMAL, android.R.style.Theme_Light_Panel);
 
+        if (getArguments() != null) {
+            mParamCountry = getArguments().getString(ARG_COUNTRY);
+            mParamState = getArguments().getString(ARG_STATE);
+            mParamCity = getArguments().getString(ARG_CITY);
+
+        }
 
     }
     @Override
@@ -215,6 +227,11 @@ public class LocationSelectionDialogFragment extends DialogFragment {
             spinnerLocationCountry.setAdapter(adapterTo);
             spinnerLocationCountry.setEnabled(true);
 
+            if(!mParamCountry.isEmpty()) {
+                int spinnerPosition = adapterTo.getPositionByValue(mParamCountry);
+                spinnerLocationCountry.setSelection(spinnerPosition);
+            }
+
             spinnerLocationCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -301,6 +318,12 @@ public class LocationSelectionDialogFragment extends DialogFragment {
                 SpinnerCustomAdapter adapterTo = new SpinnerCustomAdapter(getActivity(), android.R.layout.simple_spinner_item, spinnerStateItems);
                 spinnerLocationState.setAdapter(adapterTo);
                 spinnerLocationState.setEnabled(true);
+
+                if(!mParamState.isEmpty()) {
+                    int spinnerPosition = adapterTo.getPositionByValue(mParamState);
+                    spinnerLocationState.setSelection(spinnerPosition);
+                }
+
                 spinnerLocationState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -383,6 +406,12 @@ public class LocationSelectionDialogFragment extends DialogFragment {
                 SpinnerCustomAdapter adapterTo = new SpinnerCustomAdapter(getActivity(), android.R.layout.simple_spinner_item, spinnerStateItems);
                 spinnerLocationCity.setAdapter(adapterTo);
                 spinnerLocationCity.setEnabled(true);
+
+                if(!mParamCity.isEmpty()) {
+                    int spinnerPosition = adapterTo.getPositionByValue(mParamCity);
+                    spinnerLocationCity.setSelection(spinnerPosition);
+                }
+
             }
         }
     }

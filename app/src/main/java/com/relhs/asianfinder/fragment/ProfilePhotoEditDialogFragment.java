@@ -10,22 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.relhs.asianfinder.AsianFinderApplication;
 import com.relhs.asianfinder.ProfileActivity;
 import com.relhs.asianfinder.R;
-import com.relhs.asianfinder.adapter.PreferenceMultipleSelectionArrayAdapter;
-import com.relhs.asianfinder.adapter.PreferenceRangeSelectionAdapter;
 import com.relhs.asianfinder.adapter.SpinnerCustomAdapter;
-import com.relhs.asianfinder.data.PeoplePhotosInfo;
 import com.relhs.asianfinder.data.PreferenceMultipleSelectionModel;
 import com.relhs.asianfinder.data.SpinnerItems;
 import com.relhs.asianfinder.loader.ImageLoader;
@@ -169,7 +163,7 @@ public class ProfilePhotoEditDialogFragment extends DialogFragment {
                     for (int i=0; i<jsonArrayOptions.length(); i++) {
                         JSONObject jsonObjectOptions = jsonArrayOptions.getJSONObject(i);
                         PreferenceMultipleSelectionModel preferenceMultipleSelectionModel = new PreferenceMultipleSelectionModel(jsonObjectOptions.getString("value"),
-                                jsonObjectOptions.getString("caption"), selectionType);
+                                jsonObjectOptions.getString("caption"), selectionType, true);
                         list.add(preferenceMultipleSelectionModel);
                     }
                 }

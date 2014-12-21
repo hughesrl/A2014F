@@ -3,17 +3,18 @@ package com.relhs.asianfinder;
 import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.relhs.asianfinder.adapter.ProfilePreferenceAdapter;
-import com.relhs.asianfinder.data.PeoplePhotosInfo;
 import com.relhs.asianfinder.data.PreferenceInfo;
 import com.relhs.asianfinder.fragment.ProfilePreferenceEditDialogFragment;
 import com.relhs.asianfinder.loader.ImageLoader;
@@ -36,6 +37,10 @@ public class UserPreferenceActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_profile_pref);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            // Show the Up button in the action bar.
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         imageLoader = new ImageLoader(UserPreferenceActivity.this);
 
@@ -47,6 +52,23 @@ public class UserPreferenceActivity extends FragmentActivity {
         noPhoto = (LinearLayout) findViewById(R.id.noPhoto);
 
         new LoadPhotosDataTask().execute();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //getMenuInflater().inflate(R.menu.profile_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                UserPreferenceActivity.this.finish();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class LoadPhotosDataTask extends AsyncTask<Void, Void, ArrayList<PreferenceInfo>> {
@@ -127,6 +149,10 @@ public class UserPreferenceActivity extends FragmentActivity {
                     cursor.getString(cursor.getColumnIndex(DataBaseWrapper.PREFERENCEINFO_VALUE)),
                     cursor.getString(cursor.getColumnIndex(DataBaseWrapper.PREFERENCEINFO_IDS))));
         }
+    }
+
+    public String getDeviceId() {
+        return ((AsianFinderApplication) getApplication()).getDeviceId();
     }
 
 

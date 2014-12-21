@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.relhs.asianfinder.DataBaseWrapper;
 import com.relhs.asianfinder.data.UserDetailsInfo;
@@ -53,6 +54,14 @@ public class UserDetailsInfoOperations {
      */
     public void addUserDetails(String category, String dbname, String label, String type, String value, String ids) {
         ContentValues values = new ContentValues();
+        Log.d("-- robert",
+                DataBaseWrapper.USERDETAILSINFO_CATEGORY+":"+category.toLowerCase()+"\n"+
+                DataBaseWrapper.USERDETAILSINFO_DBNAME+":"+dbname+"\n"+
+                DataBaseWrapper.USERDETAILSINFO_LABEL+":"+label+"\n"+
+                DataBaseWrapper.USERDETAILSINFO_TYPE+":"+type+"\n"+
+                DataBaseWrapper.USERDETAILSINFO_VALUE+":"+value+"\n"+
+                DataBaseWrapper.USERDETAILSINFO_IDS+":"+ids+"\n"
+        );
         values.put(DataBaseWrapper.USERDETAILSINFO_CATEGORY, category.toLowerCase());
         values.put(DataBaseWrapper.USERDETAILSINFO_DBNAME, dbname);
         values.put(DataBaseWrapper.USERDETAILSINFO_LABEL, label);
@@ -96,8 +105,16 @@ public class UserDetailsInfoOperations {
      * Update User Details
      * @return
      */
-    public void updateUserDetails() {
 
+    public void updateUserDetails(String _dbName, String _label, String _type, String _value, String _ids) {
+        ContentValues values = new ContentValues();
+        values.put(DataBaseWrapper.USERDETAILSINFO_DBNAME, _dbName);
+        values.put(DataBaseWrapper.USERDETAILSINFO_LABEL, _label);
+        values.put(DataBaseWrapper.USERDETAILSINFO_TYPE, _type);
+        values.put(DataBaseWrapper.USERDETAILSINFO_VALUE, _value);
+        values.put(DataBaseWrapper.USERDETAILSINFO_IDS, _ids);
+
+        databaseWrite.update(DataBaseWrapper.USERDETAILSINFO, values, DataBaseWrapper.USERDETAILSINFO_LABEL+" = '" + _label + "'", null);
     }
 
 

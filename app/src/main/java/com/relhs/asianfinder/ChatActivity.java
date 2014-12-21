@@ -1,7 +1,6 @@
 package com.relhs.asianfinder;
 
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,33 +8,22 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -45,24 +33,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.nkzawa.socketio.client.Socket;
-import com.relhs.asianfinder.adapter.ChatRoomCursorAdapter;
 import com.relhs.asianfinder.adapter.ThreadCursorAdapter;
 import com.relhs.asianfinder.data.RoomInfo;
 import com.relhs.asianfinder.data.ThreadsInfo;
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.fragment.EmoticonsStickerFragment;
-import com.relhs.asianfinder.fragment.RecommendationsFragment;
-import com.relhs.asianfinder.fragment.SampleListFragment;
 import com.relhs.asianfinder.loader.ImageLoader;
 import com.relhs.asianfinder.operation.MessagesOperations;
 import com.relhs.asianfinder.operation.UserInfoOperations;
-import com.relhs.asianfinder.view.CustomButton;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class ChatActivity extends FragmentActivity implements View.OnClickListener {
 
@@ -107,8 +87,6 @@ public class ChatActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-
-
         imageLoader = new ImageLoader(this);
         profileData = (RelativeLayout) findViewById(R.id.profileData);
         txtMessage = (EditText) findViewById(R.id.txtMessage);
@@ -129,12 +107,12 @@ public class ChatActivity extends FragmentActivity implements View.OnClickListen
         userInfoOperations.open();
         userInfo = userInfoOperations.getUser();
 
-
-        customAdapter = new ThreadCursorAdapter(
-                this,
-                messagesOperations.getThreadMessages(threadId),
-                messagesOperations,userInfoOperations,
-                0);
+        Log.d("-- robert", threadId+" Total Thread : "+messagesOperations.countLastThread(threadId));
+                customAdapter = new ThreadCursorAdapter(
+                        this,
+                        messagesOperations.getThreadMessages(threadId),
+                        messagesOperations, userInfoOperations,
+                        0);
 
         lv = (ListView) findViewById(R.id.chatMessages);
         lv.setAdapter(customAdapter);
@@ -277,9 +255,12 @@ public class ChatActivity extends FragmentActivity implements View.OnClickListen
                     //Toast.makeText(this, "0", Toast.LENGTH_LONG).show();
                 } else {
                     try {
-                        lastThreadInfo = messagesOperations.getLastThread(threadId);
-                        //Log.d("-- robert CA", roomDetails.getUserId()+", "+txtMessage.getText().toString().trim()+", "+lastThreadInfo.getLocalId() + 1);
-                        mIAFPushService.sendChatMessage(roomDetails.getUserId(), txtMessage.getText().toString().trim(), lastThreadInfo.getLocalId() + 1);
+                        if(messagesOperations.countLastThread(threadId) > 0) {
+                            lastThreadInfo = messagesOperations.getLastThread(threadId);
+                            mIAFPushService.sendChatMessage(roomDetails.getUserId(), txtMessage.getText().toString().trim(), lastThreadInfo.getLocalId() + 1);
+                        } else {
+                            mIAFPushService.sendChatMessage(roomDetails.getUserId(), txtMessage.getText().toString().trim(), 1);
+                        }
 
                         txtMessage.setText("");
                         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);

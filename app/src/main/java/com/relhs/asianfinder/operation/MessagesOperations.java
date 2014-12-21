@@ -3,7 +3,6 @@ package com.relhs.asianfinder.operation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.util.Log;
 import com.relhs.asianfinder.DataBaseWrapper;
 import com.relhs.asianfinder.data.RoomInfo;
 import com.relhs.asianfinder.data.ThreadsInfo;
-import com.relhs.asianfinder.data.UserInfo;
 
 public class MessagesOperations {
 	// Database fields
@@ -46,7 +44,7 @@ public class MessagesOperations {
                                String main_photo, int isChatting, String lastOnline) {
                 ContentValues values = new ContentValues();
 
-        if(!CheckIsDataAlreadyInDBorNot(DataBaseWrapper.ROOMINFO, DataBaseWrapper.ROOMINFO_USERID, userId)) {
+        if(!CheckIsDataAlreadyInDBorNot(DataBaseWrapper.ROOMINFO, DataBaseWrapper.ROOMINFO_USERID, userId, 0, null)) {
             //Log.d("-- Robert", "NOT IN DB = "+ main_photo);
             values.put(DataBaseWrapper.ROOMINFO_USERID, userId);
             values.put(DataBaseWrapper.ROOMINFO_THREADID, threadId);
@@ -84,6 +82,13 @@ public class MessagesOperations {
         cursor.moveToFirst();
         return cursor;
     }
+    public int countChatRooms() {
+        Cursor cursor = databaseRead.query(DataBaseWrapper.ROOMINFO,
+                USERS_ROOMINFO_COLUMNS, null, null, null, null, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        return cnt;
+    }
 
     public RoomInfo getChatRoomDetails(String tid) {
         Cursor cursor = databaseRead.query(DataBaseWrapper.ROOMINFO,
@@ -96,8 +101,11 @@ public class MessagesOperations {
 
 
     public boolean CheckIsDataAlreadyInDBorNot(String TableName,
-                                                      String dbfield, int fieldValue) {
+                                               String dbfield, int fieldValue, int threadId, String fieldThreadId) {
         String Query = "Select * from " + TableName + " where " + dbfield + "=" + fieldValue;
+        if(threadId != 0) {
+            Query += " and "+fieldThreadId+"="+threadId;
+        }
         Cursor cursor = databaseRead.rawQuery(Query, null);
         if(cursor.getCount()<=0) {
             return false;
@@ -107,12 +115,12 @@ public class MessagesOperations {
     public RoomInfo createThread(String type, int threadId, int f, int localId, String message, String t, int isSeen, String folder, String file) {
         ContentValues values = new ContentValues();
 
-        if(!CheckIsDataAlreadyInDBorNot(DataBaseWrapper.MESSAGESTHREADINFO, DataBaseWrapper.MESSAGESTHREADINFO_LOCALID, localId)) {
-            //Log.d("-- Robert", "NOT IN DB, INSERT -- " + t );
+        if(!CheckIsDataAlreadyInDBorNot(DataBaseWrapper.MESSAGESTHREADINFO, DataBaseWrapper.MESSAGESTHREADINFO_LOCALID, localId, threadId, DataBaseWrapper.MESSAGESTHREADINFO_THREADID)) {
+            Log.d("-- Robert", "NOT IN DB, INSERT -- " + t );
             values.put(DataBaseWrapper.MESSAGESTHREADINFO_THREADID, threadId);
             values.put(DataBaseWrapper.MESSAGESTHREADINFO_F, f);
             values.put(DataBaseWrapper.MESSAGESTHREADINFO_LOCALID, localId);
-            values.put(DataBaseWrapper.MESSAGESTHREADINFO_MESSAGE, DatabaseUtils.sqlEscapeString(message));
+            values.put(DataBaseWrapper.MESSAGESTHREADINFO_MESSAGE, message);
             values.put(DataBaseWrapper.MESSAGESTHREADINFO_T, t);
             values.put(DataBaseWrapper.MESSAGESTHREADINFO_BOOL_SEEN, isSeen);
 
@@ -130,7 +138,7 @@ public class MessagesOperations {
 //            return roomInfo;
 //             return roomInfo;
         } else {
-            //Log.d("-- Robert", "IN DB");
+            Log.d("-- Robert", "IN DB");
         }
         return null;
     }
@@ -144,8 +152,13 @@ public class MessagesOperations {
         ThreadsInfo threadsInfo = parseThreadInfo(cursor);
         return threadsInfo;
     }
-
-
+    public int countLastThread(String anInt) {
+        Cursor cursor = databaseRead.query(DataBaseWrapper.MESSAGESTHREADINFO,
+                USERS_MESSAGESTHREADINFO_COLUMNS, DataBaseWrapper.MESSAGESTHREADINFO_THREADID+"=?", new String[]{anInt}, null, null, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        return cnt;
+    }
 
     public Cursor getThreadMessages(String anInt) {
         // now that the user is created return it ...
@@ -262,6 +275,15 @@ public class MessagesOperations {
 
     private RoomInfo parseRoomInfo(Cursor cursor) {
         RoomInfo roomInfo = new RoomInfo();
+
+        Log.d("-- robert",
+                "\nUSERID:"+cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_USERID))+"\n"+
+                "THREADID:"+cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID))+"\n"+
+                "USERTYPE:"+cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_USERTYPE))+"\n"+
+                "USERNAME:"+cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_USERNAME))+"\n"+
+                "MAINPHOTO:"+cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_MAINPHOTO))+"\n"+
+                "ISCHATTING:"+cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_ISCHATTING))+"\n"+
+                "LASTONLINE:"+cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_LASTONLINE)));
 
         roomInfo.setUserId(cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_USERID)));
         roomInfo.setThreadId(cursor.getInt(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID)));

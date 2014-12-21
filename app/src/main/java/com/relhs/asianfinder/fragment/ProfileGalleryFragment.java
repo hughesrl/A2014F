@@ -1,6 +1,5 @@
 package com.relhs.asianfinder.fragment;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,25 +15,18 @@ import android.widget.LinearLayout;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
 import com.relhs.asianfinder.Constants;
 import com.relhs.asianfinder.GallerySlideshowActivity;
-import com.relhs.asianfinder.ProfileActivity;
 import com.relhs.asianfinder.R;
-import com.relhs.asianfinder.adapter.MyListCursorAdapter;
 import com.relhs.asianfinder.adapter.PeoplePhotosCursorGridAdapter;
 import com.relhs.asianfinder.adapter.PeoplePhotosGridAdapter;
 import com.relhs.asianfinder.data.PeoplePhotosInfo;
 import com.relhs.asianfinder.loader.ImageLoader;
 import com.relhs.asianfinder.loader.Utils;
-import com.relhs.asianfinder.operation.MyListOperations;
 import com.relhs.asianfinder.operation.PhotosInfoOperations;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class ProfileGalleryFragment extends Fragment implements ProfileActivity.UpdateListListener {
+public class ProfileGalleryFragment extends Fragment {
     public static final String TAG = HomeFragment.class.getSimpleName();
     public static final String ARG_SECTION_NUMBER = "section_number";
     public static final String ARG_PROFILE = "arg_profile";
@@ -103,11 +95,6 @@ public class ProfileGalleryFragment extends Fragment implements ProfileActivity.
         new LoadPhotosDataTask().execute();
 
         return myFragmentView;
-    }
-
-    @Override
-    public void onUpdateListClick(Activity activity, String action) {
-        new LoadPhotosDataTask().execute();
     }
 
     private class LoadPhotosDataTask extends AsyncTask<Void, Void, ArrayList<PeoplePhotosInfo>> {

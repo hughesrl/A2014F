@@ -45,12 +45,12 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
     public static final String USERINFO_ISLOGIN = "_is_login";
 
     public static final String USERDETAILSINFO = "UserDetailsInfo";
-    public static final String USERDETAILSINFO_CATEGORY = "category";
-    public static final String USERDETAILSINFO_DBNAME = "dbname";
-    public static final String USERDETAILSINFO_LABEL = "label";
-    public static final String USERDETAILSINFO_TYPE = "type";
-    public static final String USERDETAILSINFO_VALUE = "value";
-    public static final String USERDETAILSINFO_IDS = "ids";
+    public static final String USERDETAILSINFO_CATEGORY = "user_category";
+    public static final String USERDETAILSINFO_DBNAME = "user_dbname";
+    public static final String USERDETAILSINFO_LABEL = "user_label";
+    public static final String USERDETAILSINFO_TYPE = "user_type";
+    public static final String USERDETAILSINFO_VALUE = "user_value";
+    public static final String USERDETAILSINFO_IDS = "user_ids";
 
 
 
@@ -89,12 +89,12 @@ public class DataBaseWrapper extends SQLiteOpenHelper {
 
 
     public static final String PREFERENCEINFO = "PreferenceInfo";
-    public static final String PREFERENCEINFO_CATEGORY = "category";
-    public static final String PREFERENCEINFO_DBNAME = "dbname";
-    public static final String PREFERENCEINFO_LABEL = "label";
-    public static final String PREFERENCEINFO_TYPE = "type";
-    public static final String PREFERENCEINFO_VALUE = "value";
-    public static final String PREFERENCEINFO_IDS = "ids";
+    public static final String PREFERENCEINFO_CATEGORY = "pref_category";
+    public static final String PREFERENCEINFO_DBNAME = "pref_dbname";
+    public static final String PREFERENCEINFO_LABEL = "pref_label";
+    public static final String PREFERENCEINFO_TYPE = "pref_type";
+    public static final String PREFERENCEINFO_VALUE = "pref_value";
+    public static final String PREFERENCEINFO_IDS = "pref_ids";
 
     public static final String MYLISTINFO = "MyListInfo";
     public static final String MYLISTINFO_USERID = "userid";

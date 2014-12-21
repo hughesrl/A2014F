@@ -1,21 +1,15 @@
 package com.relhs.asianfinder;
 
-import android.app.ActivityManager;
-import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -25,18 +19,14 @@ import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.operation.MessagesOperations;
 import com.relhs.asianfinder.operation.UserInfoOperations;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class AFPushService extends Service {
@@ -291,12 +281,16 @@ public class AFPushService extends Service {
                         String userName = jsonObjectUserData.getString("userName");
                         String main_photo = getString(R.string.api_photos) + jsonObjectUserData.getString("main_photo");
                         int is_chatting = jsonObjectUserData.getInt("is_chatting");
+                        boolean displayThread = true;
+                        if(jsonObjectUserData.has("displayThread")) {
+                            displayThread = jsonObjectUserData.getBoolean("displayThread");
+                        }
                         String lastOnline = jsonObjectUserData.getString("lastOnline");
 
                         messagesOperations.createRoom(userId, threadIdRoom, userType, userName,
                                 main_photo, is_chatting, lastOnline);
 
-                        myBinder.initializeChattingOk(threadIdRoom);
+                        myBinder.initializeChattingOk(threadIdRoom , displayThread);
 
 //                        JSONArray jsonObjectThreads = viewingData.getJSONArray("threads");
 //                        for (int i = 0; i < jsonObjectThreads.length(); i++) {
@@ -402,7 +396,7 @@ public class AFPushService extends Service {
                 e.printStackTrace();
             }
         }
-        public void initializeChattingOk(int threadId) {
+        public void initializeChattingOk(int threadId, boolean displayThread) {
             Log.d("-- robert", "threadId : "+threadId);
 
 //            Intent intent = new Intent(getBaseContext(), ChatActivity.class);
@@ -410,10 +404,14 @@ public class AFPushService extends Service {
 //            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            getApplication().startActivity(intent);
 
-            Intent intent = new Intent(getBaseContext(), ChatRoomsActivity.class);
-            intent.putExtra("threadId", threadId+"");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getApplication().startActivity(intent);
+            if(!displayThread) {
+                // Nothing to do
+            } else {
+                Intent intent = new Intent(getBaseContext(), ChatRoomsActivity.class);
+                intent.putExtra("threadId", threadId + "");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(intent);
+            }
         }
 
         public void sendChatMessage(int userId, String message, int localId) {
@@ -445,6 +443,7 @@ public class AFPushService extends Service {
 
         public void getChatMessage(String jsonData) {
             try {
+                Log.d("-- robert", jsonData);
                 JSONArray argsArray = new JSONArray(jsonData);
                 JSONObject cM = argsArray.getJSONObject(0);
                 int f = cM.getInt("f");
@@ -460,7 +459,7 @@ public class AFPushService extends Service {
                 // show notification
                 notification = new Notification(R.drawable.ic_launcher, "New Message", System.currentTimeMillis());
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                intent.putExtra("threadId", cM.getString("tid"));
+                intent.putExtra("threadId", threadId+"");
 
                 PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
                         0, intent, PendingIntent.FLAG_UPDATE_CURRENT);

@@ -13,10 +13,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.relhs.asianfinder.data.ProfilePreferenceDataInfo;
-import com.relhs.asianfinder.data.ProfilePreferenceHeaderInfo;
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.loader.Utils;
 import com.relhs.asianfinder.operation.PhotosInfoOperations;
@@ -47,12 +46,14 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private UserDetailsInfoOperations userDetailsInfoOperations;
     private PreferenceInfoOperations preferenceInfoOperations;
     private PhotosInfoOperations photoInfoOperations;
+    private InputMethodManager imm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         // TODO: !IMPORTANT DATABASE OPERATION
         userOperations = new UserInfoOperations(this);
         userOperations.open();
@@ -67,7 +68,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         photoInfoOperations.open();
         // TODO: !IMPORTANT DATABASE OPERATION
 
-        Toast.makeText(this, "isLogin "+userOperations.isLogin(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "isLogin "+userOperations.isLogin(), Toast.LENGTH_LONG).show();
 
         etUsername = (CustomEditTextView)findViewById(R.id.etUsername);
         etPassword = (CustomEditTextView)findViewById(R.id.etPassword);
@@ -77,11 +78,11 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         CustomButton btnLogin = (CustomButton)findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
 
-        Notification notification=new Notification(R.drawable.ic_launcher,"Saanvi Birthday!", System.currentTimeMillis());
+        Notification notification=new Notification(R.drawable.ic_launcher,"Welcome to AsianFinder", System.currentTimeMillis());
         Intent intent=new Intent(getApplicationContext(), IndexActivity.class);
         PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
-        notification.setLatestEventInfo(getBaseContext(), "Reminder: Saanvi Birthday",
-                "Today is your friend Saanvi's Birthday, please wish her", pendingIntent);
+        notification.setLatestEventInfo(getBaseContext(), "Welcome to AsianFinder",
+                "Welcome to AsianFinder!", pendingIntent);
 
         if(userOperations.isLogin() == 1) {
             if(!isMyServiceRunning(AFPushService.class)) {
@@ -93,8 +94,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
-
-
 
     }
     @Override
@@ -109,6 +108,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     Toast.makeText(this, "Fill up form correctly", Toast.LENGTH_LONG).show();
                 }
 
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 break;
             case R.id.signUp:
                 Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -164,6 +164,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         }
         @Override
         protected JSONObject doInBackground(String... params) {
+            userOperations.emptyAllUserData();
             List<NameValuePair> paramsAPI = new ArrayList<NameValuePair>();
             paramsAPI.add(new BasicNameValuePair("act", "login"));
             paramsAPI.add(new BasicNameValuePair("did", ((AsianFinderApplication)getApplication()).getDeviceId()));
@@ -171,8 +172,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             paramsAPI.add(new BasicNameValuePair("pass", sPassword));
 
             JSONParser jParser = new JSONParser();
-//            Log.d("HUGHES", paramsAPI.toString());
-
             return jParser.getJSONFromUrl(getString(R.string.api), paramsAPI);
         }
 
@@ -320,15 +319,12 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             for (int i=0; i<jsonArray.length()-1; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String value = jsonObject.getString("value");
-                if (jsonObject.getString("dbname").equalsIgnoreCase("living_in")) {
+                if (jsonObject.getString("label").equalsIgnoreCase("location")) {
                     if(!value.isEmpty()) {
                         JSONArray jsonArrayPrefBasicLivingIn = new JSONArray(value);
                         JSONObject jsonObjectPrefBasicLivingIn = jsonArrayPrefBasicLivingIn.getJSONObject(0);
                         value = jsonObjectPrefBasicLivingIn.getString("city") + ", " +
                                 jsonObjectPrefBasicLivingIn.getString("state") + ", " + jsonObjectPrefBasicLivingIn.getString("country");
-                        if (jsonObjectPrefBasicLivingIn.has("length")) {
-                            value = jsonObjectPrefBasicLivingIn.getString("length") + " within " + value;
-                        }
                     }
                 }
                 userDetailsInfoOperations.addUserDetails(category, jsonObject.getString("dbname"), jsonObject.getString("label"), jsonObject.getString("type"),

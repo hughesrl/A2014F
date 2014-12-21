@@ -4,9 +4,13 @@ public class SpinnerItems {
     public String spinner_title;
     public String spinner_value;
     public Boolean status;
+    public Boolean is_selected;
 
-    public SpinnerItems() {
-
+    public SpinnerItems(String spinner_title, String spinner_value, boolean status, boolean is_selected) {
+        super();
+        this.spinner_title = spinner_title;
+        this.spinner_value = spinner_value;
+        this.is_selected = is_selected;
     }
 
     public SpinnerItems(String spinner_title, String spinner_value, boolean status) {
@@ -32,4 +36,9 @@ public class SpinnerItems {
     public Boolean getSpinnerStatus() {
         return status;
     }
+
+    public Boolean getIsSelected() {
+        return is_selected;
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.relhs.asianfinder;
 
-import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -9,31 +8,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.relhs.asianfinder.adapter.ChatRoomCursorAdapter;
-import com.relhs.asianfinder.data.UserInfo;
-import com.relhs.asianfinder.fragment.ProfileAboutFragment;
-import com.relhs.asianfinder.fragment.ProfileGalleryFragment;
-import com.relhs.asianfinder.fragment.ProfilePreferenceFragment;
-import com.relhs.asianfinder.loader.ImageLoader;
 import com.relhs.asianfinder.operation.MessagesOperations;
-import com.relhs.asianfinder.operation.UserInfoOperations;
-
-import org.json.JSONObject;
 
 public class ChatRoomsActivity extends ListActivity {
     public static final String TAG = ChatRoomsActivity.class.getSimpleName();
@@ -60,6 +42,7 @@ public class ChatRoomsActivity extends ListActivity {
         messagesOperations = new MessagesOperations(this);
         messagesOperations.open();
 
+        //Log.d("-- robert", messagesOperations.countChatRooms()+"");
         customAdapter = new ChatRoomCursorAdapter(
                 this,
                 messagesOperations.getChatRooms(),

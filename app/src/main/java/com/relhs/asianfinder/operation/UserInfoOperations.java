@@ -1,14 +1,13 @@
 package com.relhs.asianfinder.operation;
 
-import com.relhs.asianfinder.DataBaseWrapper;
-import com.relhs.asianfinder.data.UserInfo;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+
+import com.relhs.asianfinder.DataBaseWrapper;
+import com.relhs.asianfinder.data.UserInfo;
 
 public class UserInfoOperations {
 	// Database fields
@@ -173,6 +172,7 @@ public class UserInfoOperations {
         cursor.close();
         return isLogin;
     }
+
     public UserInfo getUser() {
         // now that the user is created return it ...
         Cursor cursor = databaseRead.query(DataBaseWrapper.USERINFO,
@@ -197,6 +197,7 @@ public class UserInfoOperations {
     public void emptyAllUserData() {
         // User Informations
         databaseWrite.delete(DataBaseWrapper.USERINFO, null, null);
+        databaseWrite.delete(DataBaseWrapper.USERDETAILSINFO, null, null);
         databaseWrite.delete(DataBaseWrapper.PHOTOSINFO, null, null);
         // Preference
         databaseWrite.delete(DataBaseWrapper.PREFERENCEINFO, null, null);

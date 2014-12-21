@@ -1,12 +1,12 @@
 package com.relhs.asianfinder.data;
 
-public class PreferenceMultipleSelectionModel {
+public class UserDetailsMultipleSelectionModel {
     private String value;
     private String caption;
     private String selectionType;
     private boolean selected;
 
-    public PreferenceMultipleSelectionModel(String value, String caption, String selectionType, boolean isSelected) {
+    public UserDetailsMultipleSelectionModel(String value, String caption, String selectionType, boolean isSelected) {
         this.value = value;
         this.caption = caption;
         this.selectionType = selectionType;

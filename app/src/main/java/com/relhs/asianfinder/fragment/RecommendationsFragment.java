@@ -21,16 +21,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
-import com.relhs.asianfinder.AsianFinderApplication;
 import com.relhs.asianfinder.Constants;
 import com.relhs.asianfinder.DashboardActivity;
 import com.relhs.asianfinder.PeopleProfileActivity;
 import com.relhs.asianfinder.R;
+import com.relhs.asianfinder.UserPreferenceActivity;
 import com.relhs.asianfinder.adapter.PeopleListAdapter;
 import com.relhs.asianfinder.data.PeopleInfo;
 import com.relhs.asianfinder.data.SpinnerItems;
 import com.relhs.asianfinder.loader.Utils;
 import com.relhs.asianfinder.utils.JSONParser;
+import com.relhs.asianfinder.view.CustomButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -244,6 +245,15 @@ public class RecommendationsFragment extends Fragment {
                 });
             } else {
                 updatePreference.setVisibility(View.VISIBLE);
+                CustomButton btnUpdatePreference = (CustomButton) myFragmentView.findViewById(R.id.btnUpdatePreference);
+                btnUpdatePreference.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent testIntent = new Intent(getActivity(), UserPreferenceActivity.class);
+                        startActivity(testIntent);
+                    }
+                });
+
             }
 
             mProgressDialog.dismiss();

@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.relhs.asianfinder.R;
-import com.relhs.asianfinder.data.PreferenceInfo;
 import com.relhs.asianfinder.data.UserDetailsInfo;
 
 import java.util.ArrayList;
@@ -60,6 +59,9 @@ public class ProfileUserDetailsAdapter extends ArrayAdapter<UserDetailsInfo> {
                         subtitle.setText("None");
                         subtitle.setTextColor(Color.RED);
                     } else {
+                        if(ei.getLabel().equalsIgnoreCase("location")) {
+
+                        }
                         subtitle.setText(ei.getValue());
                         subtitle.setTextColor(Color.BLUE);
                     }

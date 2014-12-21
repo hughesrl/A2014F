@@ -1,6 +1,5 @@
 package com.relhs.asianfinder;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -237,24 +236,15 @@ public class GalleryActivity extends FragmentActivity {
                     thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                     bytearray = stream.toByteArray();// get byte array here
                     if (bytearray != null) {
-                        Log.w("path of image from gallery......******************.........", selectedImage + "");
+                        String image_str = Base64.encodeBytes(bytearray);
+                        final ArrayList<NameValuePair> nameValuePairs = new  ArrayList<NameValuePair>();
 
-                        if (bytearray != null) {
-//                            final ParseFile photoFile = new ParseFile(myChild.getFirtname()+"_photo.jpg", bytearray);
-//                            photoFile.saveInBackground(new SaveCallback() {
-//                                public void done(ParseException e) {
-//                                    if (e != null) {
-//                                        Toast.makeText(getActivity(),
-//                                                "Error saving: " + e.getMessage(),
-//                                                Toast.LENGTH_LONG).show();
-//                                    } else {
-//                                        patients.setPhotoFile(photoFile);
-//                                        imgPatientPhoto.setBackground(Utils.resizedBitmapDisplay(getActivity(), thumbnail));
-//                                    }
-//                                }
-//                            });
-                        }
+                        nameValuePairs.add(new BasicNameValuePair("act", "photo-image"));
+                        nameValuePairs.add(new BasicNameValuePair("did", ((AsianFinderApplication) getApplication()).getDeviceId()));
+                        nameValuePairs.add(new BasicNameValuePair("t", "upload"));
+                        nameValuePairs.add(new BasicNameValuePair("img", image_str));
 
+                        new SavePhoto(getResources().getString(R.string.api), nameValuePairs).execute();
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

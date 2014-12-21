@@ -1,33 +1,26 @@
 package com.relhs.asianfinder;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
-
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.SearchView;
 
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.fragment.HomeFragment;
-import com.relhs.asianfinder.fragment.MessagesFragment;
 import com.relhs.asianfinder.fragment.MyListFragment;
 import com.relhs.asianfinder.fragment.NavigationDrawerFragment;
-import com.relhs.asianfinder.fragment.ProfileFragment;
 import com.relhs.asianfinder.operation.UserInfoOperations;
 
 public class DashboardActivity extends FragmentActivity
@@ -95,16 +88,16 @@ public class DashboardActivity extends FragmentActivity
                         .replace(R.id.container, MyListFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 3 :
-                Intent mailActivity = new Intent(this, MailActivity.class);
-                startActivity(mailActivity);
-                break;
+//            case 3 :
+//                Intent mailActivity = new Intent(this, MailActivity.class);
+//                startActivity(mailActivity);
+//                break;
 
-            case 4 :
+            case 3 :
                 Intent chatRoomsActivity = new Intent(this, ChatRoomsActivity.class);
                 startActivity(chatRoomsActivity);
                 break;
-            case 6 :
+            case 4 :
                 Intent iSettings = new Intent(this, SettingsActivity.class);
                 startActivity(iSettings);
                 break;
@@ -131,16 +124,16 @@ public class DashboardActivity extends FragmentActivity
             case 3:
                 mTitle = "My List";
                 break;
+//            case 4:
+//                mTitle = "Mail";
+//                break;
             case 4:
-                mTitle = "Mail";
-                break;
-            case 5:
                 mTitle = "Chat";
                 break;
+//            case 6:
+//                mTitle = "Notifications";
+//                break;
             case 6:
-                mTitle = "Notifications";
-                break;
-            case 7:
                 mTitle = "Settings";
                 break;
         }
