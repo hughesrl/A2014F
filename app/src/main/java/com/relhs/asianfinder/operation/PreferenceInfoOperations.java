@@ -78,10 +78,17 @@ public class PreferenceInfoOperations {
         return preferenceInfo;
     }
     public Cursor getAllPreferenceByCategory(String category) {
-        // now that the user is created return it ...
-        Cursor cursor = databaseRead.query(DataBaseWrapper.PREFERENCEINFO,
-                PREFERENCE_TABLE_COLUMNS, DataBaseWrapper.PREFERENCEINFO_CATEGORY+"=?", new String[]{category.toLowerCase()}, null, null, null);
+        Cursor cursor = databaseRead.query(DataBaseWrapper.PREFERENCEINFO, PREFERENCE_TABLE_COLUMNS,
+                DataBaseWrapper.PREFERENCEINFO_CATEGORY+"=?", new String[]{category.trim().toLowerCase()}, null, null, null);
         return cursor;
+    }
+    public PreferenceInfo getAllPreferenceByCategory2(String category) {
+        Cursor cursor = databaseRead.query(DataBaseWrapper.PREFERENCEINFO, PREFERENCE_TABLE_COLUMNS,
+                DataBaseWrapper.PREFERENCEINFO_CATEGORY+"=?", new String[]{category.trim().toLowerCase()}, null, null, null);
+        cursor.moveToFirst();
+        PreferenceInfo preferenceInfo = parsePreferenceInfo(cursor);
+        cursor.close();
+        return preferenceInfo;
     }
     public int getPreferenceCountByCategory(String category) {
         Cursor cursor = databaseRead.query(DataBaseWrapper.PREFERENCEINFO,

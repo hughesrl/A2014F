@@ -33,12 +33,18 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.relhs.asianfinder.data.PeopleInfo;
 import com.relhs.asianfinder.data.UserInfo;
 import com.relhs.asianfinder.loader.Utils;
 import com.relhs.asianfinder.operation.UserInfoOperations;
 import com.relhs.asianfinder.utils.JSONParser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -308,15 +314,13 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
 
-    private class SignOutDataTask extends AsyncTask<Void, Void, ArrayList<PeopleInfo>> {
+    private class SignOutDataTask extends AsyncTask<Void, Void, String> {
         private final JSONParser jParser;
         private final UserInfo userInfo;
-        private double longitude;
-        private double latitude;
-        private String api_url;
 
         private ProgressDialog mProgressDialog;
 
+        private String isLogout = "";
 
         public SignOutDataTask() {
             // TODO Auto-generated constructor stub
@@ -333,32 +337,35 @@ public class SettingsActivity extends PreferenceActivity {
             }
         }
         @Override
-        protected ArrayList<PeopleInfo> doInBackground(Void... args) {
+        protected String doInBackground(Void... args) {
             // Getting JSON from URL
-//            JSONObject json = jParser.getJSONFromUrl(getResources().getString(R.string.api)+"?act=action-remove&t="+userInfo.getUser_type()+"&did="+
-//                    ((AsianFinderApplication)getApplication()).getDeviceId()+"&_pid="+userInfo.getUser_id(), null);
-//            try {
-//                // TODO: Sorry! Invalid parameter value(s). API RETURN
-//                JSONArray android = json.getJSONArray(Constants.TAG_OS);
-//                JSONObject jsonObject = android.getJSONObject(0);
-//                if(!jsonObject.getBoolean(Constants.TAG_STATUS)) { // false
-//                    Log.d("-- robert", jsonObject.getString(Constants.TAG_MESSAGE));
-//                } else { // true
-//                    userOperations.emptyAllUserData();
-//                }
-                userOperations.emptyAllUserData();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+            JSONObject json = jParser.getJSONFromUrl(getResources().getString(R.string.api)+"?act=logout&did="+((AsianFinderApplication)getApplication()).getDeviceId(), null);
+            try {
+                // TODO: Sorry! Invalid parameter value(s). API RETURN
+                JSONArray android = json.getJSONArray(Constants.TAG_OS);
+                JSONObject jsonObject = android.getJSONObject(0);
+                if(!jsonObject.getBoolean(Constants.TAG_STATUS)) { // false
+                    Log.d("-- robert", jsonObject.getString(Constants.TAG_MESSAGE));
+                    isLogout = jsonObject.getString(Constants.TAG_MESSAGE);
+                } else { // true
+                    userOperations.emptyAllUserData();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-            return null;
+            return isLogout;
         }
         @Override
-        protected void onPostExecute(ArrayList<PeopleInfo> peopleInfoArrayList) {
+        protected void onPostExecute(String isLogoutReturn) {
+            if(!isLogoutReturn.isEmpty()) {
+                Toast.makeText(SettingsActivity.this, isLogoutReturn, Toast.LENGTH_LONG).show();
+            } else {
+                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(loginIntent);
+            }
             mProgressDialog.dismiss();
-            Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-            loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(loginIntent);
         }
     }
 }

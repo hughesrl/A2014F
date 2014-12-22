@@ -216,7 +216,7 @@ public class ProfileUserDetailsEditDialogFragment extends DialogFragment impleme
         @Override
         protected JSONObject doInBackground(Void... args) {
             String did = ((ProfileActivity)getActivity()).getDeviceId();
-            return jParser.getJSONFromUrl(getResources().getString(R.string.api) + "?act=preference&t=fetch&did=" + did + "&k=" + _k, null);
+            return jParser.getJSONFromUrl(getResources().getString(R.string.api) + "?act=edit-profile&t=fetch&did=" + did + "&k=" + _k, null);
         }
         @Override
         protected void onPostExecute(JSONObject jObj) {

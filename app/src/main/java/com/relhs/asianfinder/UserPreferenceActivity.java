@@ -66,7 +66,6 @@ public class UserPreferenceActivity extends FragmentActivity {
             case android.R.id.home:
                 UserPreferenceActivity.this.finish();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -99,6 +98,7 @@ public class UserPreferenceActivity extends FragmentActivity {
             }
             if(preferenceInfoOperations.getPreferenceCountByCategory(Constants.TAG_LIFESTYLE) > 0) {
                 items.add(new PreferenceInfo(Constants.TAG_LIFESTYLE));
+
                 parsePreferenceInfoAsArray(preferenceInfoOperations.getAllPreferenceByCategory(Constants.TAG_LIFESTYLE));
             }
             if(preferenceInfoOperations.getPreferenceCountByCategory(Constants.TAG_CULTURE_VALUES) > 0) {
