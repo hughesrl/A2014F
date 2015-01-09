@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/profileData"
         android:layout_width="match_parent"
@@ -17,15 +18,24 @@
             android:adjustViewBounds="true"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"/>
-
     </RelativeLayout>
+    <ImageView
+        android:layout_below="@+id/profileData"
+        android:layout_above="@+id/chatInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/messages_bg"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"/>
+
     <ListView
         android:layout_below="@+id/profileData"
         android:layout_above="@+id/chatInputLayout"
         android:id="@+id/chatMessages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white90"
+        android:background="@android:color/transparent"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
         android:divider="@color/transparent"
@@ -45,27 +55,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingTop="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:padding="5dp">
             <ImageButton
+                android:src="@drawable/ic_plus"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnAttach"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                />
+            <ImageButton
+                android:layout_toRightOf="@+id/btnAttach"
+                android:layout_toEndOf="@+id/btnAttach"
                 android:src="@drawable/ic_smiley"
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true"
-                android:layout_width="40dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnEmoticons"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
                 />
             <ImageButton
                 android:src="@drawable/star_off"
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true"
-                android:layout_width="40dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnEmoticonsClose"
                 android:layout_alignParentStart="true"
@@ -91,7 +110,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true"
-                android:layout_width="40dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/sendMessage"
                 android:layout_alignParentEnd="true"
@@ -111,21 +130,5 @@
             />
 
     </RelativeLayout>
-
-
-
-
-
-
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bgColor"
-        >
-
-
-    </RelativeLayout>-->
-
-
 
 </RelativeLayout>

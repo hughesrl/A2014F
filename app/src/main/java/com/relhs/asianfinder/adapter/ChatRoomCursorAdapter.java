@@ -21,6 +21,7 @@ public class ChatRoomCursorAdapter extends CursorAdapter {
     private MessagesOperations messagesOperations;
     private LayoutInflater mInflater;
     private ImageLoader imageLoader;
+    private Context mContext;
 
     public ChatRoomCursorAdapter(Context context, Cursor c, MessagesOperations mO, int flags) {
         super(context, c, flags);
@@ -28,6 +29,7 @@ public class ChatRoomCursorAdapter extends CursorAdapter {
 
         imageLoader = new ImageLoader(context);
 
+        mContext = context;
         messagesOperations = mO;
     }
 
@@ -45,7 +47,8 @@ public class ChatRoomCursorAdapter extends CursorAdapter {
         userName.setText(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_USERNAME)));
 
         //lastChatDate.setText(lastThread.get);
-        imageLoader.DisplayImage(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_MAINPHOTO)), photo);
+        //imageLoader.DisplayImage(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_MAINPHOTO)), photo);
+        imageLoader.DisplayImageRounded(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_MAINPHOTO)), photo, mContext.getResources().getInteger(R.integer.room_resize_user_photo_size_size), mContext.getResources().getInteger(R.integer.room_resize_user_photo_size_size));
         ThreadsInfo lastThread = messagesOperations.getLastThread(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.ROOMINFO_THREADID)));
 //            if(lastThread.getIsSeen() == 0) {
 //                view.setBackgroundColor(context.getResources().getColor(R.color.orange));
@@ -53,6 +56,8 @@ public class ChatRoomCursorAdapter extends CursorAdapter {
             lastChatDate.setText(lastThread.getDate());
             if(lastThread.getMessageType().equalsIgnoreCase(Constants.TEXT_STICKER)) {
                 briefMsg.setText("Sticker");
+            } else if(lastThread.getMessageType().equalsIgnoreCase(Constants.TEXT_PHOTO)) {
+                briefMsg.setText("Photo");
             } else {
                 briefMsg.setText(lastThread.getMessage());
             }

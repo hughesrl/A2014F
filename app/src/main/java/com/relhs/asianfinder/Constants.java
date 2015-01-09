@@ -9,6 +9,7 @@ public class Constants {
 
     public final static String TEXT_STICKER="sticker";
     public final static String TEXT_CHAT="chat";
+    public final static String TEXT_PHOTO="photo";
 
     public final static String TAG_OS = "android";
     public final static String TAG_STATUS= "status";

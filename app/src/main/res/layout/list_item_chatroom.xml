@@ -1,17 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/bgColor"
     android:layout_gravity="center_vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
     >
 
     <ImageView
         android:contentDescription="@string/app_name"
         android:layout_gravity="center_horizontal"
-        android:layout_width="@dimen/user_photo_size"
-        android:layout_height="@dimen/user_photo_size"
+        android:layout_width="@dimen/room_user_photo_size"
+        android:layout_height="@dimen/room_user_photo_size"
         android:src="@drawable/ic_no_photo"
         android:adjustViewBounds="true"
         android:layout_centerVertical="true"

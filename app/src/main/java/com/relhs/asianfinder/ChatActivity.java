@@ -1,9 +1,12 @@
 package com.relhs.asianfinder;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -11,6 +14,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -33,6 +37,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.nkzawa.socketio.client.Socket;
 import com.relhs.asianfinder.adapter.ThreadCursorAdapter;
@@ -81,6 +86,10 @@ public class ChatActivity extends FragmentActivity implements View.OnClickListen
 
     ListView lv;
     private int actionBarHeight;
+
+    private final int CAMERA_CAPTURE = 1;
+    private final int UPLOAD_PHOTO = 2;
+    private byte[] bytearray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +156,10 @@ public class ChatActivity extends FragmentActivity implements View.OnClickListen
         sendMessage.setOnClickListener(this);
         final ImageButton btnEmoticons = (ImageButton) findViewById(R.id.btnEmoticons);
         btnEmoticons.setOnClickListener(this);
+
+        final ImageButton btnAttach = (ImageButton) findViewById(R.id.btnAttach);
+        btnAttach.setOnClickListener(this);
+
 //        final CustomButton btnSendGift = (CustomButton) findViewById(R.id.btnSendGift);
 //        btnSendGift.setOnClickListener(this);
 //        final CustomButton btnSendLoad = (CustomButton) findViewById(R.id.btnSendLoad);
@@ -300,9 +313,9 @@ public class ChatActivity extends FragmentActivity implements View.OnClickListen
 
 
                 break;
-//            case R.id.btnSendGift:
-//                showWindowFromUrl("http://store.pass-load.com/index.php");
-//                break;
+            case R.id.btnAttach:
+                selectImage();
+                break;
 //            case R.id.btnSendLoad:
 //                showWindowFromUrl("http://store.pass-load.com/store.php?cat=cellphone-loads");
 //                break;
@@ -354,6 +367,36 @@ public class ChatActivity extends FragmentActivity implements View.OnClickListen
     public void sendStickerMsg(String folder, String file) throws RemoteException {
         lastThreadInfo = messagesOperations.getLastThread(threadId);
         mIAFPushService.sendSticker(folder, file, roomDetails.getUserId(), lastThreadInfo.getLocalId() + 1);
+    }
+
+
+    private void selectImage() {
+        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Take Photo")) {
+                    try {
+                        Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(captureIntent, CAMERA_CAPTURE);
+                    } catch (ActivityNotFoundException anfe) {
+                        //display an error message
+                        String errorMessage = "Whoops - your device doesn't support capturing images!";
+                        Toast toast = Toast.makeText(ChatActivity.this, errorMessage, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                } else if (options[item].equals("Choose from Gallery")) {
+                    Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, UPLOAD_PHOTO);
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 
 

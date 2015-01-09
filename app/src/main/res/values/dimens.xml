@@ -17,8 +17,11 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
 
     <dimen name="profile_photo">95dp</dimen>
-    <dimen name="user_photo_size">50dp</dimen>
-    <integer name="resize_user_photo_size_size">70</integer>
+    <dimen name="user_photo_size">30dp</dimen>
+    <integer name="resize_user_photo_size_size">50</integer>
+
+    <dimen name="room_user_photo_size">50dp</dimen>
+    <integer name="room_resize_user_photo_size_size">70</integer>
 
     <dimen name="header_height">298dp</dimen>
     <dimen name="min_header_height">250dp</dimen>

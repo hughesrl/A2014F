@@ -75,6 +75,16 @@ public class ImageLoader {
             imageView.setImageDrawable(null);
         }
     }
+    public void DisplayImageRoundedCorners(String url, ImageView imageView) {
+        imageViews.put(imageView, url);
+        Bitmap bitmap=memoryCache.get(url);
+        if(bitmap!=null) {
+            imageView.setImageBitmap(Utils.getRoundedCornerBitmap(bitmap));
+        } else {
+            queuePhoto(url, imageView, false, 0, 0);
+            imageView.setImageDrawable(null);
+        }
+    }
 
     private void queuePhoto(String url, ImageView imageView, Boolean rounded, int width, int height)
     {

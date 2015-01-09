@@ -232,6 +232,9 @@ public class AFPushService extends Service {
                                         //Log.d("-- robert", cMSticker.toString());
                                         //Log.d("-- robert",  cMSticker.getString("folder")+"/"+ cMSticker.getString("file"));
                                         messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, "", timestamp, seen, cMSticker.getString("folder"), cMSticker.getString("file"));
+                                    } else if (cM.has("i")) {
+                                        m = cM.getString("iu");
+                                        messagesOperations.createThread(Constants.TEXT_PHOTO, threadId, f, localId, m, timestamp, seen, "", "");
                                     } else {
                                         messagesOperations.createThread(Constants.TEXT_CHAT, threadId, f, localId, m, timestamp, seen, "", "");
                                     }
@@ -470,6 +473,14 @@ public class AFPushService extends Service {
                     messagesOperations.createThread(Constants.TEXT_STICKER, threadId, f, localId, "", timestamp, mySeen, cMSticker.getString("folder"), cMSticker.getString("file"));
                     if(userInformation.getUser_id() != f) {
                         notification.setLatestEventInfo(AFPushService.this, roomDetails.getUserName(), "Sticker", pendingIntent);
+                        mgr.notify(NOTIFICATION_ID, notification);
+                    }
+                } else if(cM.has("i")) {
+                    m = cM.getString("iu");
+
+                    messagesOperations.createThread(Constants.TEXT_PHOTO, threadId, f, localId, m, timestamp, mySeen, "", "");
+                    if(userInformation.getUser_id() != f) {
+                        notification.setLatestEventInfo(AFPushService.this, roomDetails.getUserName(), "Photo", pendingIntent);
                         mgr.notify(NOTIFICATION_ID, notification);
                     }
                 } else {

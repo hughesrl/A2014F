@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +43,7 @@ public class ThreadCursorAdapter extends CursorAdapter {
     private UserInfoOperations userInfoOperations;
     private LayoutInflater mInflater;
     private ImageLoader imageLoader;
+    private Context mContext;
 
     private RoomInfo roomInfo;
     private UserInfo userInfo;
@@ -50,6 +52,7 @@ public class ThreadCursorAdapter extends CursorAdapter {
         super(context, c, flags);
         //mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        mContext = context;
         imageLoader = new ImageLoader(context);
 
         messagesOperations = mO;
@@ -86,13 +89,21 @@ public class ThreadCursorAdapter extends CursorAdapter {
                 String stickerPath = context.getResources().getString(R.string.api_stickers)+"/"+ cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_FOLDER))+"/"+ cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_FILE));
                 imageLoader.DisplayImage(stickerPath, holder.stickerRight);
             } else {
-                holder.textViewRight1.setText(getSmiledText(context, cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_MESSAGE))));
-                String dateTimeMsg = AsianFinderApplication.getDateCurrentTimeZone(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_T))));
-                String[] datetime = dateTimeMsg.split(" ");
-                holder.textViewRight2.setText(datetime[1].trim());
+//                if(messageType.equalsIgnoreCase(Constants.TEXT_PHOTO)) {
+//                    String photoHtmlImgSrc = cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_MESSAGE));
+//
+//                    String dateTimeMsg = AsianFinderApplication.getDateCurrentTimeZone(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_T))));
+//                    String[] datetime = dateTimeMsg.split(" ");
+//                    holder.textViewRight2.setText(datetime[1].trim());
+//                } else {
+                    holder.textViewRight1.setText(getSmiledText(context, cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_MESSAGE))));
+                    String dateTimeMsg = AsianFinderApplication.getDateCurrentTimeZone(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_T))));
+                    String[] datetime = dateTimeMsg.split(" ");
+                    holder.textViewRight2.setText(datetime[1].trim());
+//                }
             }
-
-            imageLoader.DisplayImage(userInfo.getMain_photo(), holder.imageViewRight);
+            imageLoader.DisplayImageRounded(userInfo.getMain_photo(), holder.imageViewRight, mContext.getResources().getInteger(R.integer.resize_user_photo_size_size), mContext.getResources().getInteger(R.integer.resize_user_photo_size_size));
+            //imageLoader.DisplayImage(userInfo.getMain_photo(), holder.imageViewRight);
         } else {
             holder.chatLeft.setVisibility(View.VISIBLE);
             holder.chatRight.setVisibility(View.GONE);
@@ -107,14 +118,27 @@ public class ThreadCursorAdapter extends CursorAdapter {
 
                 String stickerPath = context.getResources().getString(R.string.api_stickers)+"/"+ cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_FOLDER))+"/"+ cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_FILE));
                 imageLoader.DisplayImage(stickerPath, holder.stickerLeft);
+
+            } else if(messageType.equalsIgnoreCase(Constants.TEXT_PHOTO)) {
+                holder.stickerLeft.setVisibility(View.GONE);
+                holder.textViewLeft1.setVisibility(View.GONE);
+                holder.photoUploadLeft.setVisibility(View.VISIBLE);
+
+                String photoUrl = mContext.getResources().getString(R.string.asian_frinder_url)+cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_MESSAGE));
+
+                imageLoader.DisplayImageRoundedCorners(photoUrl, holder.photoUploadLeft);
+
+                String dateTimeMsg = AsianFinderApplication.getDateCurrentTimeZone(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_T))));
+                String[] datetime = dateTimeMsg.split(" ");
+                holder.textViewLeft2.setText(datetime[1].trim());
             } else {
                 holder.textViewLeft1.setText(getSmiledText(context, cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_MESSAGE))));
                 String dateTimeMsg = AsianFinderApplication.getDateCurrentTimeZone(Long.parseLong(cursor.getString(cursor.getColumnIndex(DataBaseWrapper.MESSAGESTHREADINFO_T))));
                 String[] datetime = dateTimeMsg.split(" ");
                 holder.textViewLeft2.setText(datetime[1].trim());
             }
-
-            imageLoader.DisplayImage(roomInfo.getMain_photo(), holder.imageViewLeft);
+            imageLoader.DisplayImageRounded(roomInfo.getMain_photo(), holder.imageViewLeft, mContext.getResources().getInteger(R.integer.resize_user_photo_size_size), mContext.getResources().getInteger(R.integer.resize_user_photo_size_size));
+            //imageLoader.DisplayImage(roomInfo.getMain_photo(), holder.imageViewLeft);
         }
     }
 
@@ -132,6 +156,7 @@ public class ThreadCursorAdapter extends CursorAdapter {
         holder.textViewLeft2 = (TextView) v.findViewById(R.id.lastChatDateLeft);
         holder.imageViewLeft = (ImageView) v.findViewById(R.id.photoLeft);
         holder.stickerLeft = (ImageView) v.findViewById(R.id.stickerLeft);
+        holder.photoUploadLeft = (ImageView) v.findViewById(R.id.photoUploadLeft);
 
         holder.layoutBubbleRight = (LinearLayout) v.findViewById(R.id.layoutBubbleRight);
         holder.chatRight = (RelativeLayout) v.findViewById(R.id.bubbleRight);
@@ -139,6 +164,7 @@ public class ThreadCursorAdapter extends CursorAdapter {
         holder.textViewRight2 = (TextView) v.findViewById(R.id.lastChatDateRight);
         holder.imageViewRight = (ImageView) v.findViewById(R.id.photoRight);
         holder.stickerRight = (ImageView) v.findViewById(R.id.stickerRight);
+        holder.photoUploadRight = (ImageView) v.findViewById(R.id.photoUploadRight);
 
         v.setTag(holder);
 
@@ -152,6 +178,7 @@ public class ThreadCursorAdapter extends CursorAdapter {
         public TextView textViewLeft2;
         public ImageView imageViewLeft;
         public ImageView stickerLeft;
+        public ImageView photoUploadLeft;
 
         public LinearLayout layoutBubbleRight;
         public RelativeLayout chatRight;
@@ -159,6 +186,7 @@ public class ThreadCursorAdapter extends CursorAdapter {
         public TextView textViewRight2;
         public ImageView imageViewRight;
         public ImageView stickerRight;
+        public ImageView photoUploadRight;
 
     }
 

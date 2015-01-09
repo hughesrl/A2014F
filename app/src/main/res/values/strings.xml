@@ -11,6 +11,7 @@
     2 = < 50% match
     -->
     <string name="api">http://www.asianfinder.com/actions/mobilecom.php</string>
+    <string name="asian_frinder_url">http://www.asianfinder.com</string>
     <string name="api_photos">http://www.asianfinder.com</string>
     <string name="api_stickers">http://asianfinder.com/assets/attachments/stickers</string>
     <string name="app_name">Asian Finder</string>
